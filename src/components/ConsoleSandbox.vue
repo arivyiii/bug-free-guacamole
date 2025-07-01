@@ -1,85 +1,123 @@
 <template>
   <div class="console-sandbox">
-    <h1>Console Sandbox</h1>
-    <div class="multiselect">
-      <label>Select Console Method:</label>
-      <select v-model="selectedMethod">
-        <option value="log">Log</option>
-        <option value="info">Info</option>
-        <option value="warn">Warn</option>
-        <option value="error">Error</option>
-      </select>
-    </div>
-    <div class="sections">
-      <section>
-        <h2>Primitives</h2>
-        <div class="button-grid">
-          <button @click="logPrimitive('string', 'Hello, world!')">Log String</button>
-          <button @click="logPrimitive('number', 42)">Log Number</button>
-          <button @click="logPrimitive('boolean', true)">Log Boolean</button>
-          <button @click="logPrimitive('null', null)">Log Null</button>
-          <button @click="logPrimitive('undefined', undefined)">Log Undefined</button>
+    <header class="header">
+      <div class="container">
+        <h1 class="title">Console Sandbox</h1>
+        <p class="subtitle">Test JavaScript console methods with various data types</p>
+        
+        <div class="method-selector">
+          <label for="method-select">Console Method:</label>
+          <select id="method-select" v-model="selectedMethod" class="method-select">
+            <option value="log">console.log</option>
+            <option value="info">console.info</option>
+            <option value="warn">console.warn</option>
+            <option value="error">console.error</option>
+            <option value="debug">console.debug</option>
+          </select>
         </div>
-      </section>
-      <section>
-        <h2>Objects & Arrays</h2>
-        <div class="button-grid">
-          <button @click="logObject({ key: 'value', nested: { foo: 'bar' } })">Log Object</button>
-          <button @click="logObject({})">Log Empty Object</button>
-          <button @click="logObject({ a: { b: { c: { d: 1 } } } })">Log Deeply Nested Object</button>
-          <button @click="logObject(getSymbolKeyObject())">Log Object with Symbol Key</button>
-          <button @click="logArray([1, 2, 3, 4, 5])">Log Array</button>
-          <button @click="logArray([])">Log Empty Array</button>
-          <button @click="logArray([{id:1},{id:2}])">Log Array of Objects</button>
-          <button @click="logArray([1, 'two', null, {foo:'bar'}, [5,6]])">Log Mixed Array</button>
-          <button @click="logSet()">Log Set</button>
-          <button @click="logWeakSet()">Log WeakSet</button>
-          <button @click="logMap()">Log Map</button>
-          <button @click="logWeakMap()">Log WeakMap</button>
-          <button @click="logRegExp()">Log RegExp</button>
-          <button @click="logArrayBuffer()">Log ArrayBuffer</button>
-          <button @click="logDataView()">Log DataView</button>
-          <button @click="logTypedArray()">Log Uint8Array</button>
-          <button @click="logCircularReference()">Log Circular Reference</button>
-          <button @click="logDate()">Log Date</button>
-          <button @click="logLargeObject()">Log Large Object</button>
+      </div>
+    </header>
+
+    <main class="main">
+      <div class="container">
+        <div class="sections">
+          <!-- Primitives Section -->
+          <section class="section">
+            <h2 class="section-title">Primitives</h2>
+            <div class="button-grid">
+              <button @click="logPrimitive('string', 'Hello, world!')" class="btn">String</button>
+              <button @click="logPrimitive('number', 42)" class="btn">Number</button>
+              <button @click="logPrimitive('boolean', true)" class="btn">Boolean</button>
+              <button @click="logPrimitive('null', null)" class="btn">Null</button>
+              <button @click="logPrimitive('undefined', undefined)" class="btn">Undefined</button>
+            </div>
+          </section>
+
+          <!-- Objects & Arrays Section -->
+          <section class="section">
+            <h2 class="section-title">Objects & Arrays</h2>
+            <div class="button-grid">
+              <button @click="logObject({ key: 'value', nested: { foo: 'bar' } })" class="btn">Object</button>
+              <button @click="logObject({})" class="btn">Empty Object</button>
+              <button @click="logObject({ a: { b: { c: { d: 1 } } } })" class="btn">Nested Object</button>
+              <button @click="logObject(getSymbolKeyObject())" class="btn">Symbol Keys</button>
+              <button @click="logArray([1, 2, 3, 4, 5])" class="btn">Array</button>
+              <button @click="logArray([])" class="btn">Empty Array</button>
+              <button @click="logArray([{id:1},{id:2}])" class="btn">Object Array</button>
+              <button @click="logArray([1, 'two', null, {foo:'bar'}, [5,6]])" class="btn">Mixed Array</button>
+              <button @click="logSet()" class="btn">Set</button>
+              <button @click="logWeakSet()" class="btn">WeakSet</button>
+              <button @click="logMap()" class="btn">Map</button>
+              <button @click="logWeakMap()" class="btn">WeakMap</button>
+              <button @click="logRegExp()" class="btn">RegExp</button>
+              <button @click="logArrayBuffer()" class="btn">ArrayBuffer</button>
+              <button @click="logDataView()" class="btn">DataView</button>
+              <button @click="logTypedArray()" class="btn">Uint8Array</button>
+              <button @click="logCircularReference()" class="btn">Circular Ref</button>
+              <button @click="logDate()" class="btn">Date</button>
+              <button @click="logLargeObject()" class="btn">Large Object</button>
+            </div>
+          </section>
+
+          <!-- Faker Data Section -->
+          <section class="section">
+            <h2 class="section-title">Faker Data</h2>
+            <div class="button-grid">
+              <button @click="logFakerUser()" class="btn">User Profile</button>
+              <button @click="logFakerCompany()" class="btn">Company</button>
+              <button @click="logFakerAddress()" class="btn">Address</button>
+              <button @click="logFakerProduct()" class="btn">Product</button>
+              <button @click="logFakerOrder()" class="btn">Order</button>
+              <button @click="logFakerUsers()" class="btn">User Array</button>
+              <button @click="logFakerProducts()" class="btn">Product Array</button>
+              <button @click="logFakerMixed()" class="btn">Mixed Data</button>
+            </div>
+          </section>
+
+          <!-- Functions & Errors Section -->
+          <section class="section">
+            <h2 class="section-title">Functions & Errors</h2>
+            <div class="button-grid">
+              <button @click="logFunction(() => console.log('Function executed'))" class="btn">Function</button>
+              <button @click="logError(new Error('Test error with stack trace'))" class="btn btn-error">Error</button>
+              <button @click="logResolvedPromise()" class="btn">Resolved Promise</button>
+              <button @click="logPendingPromise()" class="btn">Pending Promise</button>
+              <button @click="logRejectedPromise()" class="btn btn-error">Rejected Promise</button>
+            </div>
+          </section>
+
+          <!-- DOM Elements Section -->
+          <section class="section">
+            <h2 class="section-title">DOM Elements</h2>
+            <div class="button-grid">
+              <button @click="logDOMElement()" class="btn">DOM Element</button>
+              <button @click="logIframe()" class="btn">Iframe</button>
+            </div>
+            <div id="iframe-container" class="iframe-container"></div>
+          </section>
+
+          <!-- Utilities Section -->
+          <section class="section">
+            <h2 class="section-title">Utilities</h2>
+            <div class="button-grid">
+              <button @click="logDeduped('This is a deduped log', 3)" class="btn">Deduped Log</button>
+              <button @click="logAllTypes('Test message')" class="btn">All Types</button>
+            </div>
+          </section>
         </div>
-      </section>
-      <section>
-        <h2>Functions & Errors</h2>
-        <div class="button-grid">
-          <button @click="logFunction(() => console.log('Function executed'))">Log Function</button>
-          <button @click="logError(new Error('Test error with stack trace'))">Log Error</button>
-          <button @click="logResolvedPromise()">Log Resolved Promise</button>
-          <button @click="logPendingPromise()">Log Pending Promise</button>
-          <button @click="logRejectedPromise()">Log Rejected Promise</button>
-        </div>
-      </section>
-      <section>
-        <h2>DOM Elements</h2>
-        <div class="button-grid">
-          <button @click="logDOMElement()">Log DOM Element</button>
-          <button @click="logIframe()">Log Iframe</button>
-        </div>
-        <div id="iframe-container"></div>
-      </section>
-      <section>
-        <h2>Other</h2>
-        <div class="button-grid">
-          <button @click="logDeduped('This is a deduped log', 3)">Log Deduped (3 times)</button>
-          <button @click="logAllTypes('Test message')">Log All Types</button>
-        </div>
-      </section>
-    </div>
+      </div>
+    </main>
   </div>
 </template>
 
 <script>
+import { faker } from '@faker-js/faker';
+
 export default {
   name: 'ConsoleSandbox',
   data() {
     return {
-      selectedMethod: 'log',
+      selectedMethod: 'debug',
       iframe: null
     };
   },
@@ -274,6 +312,234 @@ export default {
         }))
       };
       console[this.selectedMethod]('Large Object:', largeObject);
+    },
+    // Faker methods
+    logFakerUser() {
+      const user = {
+        id: faker.string.uuid(),
+        firstName: faker.person.firstName(),
+        lastName: faker.person.lastName(),
+        email: faker.internet.email(),
+        phone: faker.phone.number(),
+        avatar: faker.image.avatar(),
+        birthDate: faker.date.birthdate(),
+        address: {
+          street: faker.location.streetAddress(),
+          city: faker.location.city(),
+          state: faker.location.state(),
+          zipCode: faker.location.zipCode(),
+          country: faker.location.country()
+        },
+        company: faker.company.name(),
+        jobTitle: faker.person.jobTitle(),
+        bio: faker.lorem.paragraph(),
+        website: faker.internet.url(),
+        socialMedia: {
+          twitter: faker.internet.username(),
+          linkedin: faker.internet.username(),
+          github: faker.internet.username()
+        }
+      };
+      console[this.selectedMethod]('Faker User:', user);
+    },
+    logFakerCompany() {
+      const company = {
+        id: faker.string.uuid(),
+        name: faker.company.name(),
+        catchPhrase: faker.company.catchPhrase(),
+        bs: faker.company.buzzPhrase(),
+        founded: faker.date.past(),
+        industry: faker.company.buzzNoun(),
+        size: faker.helpers.arrayElement(['startup', 'small', 'medium', 'large', 'enterprise']),
+        revenue: faker.finance.amount({ min: 1000000, max: 1000000000, dec: 0 }),
+        employees: faker.number.int({ min: 10, max: 10000 }),
+        address: {
+          street: faker.location.streetAddress(),
+          city: faker.location.city(),
+          state: faker.location.state(),
+          zipCode: faker.location.zipCode(),
+          country: faker.location.country()
+        },
+        contact: {
+          email: faker.internet.email(),
+          phone: faker.phone.number(),
+          website: faker.internet.url()
+        },
+        departments: Array.from({ length: faker.number.int({ min: 3, max: 8 }) }, () => ({
+          name: faker.commerce.department(),
+          manager: faker.person.fullName(),
+          employees: faker.number.int({ min: 5, max: 50 })
+        }))
+      };
+      console[this.selectedMethod]('Faker Company:', company);
+    },
+    logFakerAddress() {
+      const address = {
+        id: faker.string.uuid(),
+        street: faker.location.streetAddress(),
+        secondaryAddress: faker.location.secondaryAddress(),
+        city: faker.location.city(),
+        state: faker.location.state(),
+        zipCode: faker.location.zipCode(),
+        country: faker.location.country(),
+        countryCode: faker.location.countryCode(),
+        timeZone: faker.location.timeZone(),
+        coordinates: {
+          latitude: faker.location.latitude(),
+          longitude: faker.location.longitude()
+        },
+        nearbyPlaces: Array.from({ length: 5 }, () => ({
+          name: faker.company.name(),
+          type: faker.helpers.arrayElement(['restaurant', 'store', 'bank', 'gas station', 'pharmacy']),
+          distance: faker.number.float({ min: 0.1, max: 5.0, fractionDigits: 1 })
+        }))
+      };
+      console[this.selectedMethod]('Faker Address:', address);
+    },
+    logFakerProduct() {
+      const product = {
+        id: faker.string.uuid(),
+        name: faker.commerce.productName(),
+        description: faker.commerce.productDescription(),
+        price: faker.commerce.price(),
+        category: faker.commerce.department(),
+        brand: faker.company.name(),
+        sku: faker.string.alphanumeric(8).toUpperCase(),
+        inStock: faker.datatype.boolean(),
+        stockQuantity: faker.number.int({ min: 0, max: 1000 }),
+        images: Array.from({ length: faker.number.int({ min: 1, max: 5 }) }, () => faker.image.url()),
+        specifications: {
+          color: faker.color.human(),
+          size: faker.helpers.arrayElement(['XS', 'S', 'M', 'L', 'XL', 'XXL']),
+          weight: faker.number.float({ min: 0.1, max: 10.0, fractionDigits: 2 }),
+          material: faker.commerce.productMaterial(),
+          dimensions: {
+            length: faker.number.float({ min: 1, max: 100, fractionDigits: 1 }),
+            width: faker.number.float({ min: 1, max: 100, fractionDigits: 1 }),
+            height: faker.number.float({ min: 1, max: 100, fractionDigits: 1 })
+          }
+        },
+        reviews: Array.from({ length: faker.number.int({ min: 0, max: 10 }) }, () => ({
+          id: faker.string.uuid(),
+          rating: faker.number.int({ min: 1, max: 5 }),
+          comment: faker.lorem.sentence(),
+          author: faker.person.fullName(),
+          date: faker.date.recent()
+        }))
+      };
+      console[this.selectedMethod]('Faker Product:', product);
+    },
+    logFakerOrder() {
+      const order = {
+        id: faker.string.uuid(),
+        orderNumber: faker.string.alphanumeric(10).toUpperCase(),
+        customer: {
+          id: faker.string.uuid(),
+          name: faker.person.fullName(),
+          email: faker.internet.email(),
+          phone: faker.phone.number()
+        },
+        items: Array.from({ length: faker.number.int({ min: 1, max: 5 }) }, () => ({
+          id: faker.string.uuid(),
+          name: faker.commerce.productName(),
+          price: faker.commerce.price(),
+          quantity: faker.number.int({ min: 1, max: 10 }),
+          total: faker.commerce.price()
+        })),
+        subtotal: faker.commerce.price(),
+        tax: faker.commerce.price({ min: 10, max: 100 }),
+        shipping: faker.commerce.price({ min: 5, max: 50 }),
+        total: faker.commerce.price({ min: 100, max: 1000 }),
+        status: faker.helpers.arrayElement(['pending', 'processing', 'shipped', 'delivered', 'cancelled']),
+        paymentMethod: faker.helpers.arrayElement(['credit_card', 'paypal', 'bank_transfer', 'cash']),
+        shippingAddress: {
+          street: faker.location.streetAddress(),
+          city: faker.location.city(),
+          state: faker.location.state(),
+          zipCode: faker.location.zipCode(),
+          country: faker.location.country()
+        },
+        billingAddress: {
+          street: faker.location.streetAddress(),
+          city: faker.location.city(),
+          state: faker.location.state(),
+          zipCode: faker.location.zipCode(),
+          country: faker.location.country()
+        },
+        orderDate: faker.date.recent(),
+        estimatedDelivery: faker.date.future(),
+        trackingNumber: faker.string.alphanumeric(12).toUpperCase()
+      };
+      console[this.selectedMethod]('Faker Order:', order);
+    },
+    logFakerUsers() {
+      const users = Array.from({ length: faker.number.int({ min: 5, max: 15 }) }, () => ({
+        id: faker.string.uuid(),
+        firstName: faker.person.firstName(),
+        lastName: faker.person.lastName(),
+        email: faker.internet.email(),
+        avatar: faker.image.avatar(),
+        jobTitle: faker.person.jobTitle(),
+        department: faker.commerce.department(),
+        salary: faker.number.int({ min: 30000, max: 150000 }),
+        hireDate: faker.date.past(),
+        isActive: faker.datatype.boolean()
+      }));
+      console[this.selectedMethod]('Faker Users Array:', users);
+    },
+    logFakerProducts() {
+      const products = Array.from({ length: faker.number.int({ min: 8, max: 20 }) }, () => ({
+        id: faker.string.uuid(),
+        name: faker.commerce.productName(),
+        price: faker.commerce.price(),
+        category: faker.commerce.department(),
+        brand: faker.company.name(),
+        inStock: faker.datatype.boolean(),
+        stockQuantity: faker.number.int({ min: 0, max: 500 }),
+        rating: faker.number.float({ min: 1, max: 5, fractionDigits: 1 }),
+        reviewCount: faker.number.int({ min: 0, max: 1000 }),
+        image: faker.image.url(),
+        description: faker.commerce.productDescription()
+      }));
+      console[this.selectedMethod]('Faker Products Array:', products);
+    },
+    logFakerMixed() {
+      const mixedData = {
+        users: Array.from({ length: 3 }, () => ({
+          id: faker.string.uuid(),
+          name: faker.person.fullName(),
+          email: faker.internet.email(),
+          avatar: faker.image.avatar()
+        })),
+        products: Array.from({ length: 5 }, () => ({
+          id: faker.string.uuid(),
+          name: faker.commerce.productName(),
+          price: faker.commerce.price(),
+          category: faker.commerce.department()
+        })),
+        orders: Array.from({ length: 2 }, () => ({
+          id: faker.string.uuid(),
+          orderNumber: faker.string.alphanumeric(8).toUpperCase(),
+          total: faker.commerce.price(),
+          status: faker.helpers.arrayElement(['pending', 'completed', 'cancelled'])
+        })),
+        analytics: {
+          totalRevenue: faker.number.int({ min: 100000, max: 1000000 }),
+          totalOrders: faker.number.int({ min: 1000, max: 10000 }),
+          averageOrderValue: faker.number.float({ min: 50, max: 200, fractionDigits: 2 }),
+          topCategories: Array.from({ length: 5 }, () => ({
+            name: faker.commerce.department(),
+            sales: faker.number.int({ min: 10000, max: 100000 })
+          }))
+        },
+        settings: {
+          theme: faker.helpers.arrayElement(['light', 'dark']),
+          language: faker.helpers.arrayElement(['en', 'es', 'fr', 'de']),
+          notifications: faker.datatype.boolean(),
+          currency: faker.helpers.arrayElement(['USD', 'EUR', 'GBP', 'CAD'])
+        }
+      };
+      console[this.selectedMethod]('Faker Mixed Data:', mixedData);
     }
   }
 };
@@ -281,57 +547,192 @@ export default {
 
 <style scoped>
 .console-sandbox {
-  padding: 20px;
-  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #333;
 }
-.sections {
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.header {
+  background-color: white;
+  border-bottom: 1px solid #e9ecef;
+  padding: 2rem 0;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+  color: #212529;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #6c757d;
+  margin: 0 0 1.5rem 0;
+}
+
+.method-selector {
   display: flex;
-  flex-wrap: wrap;
-  gap: 24px;
-  justify-content: flex-start;
+  align-items: center;
+  gap: 0.75rem;
 }
-section {
-  flex: 1 1 320px;
-  min-width: 320px;
-  max-width: 400px;
-  border: 1px solid #ddd;
-  padding: 15px;
-  border-radius: 8px;
-  box-sizing: border-box;
-  background: #fff;
+
+.method-selector label {
+  font-weight: 500;
+  color: #495057;
+  font-size: 0.9rem;
 }
-.button-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 10px;
-}
-button {
-  padding: 10px;
-  font-size: 14px;
-  cursor: pointer;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  transition: background-color 0.3s;
-}
-button:hover {
-  background-color: #45a049;
-}
-.multiselect {
-  margin-bottom: 20px;
-}
-select {
-  padding: 8px;
-  font-size: 14px;
-  border: 1px solid #ddd;
+
+.method-select {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ced4da;
   border-radius: 4px;
   background-color: white;
+  font-size: 0.9rem;
+  color: #495057;
   cursor: pointer;
 }
-#iframe-container {
-  margin-top: 10px;
+
+.method-select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.main {
+  padding: 2rem 0;
+}
+
+.sections {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
+}
+
+.section {
+  background-color: white;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+  color: #212529;
+  border-bottom: 2px solid #f8f9fa;
+  padding-bottom: 0.5rem;
+}
+
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.5rem;
+}
+
+.btn {
+  padding: 0.75rem 1rem;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  color: #495057;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: center;
+}
+
+.btn:hover {
+  background-color: #e9ecef;
+  border-color: #adb5bd;
+}
+
+.btn:active {
+  background-color: #dee2e6;
+}
+
+.btn:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.btn-error {
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  color: #721c24;
+}
+
+.btn-error:hover {
+  background-color: #f1b0b7;
+  border-color: #ed969e;
+}
+
+.iframe-container {
+  margin-top: 1rem;
   height: 100px;
-  border: 1px dashed #ccc;
+  border: 1px dashed #dee2e6;
+  border-radius: 4px;
+  background-color: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6c757d;
+  font-size: 0.875rem;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 15px;
+  }
+  
+  .title {
+    font-size: 1.75rem;
+  }
+  
+  .sections {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .section {
+    padding: 1.25rem;
+  }
+  
+  .button-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 0.375rem;
+  }
+  
+  .btn {
+    padding: 0.625rem 0.75rem;
+    font-size: 0.8rem;
+  }
+  
+  .method-selector {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .button-grid {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  }
+  
+  .btn {
+    padding: 0.5rem 0.625rem;
+    font-size: 0.75rem;
+  }
 }
 </style> 
