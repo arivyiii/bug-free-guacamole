@@ -41,7 +41,7 @@
   </template>
   
   <script>
-  import { ref } from 'vue'
+  import { ref, onMounted } from 'vue'
   import pako from 'pako'
   import base64js from 'base64-js'
   
@@ -117,6 +117,10 @@
         a.click()
         URL.revokeObjectURL(url)
       }
+
+      onMounted(() => {
+      decodePayload(0)
+    })
   
       return {
         payloads,
