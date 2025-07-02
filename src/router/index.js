@@ -1,7 +1,8 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import ConsoleSandbox from '../components/ConsoleSandbox.vue'
-import DataVisualizer from '../components/DataVisualizer.vue'
-import JzbDecoder from '../components/JzbDecoder.vue'
+
+const ConsoleSandbox = () => import('../components/ConsoleSandbox.vue')
+const DataVisualizer = () => import('../components/DataVisualizer.vue')
+const JzbDecoder = () => import('../components/JzbDecoder.vue')
 
 const routes = [
   {
