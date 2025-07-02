@@ -56,6 +56,7 @@
               <button @click="logCircularReference()" class="btn">Circular Ref</button>
               <button @click="logDate()" class="btn">Date</button>
               <button @click="logLargeObject()" class="btn">Large Object</button>
+              <button @click="logLargeObject(50)" class="btn">Large Object (50)</button>
             </div>
           </section>
 
@@ -100,7 +101,7 @@
           <section class="section">
             <h2 class="section-title">Utilities</h2>
             <div class="button-grid">
-              <button @click="logDeduped('This is a deduped log', 3)" class="btn">Deduped Log</button>
+              <button @click="logDeduped('This is a deduped log', 200)" class="btn">Deduped Log</button>
               <button @click="logAllTypes('Test message')" class="btn">All Types</button>
             </div>
           </section>
@@ -238,7 +239,7 @@ export default {
       const sym = Symbol('sym');
       return { [sym]: 'symbol value', normal: 'normal value' };
     },
-    logLargeObject() {
+    logLargeObject(logCount = 1) {
       const largeObject = {
         metadata: {
           version: '1.0.0',
@@ -311,7 +312,9 @@ export default {
           }
         }))
       };
-      console[this.selectedMethod]('Large Object:', largeObject);
+      for (let i = 0; i < logCount; i++) {
+        console[this.selectedMethod]('Large Object:', largeObject);
+      }
     },
     // Faker methods
     logFakerUser() {
