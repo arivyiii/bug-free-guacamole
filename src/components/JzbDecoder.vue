@@ -115,29 +115,41 @@ export default {
   },
   methods: {
     convertJzbToHumanReadable(jzbString) {
-      if (!jzbString) return "";
+        if (!jzbString) return ''
 
-      try {
-        const unpaddedJzbString = jzbString.substr(
-          0,
-          jzbString.length - (jzbString.length % 4)
-        );
+        // 1) Normalize URL-safe Base64 → standard Base64
+        let b64 = jzbString.replace(/-/g, '+').replace(/_/g, '/')
 
-        const byteArray = base64js.toByteArray(unpaddedJzbString);
+        b64 += '='.repeat((4 - (b64.length % 4)) % 4)
 
-        // zlib inflate (decompress) binary -> JSON string
-        const jsonStr = pako.inflate(byteArray, { to: "string" });
+        let bytes
+        try {
+            bytes = base64js.toByteArray(b64)
+        } catch (err) {
+            return `Error: invalid Base64 – ${err.message}`
+        }
 
-        // Parse and potentially recursively decode
-        const parsed = JSON.parse(jsonStr);
-        const processed = this.autoDecodeNested ? this.recursivelyDecodeJzb(parsed) : parsed;
-        
-        // Make it nice to read
-        return JSON.stringify(processed, null, 2);
-      } catch (error) {
-        console.error('Error decoding JZB string:', error);
-        return `Error decoding JZB string: ${error.message}`;
-      }
+        // 4) Inflate (zlib)
+        let jsonStr
+        try {
+            jsonStr = pako.inflate(bytes, { to: 'string' })
+        } catch (err) {
+        // if standard inflate fails you can try raw
+        try {
+            const raw = pako.inflateRaw(bytes)
+            jsonStr = new TextDecoder().decode(raw)
+        } catch (err2) {
+            return `Error during inflation: ${err.message}; raw-inflate: ${err2.message}`
+        }
+        }
+
+        // 5) Parse JSON
+        try {
+        const obj = JSON.parse(jsonStr)
+        return JSON.stringify(obj, null, 2)
+        } catch (err) {
+        return `Error parsing JSON: ${err.message}\n\n${jsonStr.slice(0,200)}…`
+        }
     },
     
     recursivelyDecodeJzb(obj, parentKey = '') {
