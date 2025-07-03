@@ -105,6 +105,42 @@
               <button @click="logAllTypes('Test message')" class="btn">All Types</button>
             </div>
           </section>
+
+          <!-- XSS Test Cases Section -->
+          <section class="section">
+            <h2 class="section-title">XSS Test Cases</h2>
+            <div class="button-grid">
+              <!-- HTML/Script Tags -->
+              <button @click="logXSSScriptTag()" class="btn btn-error">Script Tag</button>
+              <button @click="logXSSImgOnError()" class="btn btn-error">Img onerror</button>
+              <button @click="logXSSSvgOnLoad()" class="btn btn-error">SVG onload</button>
+              <button @click="logXSSJavaScriptUrl()" class="btn btn-error">JS URL</button>
+              
+              <!-- Event Handlers -->
+              <button @click="logXSSOnClick()" class="btn btn-error">onclick</button>
+              <button @click="logXSSOnLoad()" class="btn btn-error">onload</button>
+              <button @click="logXSSOnFocus()" class="btn btn-error">onfocus</button>
+              
+              <!-- URL Schemes -->
+              <button @click="logXSSDataUrl()" class="btn btn-error">Data URL</button>
+              <button @click="logXSSVBScript()" class="btn btn-error">VBScript</button>
+              
+              <!-- Object Properties -->
+              <button @click="logXSSObjectMalicious()" class="btn btn-error">Malicious Object</button>
+              <button @click="logXSSObjectHtml()" class="btn btn-error">HTML Object</button>
+              <button @click="logXSSDOMElement()" class="btn btn-error">DOM Element</button>
+              
+              <!-- Length & Encoding -->
+              <button @click="logXSSLongPayload()" class="btn btn-error">Long Payload</button>
+              <button @click="logXSSUnicode()" class="btn btn-error">Unicode</button>
+              <button @click="logXSSHtmlEntities()" class="btn btn-error">HTML Entities</button>
+              
+              <!-- PII & Errors -->
+              <button @click="logXSSWithPII()" class="btn btn-error">XSS + PII</button>
+              <button @click="logXSSInUrl()" class="btn btn-error">XSS in URL</button>
+              <button @click="logXSSError()" class="btn btn-error">XSS Error</button>
+            </div>
+          </section>
         </div>
       </div>
     </main>
@@ -113,6 +149,7 @@
 
 <script>
 import { faker } from '@faker-js/faker';
+import { xssTestCases } from './xssTestCases.js';
 
 export default {
   name: 'ConsoleSandbox',
@@ -543,6 +580,71 @@ export default {
         }
       };
       console[this.selectedMethod]('Faker Mixed Data:', mixedData);
+    },
+    // HTML/Script Tags
+    logXSSScriptTag() {
+      console[this.selectedMethod](xssTestCases.scriptTag());
+    },
+    logXSSImgOnError() {
+      console[this.selectedMethod](xssTestCases.imgOnError());
+    },
+    logXSSSvgOnLoad() {
+      console[this.selectedMethod](xssTestCases.svgOnLoad());
+    },
+    logXSSJavaScriptUrl() {
+      console[this.selectedMethod](xssTestCases.javascriptUrl());
+    },
+    
+    // Event Handlers
+    logXSSOnClick() {
+      console[this.selectedMethod](xssTestCases.onClick());
+    },
+    logXSSOnLoad() {
+      console[this.selectedMethod](xssTestCases.onLoad());
+    },
+    logXSSOnFocus() {
+      console[this.selectedMethod](xssTestCases.onFocus());
+    },
+    
+    // URL Schemes
+    logXSSDataUrl() {
+      console[this.selectedMethod](xssTestCases.dataUrl());
+    },
+    logXSSVBScript() {
+      console[this.selectedMethod](xssTestCases.vbScript());
+    },
+    
+    // Object Properties
+    logXSSObjectMalicious() {
+      console[this.selectedMethod](xssTestCases.maliciousObject());
+    },
+    logXSSObjectHtml() {
+      console[this.selectedMethod](xssTestCases.htmlObject());
+    },
+    logXSSDOMElement() {
+      console[this.selectedMethod](xssTestCases.createMaliciousElement());
+    },
+    
+    // Length & Encoding
+    logXSSLongPayload() {
+      console[this.selectedMethod](xssTestCases.longPayload());
+    },
+    logXSSUnicode() {
+      console[this.selectedMethod](xssTestCases.unicode());
+    },
+    logXSSHtmlEntities() {
+      console[this.selectedMethod](xssTestCases.htmlEntities());
+    },
+    
+    // PII & Errors
+    logXSSWithPII() {
+      console[this.selectedMethod](xssTestCases.withPii());
+    },
+    logXSSInUrl() {
+      console[this.selectedMethod](xssTestCases.inUrl());
+    },
+    logXSSError() {
+      console.error(xssTestCases.createMaliciousError());
     }
   }
 };
