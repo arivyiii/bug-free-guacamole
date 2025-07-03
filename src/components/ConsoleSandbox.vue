@@ -141,6 +141,66 @@
               <button @click="logXSSError()" class="btn btn-error">XSS Error</button>
             </div>
           </section>
+
+          <!-- IP Address Test Cases Section -->
+          <section class="section">
+            <h2 class="section-title">IP Address Test Cases</h2>
+            <div class="button-grid">
+              <button @click="console[this.selectedMethod]('192.168.1.1')" class="btn">IP: 192.168.1.1</button>
+              <button @click="console[this.selectedMethod]('192.168.001.001')" class="btn">IP: 192.168.001.001</button>
+              <button @click="console[this.selectedMethod]('192 . 168 . 1 . 1')" class="btn">IP: 192 . 168 . 1 . 1</button>
+              <button @click="console[this.selectedMethod]('[192.168.1.1]')" class="btn">IP: [192.168.1.1]</button>
+              <button @click="console[this.selectedMethod]('2001:0db8:85a3:0000:0000:8a2e:0370:7334')" class="btn">IPv6: 2001:0db8:85a3:0000:0000:8a2e:0370:7334</button>
+              <button @click="console[this.selectedMethod]('The user connected from 192.168.1.1 and accessed the system.')" class="btn">IP in text</button>
+            </div>
+          </section>
+
+          <!-- SSN Test Cases Section -->
+          <section class="section">
+            <h2 class="section-title">SSN Test Cases</h2>
+            <div class="button-grid">
+              <button @click="console[this.selectedMethod]('123-45-6789')" class="btn">SSN: 123-45-6789</button>
+              <button @click="console[this.selectedMethod]('12345678')" class="btn">SSN: 12345678</button>
+              <button @click="console[this.selectedMethod]('123 45 6789')" class="btn">SSN: 123 45 6789</button>
+              <button @click="console[this.selectedMethod]('123.45.6789')" class="btn">SSN: 123.45.6789</button>
+              <button @click="console[this.selectedMethod]('123/45/6789')" class="btn">SSN: 123/45/6789</button>
+              <button @click="console[this.selectedMethod]('(123) 45-6789')" class="btn">SSN: (123) 45-6789</button>
+              <button @click="console[this.selectedMethod]('The provided SSN is 123-45-6789 and should be scrubbed.')" class="btn">SSN in text</button>
+            </div>
+          </section>
+
+          <!-- Credit Card Test Cases Section -->
+          <section class="section">
+            <h2 class="section-title">Credit Card Test Cases</h2>
+            <div class="button-grid">
+              <button @click="console[this.selectedMethod]('4111 1111 1111 1111')" class="btn">Visa: 4111 1111 1111 1111</button>
+              <button @click="console[this.selectedMethod]('5500 0000 0000 0000')" class="btn">Mastercard: 5500 0000 0000 0000</button>
+              <button @click="console[this.selectedMethod]('3400 000000 00009')" class="btn">Amex: 3400 000000 00009</button>
+              <button @click="console[this.selectedMethod]('6011 0000 0000 0004')" class="btn">Discover: 6011 0000 0000 0004</button>
+              <button @click="console[this.selectedMethod]('4111-1111-1111-1111')" class="btn">Visa (dashes): 4111-1111-1111-1111</button>
+              <button @click="console[this.selectedMethod]('4111.1111.1111.1111')" class="btn">Visa (dots): 4111.1111.1111.1111</button>
+              <button @click="console[this.selectedMethod]('4111/1111/1111/1111')" class="btn">Visa (slashes): 4111/1111/1111/1111</button>
+              <button @click="console[this.selectedMethod]('4111111111111111')" class="btn">Visa (no spaces): 4111111111111111</button>
+              <button @click="console[this.selectedMethod]('The card number 4111 1111 1111 1111 was used for the transaction.')" class="btn">Credit Card in text</button>
+            </div>
+          </section>
+
+          <!-- HTTPS URL Test Cases Section -->
+          <section class="section">
+            <h2 class="section-title">HTTPS URL Test Cases</h2>
+            <div class="button-grid">
+              <button @click="console[this.selectedMethod]('https://example.com')" class="btn">URL: beginning</button>
+              <button @click="console[this.selectedMethod]('foo https://example.com bar')" class="btn">URL: middle</button>
+              <button @click="console[this.selectedMethod]('foo bar https://example.com')" class="btn">URL: end</button>
+              <button @click="console[this.selectedMethod]('https://example.com/path/to/resource')" class="btn">URL: with path</button>
+              <button @click="console[this.selectedMethod]('https://example.com?foo=bar&baz=qux')" class="btn">URL: with query</button>
+              <button @click="console[this.selectedMethod]('https://example.com:8080')" class="btn">URL: with port</button>
+              <button @click="console[this.selectedMethod]('https://example.com#fragment')" class="btn">URL: with fragment</button>
+              <button @click="console[this.selectedMethod]('https://sub.example.com')" class="btn">URL: with subdomain</button>
+              <button @click="console[this.selectedMethod]('https://user:pass@example.com')" class="btn">URL: with credentials</button>
+              <button @click="console[this.selectedMethod]('The user visited https://example.com while browsing the site.')" class="btn">URL in text</button>
+            </div>
+          </section>
         </div>
       </div>
     </main>
