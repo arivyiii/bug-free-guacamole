@@ -23,7 +23,7 @@ export const xssTestCases = {
   
   // Length & Encoding
   longPayload: () => '<script>alert("xss")</script>' + 'A'.repeat(1000),
-  unicode: () => '\u003cscript\u003ealert("xss")\u003c/script\u003e',
+  unicode: () => '<script>alert("xss")</script>',
   htmlEntities: () => '&#60;script&#62;alert("xss")&#60;/script&#62;',
   
   // PII & Errors
