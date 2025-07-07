@@ -21,13 +21,13 @@ const useLocalAgent = hasLocalAgentParam || import.meta.env.VITE_USE_LOCAL_AGENT
 if (useLocalAgent) {
   const reason = hasLocalAgentParam ? 'query parameter' : 'environment variable';
   console.debug(`[Sandbox] Using local agent (triggered by ${reason})`);
-  (function(){
+  (function(localAgentUrl){
     (function(p,e,n,d,o){var v,w,x,y,z;o=p[d]=p[d]||{};o._q=o._q||[];
     v=['initialize','identify','updateOptions','pageLoad','track'];for(w=0,x=v.length;w<x;++w)(function(m){
         o[m]=o[m]||function(){o._q[m===v[0]?'unshift':'push']([m].concat([].slice.call(arguments,0)));};})(v[w]);
-        y=e.createElement(n);y.async=!0;y.src=import.meta.env.VITE_LOCAL_AGENT_URL;
+        y=e.createElement(n);y.async=!0;y.src=localAgentUrl;
         z=e.getElementsByTagName(n)[0];z.parentNode.insertBefore(y,z);})(window,document,'script','pendo');
-  })();
+  })(import.meta.env.VITE_LOCAL_AGENT_URL);
 } else {
   console.debug('[Sandbox] Using production agent');
   (function(apiKey, cdnUrl){
