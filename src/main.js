@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
+import { localAgentUrlParam } from './constants'
 
 const app = createApp(App)
 
@@ -8,9 +9,17 @@ app.config.errorHandler = (err, instance, info) => {
   console.error('[Vue Global Error Handler]', err, info)
 }
 
-// Initialize Pendo based on environment
-if (import.meta.env.VITE_USE_LOCAL_AGENT) {
-  console.debug('[Sandbox] Using local agent');
+
+
+// Check for query parameter to override agent selection
+const urlParams = new URLSearchParams(window.location.search);
+const hasLocalAgentParam = urlParams.get(localAgentUrlParam) === 'true'
+const useLocalAgent = hasLocalAgentParam || import.meta.env.VITE_USE_LOCAL_AGENT;
+
+// Initialize Pendo based on environment and query parameter
+if (useLocalAgent) {
+  const reason = hasLocalAgentParam ? 'query parameter' : 'environment variable';
+  console.debug(`[Sandbox] Using local agent (triggered by ${reason})`);
   (function(){
     (function(p,e,n,d,o){var v,w,x,y,z;o=p[d]=p[d]||{};o._q=o._q||[];
     v=['initialize','identify','updateOptions','pageLoad','track'];for(w=0,x=v.length;w<x;++w)(function(m){
