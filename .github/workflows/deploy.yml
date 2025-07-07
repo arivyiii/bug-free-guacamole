@@ -37,6 +37,7 @@ jobs:
         run: |
           echo "VITE_PENDO_API_KEY=${{ secrets.VITE_PENDO_API_KEY }}" >> .env
           echo "VITE_PENDO_CDN=${{ secrets.VITE_PENDO_CDN }}" >> .env
+          echo "VITE_LOCAL_AGENT_URL=${{ secrets.VITE_LOCAL_AGENT_URL }}" >> .env
 
       - name: Build
         run: npm run build
