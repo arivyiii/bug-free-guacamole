@@ -1,6 +1,6 @@
 <template>
   <div class="console-sandbox">
-    <header class="header">
+    <header class="header" :class="{ 'header-sticky': isHeaderSticky }">
       <div class="container">
         <h1 class="title">Console Sandbox</h1>
         <p class="subtitle">Test JavaScript console methods with various data types</p>
@@ -17,6 +17,9 @@
         </div>
       </div>
     </header>
+
+    <!-- Placeholder to prevent layout shift -->
+    <div class="header-placeholder" v-show="isHeaderSticky"></div>
 
     <main class="main">
       <div class="container">
@@ -421,6 +424,8 @@ export default {
       selectedMethod: 'debug',
       iframe: null,
       isLogging: false,
+      isHeaderSticky: false,
+      scrollTicking: false,
       // XSS section collapse states
       xssSections: {
         basic: false,
@@ -448,7 +453,37 @@ export default {
       return Object.values(this.xssSections).every(expanded => expanded);
     }
   },
+  mounted() {
+    window.addEventListener('scroll', this.handleScroll);
+  },
+  beforeUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+  },
   methods: {
+    handleScroll() {
+      // Use requestAnimationFrame for smoother performance
+      if (!this.scrollTicking) {
+        this.scrollTicking = true;
+        requestAnimationFrame(() => {
+          this.updateHeaderState();
+          this.scrollTicking = false;
+        });
+      }
+    },
+    
+    updateHeaderState() {
+      // Use a more gradual threshold with a larger buffer for smoother transitions
+      const scrollThreshold = 60;
+      const buffer = 30;
+      const scrollY = window.scrollY;
+      
+      if (scrollY > scrollThreshold + buffer) {
+        this.isHeaderSticky = true;
+      } else if (scrollY < scrollThreshold - buffer) {
+        this.isHeaderSticky = false;
+      }
+      // Keep current state if in buffer zone to prevent flickering
+    },
     logPrimitive(type, value) {
       console[this.selectedMethod](`[${type}]`, value);
     },
@@ -1346,6 +1381,55 @@ export default {
   background-color: white;
   border-bottom: 1px solid #e9ecef;
   padding: 2rem 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateZ(0);
+  will-change: transform, padding, box-shadow;
+}
+
+.header-placeholder {
+  height: 8rem;
+  transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.header-sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 1rem 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  background-color: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+}
+
+.header-sticky .title {
+  font-size: 1.5rem;
+  margin: 0 0 0.25rem 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.header-sticky .subtitle {
+  font-size: 0.875rem;
+  margin: 0 0 0.75rem 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.header-sticky .method-selector {
+  gap: 0.5rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.header-sticky .method-selector label {
+  font-size: 0.8rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.header-sticky .method-select {
+  padding: 0.375rem 0.5rem;
+  font-size: 0.8rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .title {
