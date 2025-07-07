@@ -1,22 +1,6 @@
 <script setup>
 import { RouterView } from 'vue-router'
-import { ref, onMounted } from 'vue'
-import { localAgentUrlParam } from './constants'
-
-const agentType = ref('production')
-const agentReason = ref('')
-
-onMounted(() => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const hashParams = new URLSearchParams(window.location.hash.split('?')[1] || '');
-  const hasLocalAgentParam = urlParams.get(localAgentUrlParam) === 'true' || hashParams.get(localAgentUrlParam) === 'true';
-  const useLocalAgent = hasLocalAgentParam || import.meta.env.VITE_USE_LOCAL_AGENT;
-  
-  if (useLocalAgent) {
-    agentType.value = 'local'
-    agentReason.value = hasLocalAgentParam ? 'query parameter' : 'environment variable'
-  }
-})
+import AgentIndicator from './components/AgentIndicator.vue'
 
 pendo.initialize({
         visitor: {
@@ -36,10 +20,7 @@ pendo.initialize({
         <div class="nav-links">
           <router-link to="/" class="nav-link">Console Sandbox</router-link>
           <router-link to="/jzb-decoder" class="nav-link">JZB Decoder</router-link>
-          <div class="agent-indicator" :class="agentType">
-            <span class="agent-label">{{ agentType.toUpperCase() }}</span>
-            <span v-if="agentReason" class="agent-reason">({{ agentReason }})</span>
-          </div>
+          <AgentIndicator />
         </div>
       </div>
     </nav>
@@ -111,37 +92,6 @@ body {
   background-color: #4CAF50;
 }
 
-.agent-indicator {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 12px;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-.agent-indicator.local {
-  background-color: #ff9800;
-  color: white;
-}
-
-.agent-indicator.production {
-  background-color: #4CAF50;
-  color: white;
-}
-
-.agent-label {
-  font-weight: bold;
-}
-
-.agent-reason {
-  font-size: 10px;
-  opacity: 0.9;
-  font-weight: normal;
-}
-
 .main-content {
   flex: 1;
   max-width: 1200px;
@@ -165,15 +115,6 @@ body {
   .nav-link {
     padding: 6px 12px;
     font-size: 14px;
-  }
-  
-  .agent-indicator {
-    font-size: 10px;
-    padding: 4px 8px;
-  }
-  
-  .agent-reason {
-    display: none;
   }
 }
 </style>

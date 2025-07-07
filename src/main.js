@@ -11,10 +11,9 @@ app.config.errorHandler = (err, instance, info) => {
 
 
 
-// Check for query parameter to override agent selection (handles both hash and non-hash routing)
+// Check for query parameter to override agent selection
 const urlParams = new URLSearchParams(window.location.search);
-const hashParams = new URLSearchParams(window.location.hash.split('?')[1] || '');
-const hasLocalAgentParam = urlParams.get(localAgentUrlParam) === 'true' || hashParams.get(localAgentUrlParam) === 'true';
+const hasLocalAgentParam = urlParams.get(localAgentUrlParam) === 'true';
 const useLocalAgent = hasLocalAgentParam || import.meta.env.VITE_USE_LOCAL_AGENT;
 
 // Initialize Pendo based on environment and query parameter
