@@ -108,37 +108,216 @@
 
           <!-- XSS Test Cases Section -->
           <section class="section">
-            <h2 class="section-title">XSS Test Cases</h2>
-            <div class="button-grid">
-              <!-- HTML/Script Tags -->
-              <button @click="logXSSScriptTag()" class="btn btn-error">Script Tag</button>
-              <button @click="logXSSImgOnError()" class="btn btn-error">Img onerror</button>
-              <button @click="logXSSSvgOnLoad()" class="btn btn-error">SVG onload</button>
-              <button @click="logXSSJavaScriptUrl()" class="btn btn-error">JS URL</button>
-              
-              <!-- Event Handlers -->
-              <button @click="logXSSOnClick()" class="btn btn-error">onclick</button>
-              <button @click="logXSSOnLoad()" class="btn btn-error">onload</button>
-              <button @click="logXSSOnFocus()" class="btn btn-error">onfocus</button>
-              
-              <!-- URL Schemes -->
-              <button @click="logXSSDataUrl()" class="btn btn-error">Data URL</button>
-              <button @click="logXSSVBScript()" class="btn btn-error">VBScript</button>
-              
-              <!-- Object Properties -->
-              <button @click="logXSSObjectMalicious()" class="btn btn-error">Malicious Object</button>
-              <button @click="logXSSObjectHtml()" class="btn btn-error">HTML Object</button>
-              <button @click="logXSSDOMElement()" class="btn btn-error">DOM Element</button>
-              
-              <!-- Length & Encoding -->
-              <button @click="logXSSLongPayload()" class="btn btn-error">Long Payload</button>
-              <button @click="logXSSUnicode()" class="btn btn-error">Unicode</button>
-              <button @click="logXSSHtmlEntities()" class="btn btn-error">HTML Entities</button>
-              
-              <!-- PII & Errors -->
-              <button @click="logXSSWithPII()" class="btn btn-error">XSS + PII</button>
-              <button @click="logXSSInUrl()" class="btn btn-error">XSS in URL</button>
-              <button @click="logXSSError()" class="btn btn-error">XSS Error</button>
+            <div class="section-header">
+              <h2 class="section-title">XSS Test Cases</h2>
+              <button @click="toggleAllXssSections" class="btn btn-toggle">
+                {{ allXssSectionsExpanded ? 'Collapse All' : 'Show All' }}
+              </button>
+            </div>
+            
+            <!-- Basic XSS -->
+            <div class="xss-subsection">
+              <h3 class="subsection-title" @click="xssSections.basic = !xssSections.basic">
+                <span class="toggle-icon">{{ xssSections.basic ? '▼' : '▶' }}</span>
+                Basic XSS (HTML/Script Tags, Event Handlers, URL Schemes)
+              </h3>
+              <div class="button-grid" v-show="xssSections.basic">
+                <button @click="logXSSScriptTag()" class="btn btn-error">Script Tag</button>
+                <button @click="logXSSImgOnError()" class="btn btn-error">Img onerror</button>
+                <button @click="logXSSSvgOnLoad()" class="btn btn-error">SVG onload</button>
+                <button @click="logXSSJavaScriptUrl()" class="btn btn-error">JS URL</button>
+                <button @click="logXSSOnClick()" class="btn btn-error">onclick</button>
+                <button @click="logXSSOnLoad()" class="btn btn-error">onload</button>
+                <button @click="logXSSOnFocus()" class="btn btn-error">onfocus</button>
+                <button @click="logXSSDataUrl()" class="btn btn-error">Data URL</button>
+                <button @click="logXSSVBScript()" class="btn btn-error">VBScript</button>
+                <button @click="logXSSObjectMalicious()" class="btn btn-error">Malicious Object</button>
+                <button @click="logXSSObjectHtml()" class="btn btn-error">HTML Object</button>
+                <button @click="logXSSDOMElement()" class="btn btn-error">DOM Element</button>
+                <button @click="logXSSLongPayload()" class="btn btn-error">Long Payload</button>
+                <button @click="logXSSUnicode()" class="btn btn-error">Unicode</button>
+                <button @click="logXSSHtmlEntities()" class="btn btn-error">HTML Entities</button>
+                <button @click="logXSSWithPII()" class="btn btn-error">XSS + PII</button>
+                <button @click="logXSSInUrl()" class="btn btn-error">XSS in URL</button>
+                <button @click="logXSSError()" class="btn btn-error">XSS Error</button>
+              </div>
+            </div>
+
+            <!-- CSS-based XSS -->
+            <div class="xss-subsection">
+              <h3 class="subsection-title" @click="xssSections.css = !xssSections.css">
+                <span class="toggle-icon">{{ xssSections.css ? '▼' : '▶' }}</span>
+                CSS-based XSS
+              </h3>
+              <div class="button-grid" v-show="xssSections.css">
+                <button @click="logXSSCssExpression()" class="btn btn-error">CSS Expression</button>
+                <button @click="logXSSCssUrl()" class="btn btn-error">CSS URL</button>
+                <button @click="logXSSCssImport()" class="btn btn-error">CSS Import</button>
+              </div>
+            </div>
+
+            <!-- Advanced Event Handlers -->
+            <div class="xss-subsection">
+              <h3 class="subsection-title" @click="xssSections.events = !xssSections.events">
+                <span class="toggle-icon">{{ xssSections.events ? '▼' : '▶' }}</span>
+                Advanced Event Handlers
+              </h3>
+              <div class="button-grid" v-show="xssSections.events">
+                <button @click="logXSSOnMouseOver()" class="btn btn-error">onmouseover</button>
+                <button @click="logXSSOnKeyPress()" class="btn btn-error">onkeypress</button>
+                <button @click="logXSSOnBlur()" class="btn btn-error">onblur</button>
+                <button @click="logXSSOnContextMenu()" class="btn btn-error">oncontextmenu</button>
+                <button @click="logXSSOnDoubleClick()" class="btn btn-error">ondblclick</button>
+              </div>
+            </div>
+
+            <!-- Frame/Iframe XSS -->
+            <div class="xss-subsection">
+              <h3 class="subsection-title" @click="xssSections.frames = !xssSections.frames">
+                <span class="toggle-icon">{{ xssSections.frames ? '▼' : '▶' }}</span>
+                Frame/Iframe XSS
+              </h3>
+              <div class="button-grid" v-show="xssSections.frames">
+                <button @click="logXSSIframeSrc()" class="btn btn-error">Iframe src</button>
+                <button @click="logXSSFrameSrc()" class="btn btn-error">Frame src</button>
+                <button @click="logXSSEmbedSrc()" class="btn btn-error">Embed src</button>
+                <button @click="logXSSObjectData()" class="btn btn-error">Object data</button>
+              </div>
+            </div>
+
+            <!-- Meta/Link XSS -->
+            <div class="xss-subsection">
+              <h3 class="subsection-title" @click="xssSections.meta = !xssSections.meta">
+                <span class="toggle-icon">{{ xssSections.meta ? '▼' : '▶' }}</span>
+                Meta/Link XSS
+              </h3>
+              <div class="button-grid" v-show="xssSections.meta">
+                <button @click="logXSSMetaRefresh()" class="btn btn-error">Meta refresh</button>
+                <button @click="logXSSLinkHref()" class="btn btn-error">Link href</button>
+                <button @click="logXSSAnchorHref()" class="btn btn-error">Anchor href</button>
+              </div>
+            </div>
+
+            <!-- Form XSS -->
+            <div class="xss-subsection">
+              <h3 class="subsection-title" @click="xssSections.forms = !xssSections.forms">
+                <span class="toggle-icon">{{ xssSections.forms ? '▼' : '▶' }}</span>
+                Form XSS
+              </h3>
+              <div class="button-grid" v-show="xssSections.forms">
+                <button @click="logXSSFormAction()" class="btn btn-error">Form action</button>
+                <button @click="logXSSInputFormaction()" class="btn btn-error">Input formaction</button>
+              </div>
+            </div>
+
+            <!-- Advanced URL Schemes -->
+            <div class="xss-subsection">
+              <h3 class="subsection-title" @click="xssSections.urls = !xssSections.urls">
+                <span class="toggle-icon">{{ xssSections.urls ? '▼' : '▶' }}</span>
+                Advanced URL Schemes
+              </h3>
+              <div class="button-grid" v-show="xssSections.urls">
+                <button @click="logXSSDataUrlWithBase64()" class="btn btn-error">Data URL Base64</button>
+                <button @click="logXSSDataUrlWithCharset()" class="btn btn-error">Data URL Charset</button>
+                <button @click="logXSSFileUrl()" class="btn btn-error">File URL</button>
+                <button @click="logXSSFtpUrl()" class="btn btn-error">FTP URL</button>
+              </div>
+            </div>
+
+            <!-- Unicode and Encoding -->
+            <div class="xss-subsection">
+              <h3 class="subsection-title" @click="xssSections.encoding = !xssSections.encoding">
+                <span class="toggle-icon">{{ xssSections.encoding ? '▼' : '▶' }}</span>
+                Unicode and Encoding Variations
+              </h3>
+              <div class="button-grid" v-show="xssSections.encoding">
+                <button @click="logXSSUnicodeHex()" class="btn btn-error">Unicode Hex</button>
+                <button @click="logXSSUnicodeDecimal()" class="btn btn-error">Unicode Decimal</button>
+                <button @click="logXSSUnicodeMixed()" class="btn btn-error">Unicode Mixed</button>
+                <button @click="logXSSUrlEncoded()" class="btn btn-error">URL Encoded</button>
+                <button @click="logXSSDoubleEncoded()" class="btn btn-error">Double Encoded</button>
+              </div>
+            </div>
+
+            <!-- Template Literals -->
+            <div class="xss-subsection">
+              <h3 class="subsection-title" @click="xssSections.templates = !xssSections.templates">
+                <span class="toggle-icon">{{ xssSections.templates ? '▼' : '▶' }}</span>
+                Template Literals and String Interpolation
+              </h3>
+              <div class="button-grid" v-show="xssSections.templates">
+                <button @click="logXSSTemplateLiteral()" class="btn btn-error">Template Literal</button>
+                <button @click="logXSSStringInterpolation()" class="btn btn-error">String Interpolation</button>
+              </div>
+            </div>
+
+            <!-- Complex Objects -->
+            <div class="xss-subsection">
+              <h3 class="subsection-title" @click="xssSections.objects = !xssSections.objects">
+                <span class="toggle-icon">{{ xssSections.objects ? '▼' : '▶' }}</span>
+                Complex Objects and Nesting
+              </h3>
+              <div class="button-grid" v-show="xssSections.objects">
+                <button @click="logXSSNestedArray()" class="btn btn-error">Nested Array</button>
+                <button @click="logXSSNestedObject()" class="btn btn-error">Nested Object</button>
+                <button @click="logXSSMixedData()" class="btn btn-error">Mixed Data</button>
+              </div>
+            </div>
+
+            <!-- Functions and Classes -->
+            <div class="xss-subsection">
+              <h3 class="subsection-title" @click="xssSections.functions = !xssSections.functions">
+                <span class="toggle-icon">{{ xssSections.functions ? '▼' : '▶' }}</span>
+                Functions and Classes
+              </h3>
+              <div class="button-grid" v-show="xssSections.functions">
+                <button @click="logXSSFunctionName()" class="btn btn-error">Function Name</button>
+                <button @click="logXSSSymbolKey()" class="btn btn-error">Symbol Key</button>
+                <button @click="logXSSProxyObject()" class="btn btn-error">Proxy Object</button>
+                <button @click="logXSSGeneratorFunction()" class="btn btn-error">Generator Function</button>
+                <button @click="logXSSAsyncFunction()" class="btn btn-error">Async Function</button>
+                <button @click="logXSSMaliciousClass()" class="btn btn-error">Malicious Class</button>
+              </div>
+            </div>
+
+            <!-- Collections -->
+            <div class="xss-subsection">
+              <h3 class="subsection-title" @click="xssSections.collections = !xssSections.collections">
+                <span class="toggle-icon">{{ xssSections.collections ? '▼' : '▶' }}</span>
+                Collections (Map, Set, TypedArray)
+              </h3>
+              <div class="button-grid" v-show="xssSections.collections">
+                <button @click="logXSSMaliciousMap()" class="btn btn-error">Malicious Map</button>
+                <button @click="logXSSMaliciousSet()" class="btn btn-error">Malicious Set</button>
+                <button @click="logXSSMaliciousTypedArray()" class="btn btn-error">Malicious TypedArray</button>
+              </div>
+            </div>
+
+            <!-- Built-in Objects -->
+            <div class="xss-subsection">
+              <h3 class="subsection-title" @click="xssSections.builtins = !xssSections.builtins">
+                <span class="toggle-icon">{{ xssSections.builtins ? '▼' : '▶' }}</span>
+                Built-in Objects
+              </h3>
+              <div class="button-grid" v-show="xssSections.builtins">
+                <button @click="logXSSMaliciousDate()" class="btn btn-error">Malicious Date</button>
+                <button @click="logXSSMaliciousRegExp()" class="btn btn-error">Malicious RegExp</button>
+                <button @click="logXSSMaliciousErrorStack()" class="btn btn-error">Malicious Error Stack</button>
+              </div>
+            </div>
+
+            <!-- Advanced Patterns -->
+            <div class="xss-subsection">
+              <h3 class="subsection-title" @click="xssSections.patterns = !xssSections.patterns">
+                <span class="toggle-icon">{{ xssSections.patterns ? '▼' : '▶' }}</span>
+                Advanced Patterns
+              </h3>
+              <div class="button-grid" v-show="xssSections.patterns">
+                <button @click="logXSSCircularXSS()" class="btn btn-error">Circular XSS</button>
+                <button @click="logXSSDeepNestedXSS()" class="btn btn-error">Deep Nested XSS</button>
+                <button @click="logXSSMaliciousArrayMethods()" class="btn btn-error">Malicious Array Methods</button>
+                <button @click="logXSSMaliciousPrototype()" class="btn btn-error">Malicious Prototype</button>
+              </div>
             </div>
           </section>
 
@@ -213,6 +392,18 @@
               <button @click="dedupeDiffMethodMessageStack" class="btn">Diff method, message, stack (x5)</button>
             </div>
           </section>
+
+          <!-- Continuous Logging Section -->
+          <section class="section" v-if="!isProduction">
+            <h2 class="section-title">Continuous Logging</h2>
+            <div class="button-grid">
+              <button @click="startContinuousLogging" class="btn btn-error" :disabled="isLogging">Start 2min Continuous Logging</button>
+              <button @click="startConsoleSpam" class="btn btn-error" :disabled="isLogging">Start 2min Console Spam</button>
+            </div>
+            <p style="margin-top: 0.5rem; font-size: 0.875rem; color: #6c757d;">
+              Left: Random intervals (0-2s) | Right: Maximum spam for rate limiting tests
+            </p>
+          </section>
         </div>
       </div>
     </main>
@@ -228,8 +419,34 @@ export default {
   data() {
     return {
       selectedMethod: 'debug',
-      iframe: null
+      iframe: null,
+      isLogging: false,
+      // XSS section collapse states
+      xssSections: {
+        basic: false,
+        css: false,
+        events: false,
+        frames: false,
+        meta: false,
+        forms: false,
+        urls: false,
+        encoding: false,
+        templates: false,
+        objects: false,
+        functions: false,
+        collections: false,
+        builtins: false,
+        patterns: false
+      }
     };
+  },
+  computed: {
+    isProduction() {
+      return process.env.NODE_ENV === 'production';
+    },
+    allXssSectionsExpanded() {
+      return Object.values(this.xssSections).every(expanded => expanded);
+    }
   },
   methods: {
     logPrimitive(type, value) {
@@ -718,6 +935,184 @@ export default {
     logXSSError() {
       console.error(xssTestCases.createMaliciousError());
     },
+    
+    // Additional XSS Test Cases - CSS-based
+    logXSSCssExpression() {
+      console[this.selectedMethod](xssTestCases.cssExpression());
+    },
+    logXSSCssUrl() {
+      console[this.selectedMethod](xssTestCases.cssUrl());
+    },
+    logXSSCssImport() {
+      console[this.selectedMethod](xssTestCases.cssImport());
+    },
+    
+    // Additional XSS Test Cases - Advanced Event Handlers
+    logXSSOnMouseOver() {
+      console[this.selectedMethod](xssTestCases.onMouseOver());
+    },
+    logXSSOnKeyPress() {
+      console[this.selectedMethod](xssTestCases.onKeyPress());
+    },
+    logXSSOnBlur() {
+      console[this.selectedMethod](xssTestCases.onBlur());
+    },
+    logXSSOnContextMenu() {
+      console[this.selectedMethod](xssTestCases.onContextMenu());
+    },
+    logXSSOnDoubleClick() {
+      console[this.selectedMethod](xssTestCases.onDoubleClick());
+    },
+    
+    // Additional XSS Test Cases - Frame/Iframe
+    logXSSIframeSrc() {
+      console[this.selectedMethod](xssTestCases.iframeSrc());
+    },
+    logXSSFrameSrc() {
+      console[this.selectedMethod](xssTestCases.frameSrc());
+    },
+    logXSSEmbedSrc() {
+      console[this.selectedMethod](xssTestCases.embedSrc());
+    },
+    logXSSObjectData() {
+      console[this.selectedMethod](xssTestCases.objectData());
+    },
+    
+    // Additional XSS Test Cases - Meta/Link
+    logXSSMetaRefresh() {
+      console[this.selectedMethod](xssTestCases.metaRefresh());
+    },
+    logXSSLinkHref() {
+      console[this.selectedMethod](xssTestCases.linkHref());
+    },
+    logXSSAnchorHref() {
+      console[this.selectedMethod](xssTestCases.anchorHref());
+    },
+    
+    // Additional XSS Test Cases - Form
+    logXSSFormAction() {
+      console[this.selectedMethod](xssTestCases.formAction());
+    },
+    logXSSInputFormaction() {
+      console[this.selectedMethod](xssTestCases.inputFormaction());
+    },
+    
+    // Additional XSS Test Cases - Advanced URL Schemes
+    logXSSDataUrlWithBase64() {
+      console[this.selectedMethod](xssTestCases.dataUrlWithBase64());
+    },
+    logXSSDataUrlWithCharset() {
+      console[this.selectedMethod](xssTestCases.dataUrlWithCharset());
+    },
+    logXSSFileUrl() {
+      console[this.selectedMethod](xssTestCases.fileUrl());
+    },
+    logXSSFtpUrl() {
+      console[this.selectedMethod](xssTestCases.ftpUrl());
+    },
+    
+    // Additional XSS Test Cases - Unicode and Encoding
+    logXSSUnicodeHex() {
+      console[this.selectedMethod](xssTestCases.unicodeHex());
+    },
+    logXSSUnicodeDecimal() {
+      console[this.selectedMethod](xssTestCases.unicodeDecimal());
+    },
+    logXSSUnicodeMixed() {
+      console[this.selectedMethod](xssTestCases.unicodeMixed());
+    },
+    logXSSUrlEncoded() {
+      console[this.selectedMethod](xssTestCases.urlEncoded());
+    },
+    logXSSDoubleEncoded() {
+      console[this.selectedMethod](xssTestCases.doubleEncoded());
+    },
+    
+    // Additional XSS Test Cases - Template Literals
+    logXSSTemplateLiteral() {
+      console[this.selectedMethod](xssTestCases.templateLiteral());
+    },
+    logXSSStringInterpolation() {
+      console[this.selectedMethod](xssTestCases.stringInterpolation());
+    },
+    
+    // Additional XSS Test Cases - Complex Objects
+    logXSSNestedArray() {
+      console[this.selectedMethod](xssTestCases.nestedArray());
+    },
+    logXSSNestedObject() {
+      console[this.selectedMethod](xssTestCases.nestedObject());
+    },
+    logXSSMixedData() {
+      console[this.selectedMethod](xssTestCases.mixedData());
+    },
+    
+    // Additional XSS Test Cases - Functions and Classes
+    logXSSFunctionName() {
+      console[this.selectedMethod](xssTestCases.functionName());
+    },
+    logXSSSymbolKey() {
+      console[this.selectedMethod](xssTestCases.symbolKey());
+    },
+    logXSSProxyObject() {
+      console[this.selectedMethod](xssTestCases.proxyObject());
+    },
+    logXSSGeneratorFunction() {
+      console[this.selectedMethod](xssTestCases.generatorFunction());
+    },
+    logXSSAsyncFunction() {
+      console[this.selectedMethod](xssTestCases.asyncFunction());
+    },
+    logXSSMaliciousClass() {
+      console[this.selectedMethod](xssTestCases.maliciousClass());
+    },
+    
+    // Additional XSS Test Cases - Collections
+    logXSSMaliciousMap() {
+      console[this.selectedMethod](xssTestCases.maliciousMap());
+    },
+    logXSSMaliciousSet() {
+      console[this.selectedMethod](xssTestCases.maliciousSet());
+    },
+    logXSSMaliciousTypedArray() {
+      console[this.selectedMethod](xssTestCases.maliciousTypedArray());
+    },
+    
+    // Additional XSS Test Cases - Built-in Objects
+    logXSSMaliciousDate() {
+      console[this.selectedMethod](xssTestCases.maliciousDate());
+    },
+    logXSSMaliciousRegExp() {
+      console[this.selectedMethod](xssTestCases.maliciousRegExp());
+    },
+    logXSSMaliciousErrorStack() {
+      console[this.selectedMethod](xssTestCases.maliciousErrorStack());
+    },
+    
+    // Additional XSS Test Cases - Advanced Patterns
+    logXSSCircularXSS() {
+      console[this.selectedMethod](xssTestCases.circularXSS());
+    },
+    logXSSDeepNestedXSS() {
+      console[this.selectedMethod](xssTestCases.deepNestedXSS());
+    },
+    logXSSMaliciousArrayMethods() {
+      const maliciousArray = xssTestCases.maliciousArrayMethods();
+      console[this.selectedMethod](maliciousArray.toString());
+      console[this.selectedMethod](maliciousArray.join(''));
+    },
+    logXSSMaliciousPrototype() {
+      console[this.selectedMethod](xssTestCases.maliciousPrototype());
+    },
+    
+    // Toggle all XSS sections
+    toggleAllXssSections() {
+      const shouldExpand = !this.allXssSectionsExpanded;
+      Object.keys(this.xssSections).forEach(key => {
+        this.xssSections[key] = shouldExpand;
+      });
+    },
+    
     dedupeSameMethodMessageStack() {
       // Same method, message, and stack - log from same function multiple times
       const logSameStack = () => {
@@ -829,6 +1224,105 @@ export default {
           case 4: logFromContext5(method, message); break;
         }
       }
+    },
+    startContinuousLogging() {
+      const startTime = Date.now();
+      const duration = 2 * 60 * 1000; // 2 minutes in milliseconds
+      let logCount = 0;
+      this.isLogging = true;
+      
+      const methods = ['log', 'info', 'warn', 'error'];
+      const messages = [
+        'Application started successfully',
+        'Processing user request',
+        'Database connection established',
+        'API call completed',
+        'Cache miss - fetching from database',
+        'User authentication successful',
+        'File upload completed',
+        'Background task finished',
+        'Memory usage: 45%',
+        'Network request timeout',
+        'Configuration loaded',
+        'Session created',
+        'Data validation passed',
+        'External service unavailable',
+        'Task queue processed'
+      ];
+      
+      const logRandomMessage = () => {
+        const now = Date.now();
+        if (now - startTime >= duration) {
+          console.log(`Continuous logging completed. Total logs: ${logCount}`);
+          this.isLogging = false;
+          return;
+        }
+        
+        const method = methods[Math.floor(Math.random() * methods.length)];
+        const message = messages[Math.floor(Math.random() * messages.length)];
+        const timestamp = new Date().toISOString();
+        
+        console[method](`[${timestamp}] ${message} (Log #${++logCount})`);
+        
+        // Schedule next log with random interval (0-2 seconds, including sub-second)
+        const nextInterval = Math.random() * 2000; // 0-2000ms (0-2 seconds)
+        setTimeout(logRandomMessage, nextInterval);
+      };
+      
+      console.log('Starting continuous logging for 2 minutes...');
+      logRandomMessage();
+    },
+    startConsoleSpam() {
+      const startTime = Date.now();
+      const duration = 2 * 60 * 1000; // 2 minutes in milliseconds
+      let logCount = 0;
+      this.isLogging = true;
+      
+      const methods = ['log', 'info', 'warn', 'error'];
+      const spamMessages = [
+        'SPAM: Rate limit test message',
+        'SPAM: High volume logging test',
+        'SPAM: Console flood detection',
+        'SPAM: Log aggregation stress test',
+        'SPAM: Performance monitoring test',
+        'SPAM: System load simulation',
+        'SPAM: Network traffic simulation',
+        'SPAM: Database query spam',
+        'SPAM: API endpoint hammering',
+        'SPAM: Memory pressure test',
+        'SPAM: CPU intensive logging',
+        'SPAM: I/O bound operation test',
+        'SPAM: Concurrent request simulation',
+        'SPAM: Buffer overflow test',
+        'SPAM: Queue saturation test'
+      ];
+      
+      const spamConsole = () => {
+        const now = Date.now();
+        if (now - startTime >= duration) {
+          console.log(`Console spam completed. Total logs: ${logCount}`);
+          this.isLogging = false;
+          return;
+        }
+        
+        const maxSpam = 100;
+        const minSpam = 40;
+        const spamPerBurst = Math.floor(Math.random() * (maxSpam - minSpam + 1)) + minSpam;
+        // Log multiple messages per iteration for maximum spam
+        for (let i = 0; i < spamPerBurst; i++) {
+          const method = methods[Math.floor(Math.random() * methods.length)];
+          const message = spamMessages[Math.floor(Math.random() * spamMessages.length)];
+          const timestamp = new Date().toISOString();
+          
+          console[method](`[${timestamp}] ${message} (Spam #${++logCount})`);
+        }
+        
+        // Schedule next spam burst immediately (no delay for maximum spam)
+        setTimeout(spamConsole, 0);
+      };
+      
+      console.log('Starting console spam for 2 minutes...');
+      spamConsole();
     }
   }
 };
@@ -921,6 +1415,35 @@ export default {
   padding-bottom: 0.5rem;
 }
 
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #f8f9fa;
+  padding-bottom: 0.5rem;
+}
+
+.section-header .section-title {
+  margin: 0;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.btn-toggle {
+  background-color: #e9ecef;
+  border-color: #ced4da;
+  color: #495057;
+  font-size: 0.8rem;
+  padding: 0.5rem 0.75rem;
+  min-width: 100px;
+}
+
+.btn-toggle:hover {
+  background-color: #dee2e6;
+  border-color: #adb5bd;
+}
+
 .button-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
@@ -977,6 +1500,49 @@ export default {
   justify-content: center;
   color: #6c757d;
   font-size: 0.875rem;
+}
+
+/* XSS Collapsible Sections */
+.xss-subsection {
+  margin-bottom: 1rem;
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.xss-subsection:last-child {
+  margin-bottom: 0;
+}
+
+.subsection-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+  padding: 0.75rem 1rem;
+  background-color: #f8f9fa;
+  color: #495057;
+  cursor: pointer;
+  border-bottom: 1px solid #e9ecef;
+  transition: background-color 0.15s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.subsection-title:hover {
+  background-color: #e9ecef;
+}
+
+.toggle-icon {
+  font-size: 0.75rem;
+  color: #6c757d;
+  transition: transform 0.15s ease;
+}
+
+.xss-subsection .button-grid {
+  padding: 1rem;
+  margin: 0;
+  background-color: white;
 }
 
 @media (max-width: 768px) {
