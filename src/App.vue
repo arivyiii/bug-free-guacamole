@@ -8,7 +8,8 @@ const agentReason = ref('')
 
 onMounted(() => {
   const urlParams = new URLSearchParams(window.location.search);
-  const hasLocalAgentParam = urlParams.get(localAgentUrlParam) === 'true'
+  const hashParams = new URLSearchParams(window.location.hash.split('?')[1] || '');
+  const hasLocalAgentParam = urlParams.get(localAgentUrlParam) === 'true' || hashParams.get(localAgentUrlParam) === 'true';
   const useLocalAgent = hasLocalAgentParam || import.meta.env.VITE_USE_LOCAL_AGENT;
   
   if (useLocalAgent) {
