@@ -141,7 +141,8 @@ export default {
         // Store the JZB output in localStorage for the decoder to pick up
         localStorage.setItem('jzbToDecode', jzbOutput)
         // Open decoder in new tab
-        window.open('/#/jzb-decoder', '_blank')
+        const url = router.resolve({ name: 'JzbDecoder' });
+        window.open(url.href, '_blank')
       }
     }
 

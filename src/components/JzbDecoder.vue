@@ -128,10 +128,10 @@ import base64js from 'base64-js'
           try {
             // Parse to ensure it's valid JSON
             JSON.parse(jsonOutput)
-            // Store the JSON output in localStorage for the encoder to pick up
             localStorage.setItem('jsonToEncode', jsonOutput)
-            // Open encoder in new tab
-            window.open('/#/jzb-encoder', '_blank')
+
+            const url = router.resolve({ name: 'JzbEncoder' })
+            window.open(url.href, '_blank')
           } catch (e) {
             console.error('Invalid JSON, cannot encode:', e)
           }
