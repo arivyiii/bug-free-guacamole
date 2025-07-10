@@ -13,6 +13,7 @@
             <option value="warn">console.warn</option>
             <option value="error">console.error</option>
             <option value="debug">console.debug</option>
+            <option value="all">All Types</option>
           </select>
         </div>
       </div>
@@ -460,6 +461,16 @@ export default {
     window.removeEventListener('scroll', this.handleScroll);
   },
   methods: {
+    // Helper function to log with all console methods when 'all' is selected
+    logWithAllMethods(data) {
+      if (this.selectedMethod === 'all') {
+        console.info(data);
+        console.warn(data);
+        console.error(data);
+      } else {
+        console[this.selectedMethod](data);
+      }
+    },
     handleScroll() {
       // Use requestAnimationFrame for smoother performance
       if (!this.scrollTicking) {
@@ -485,23 +496,63 @@ export default {
       // Keep current state if in buffer zone to prevent flickering
     },
     logPrimitive(type, value) {
-      console[this.selectedMethod](`[${type}]`, value);
+      if (this.selectedMethod === 'all') {
+        console.log(`[${type}]`, value);
+        console.info(`[${type}]`, value);
+        console.warn(`[${type}]`, value);
+        console.error(`[${type}]`, value);
+        console.debug(`[${type}]`, value);
+      } else {
+        console[this.selectedMethod](`[${type}]`, value);
+      }
     },
     logObject(obj) {
-      console[this.selectedMethod]('Object:', obj);
+      if (this.selectedMethod === 'all') {
+        console.log('Object:', obj);
+        console.info('Object:', obj);
+        console.warn('Object:', obj);
+        console.error('Object:', obj);
+        console.debug('Object:', obj);
+      } else {
+        console[this.selectedMethod]('Object:', obj);
+      }
     },
     logArray(arr) {
-      console[this.selectedMethod]('Array:', arr);
+      if (this.selectedMethod === 'all') {
+        console.log('Array:', arr);
+        console.info('Array:', arr);
+        console.warn('Array:', arr);
+        console.error('Array:', arr);
+        console.debug('Array:', arr);
+      } else {
+        console[this.selectedMethod]('Array:', arr);
+      }
     },
     logSet() {
       const set = new Set([1, 2, 3, 4, 5]);
-      console[this.selectedMethod]('Set:', set);
+      if (this.selectedMethod === 'all') {
+        console.log('Set:', set);
+        console.info('Set:', set);
+        console.warn('Set:', set);
+        console.error('Set:', set);
+        console.debug('Set:', set);
+      } else {
+        console[this.selectedMethod]('Set:', set);
+      }
     },
     logWeakSet() {
       const obj1 = {};
       const obj2 = {};
       const weakSet = new WeakSet([obj1, obj2]);
-      console[this.selectedMethod]('WeakSet:', weakSet);
+      if (this.selectedMethod === 'all') {
+        console.log('WeakSet:', weakSet);
+        console.info('WeakSet:', weakSet);
+        console.warn('WeakSet:', weakSet);
+        console.error('WeakSet:', weakSet);
+        console.debug('WeakSet:', weakSet);
+      } else {
+        console[this.selectedMethod]('WeakSet:', weakSet);
+      }
     },
     logMap() {
       const map = new Map([
@@ -509,52 +560,140 @@ export default {
         ['b', 2],
         ['c', 3]
       ]);
-      console[this.selectedMethod]('Map:', map);
+      if (this.selectedMethod === 'all') {
+        console.log('Map:', map);
+        console.info('Map:', map);
+        console.warn('Map:', map);
+        console.error('Map:', map);
+        console.debug('Map:', map);
+      } else {
+        console[this.selectedMethod]('Map:', map);
+      }
     },
     logWeakMap() {
       const obj1 = {};
       const obj2 = {};
       const weakMap = new WeakMap([[obj1, 'foo'], [obj2, 'bar']]);
-      console[this.selectedMethod]('WeakMap:', weakMap);
+      if (this.selectedMethod === 'all') {
+        console.log('WeakMap:', weakMap);
+        console.info('WeakMap:', weakMap);
+        console.warn('WeakMap:', weakMap);
+        console.error('WeakMap:', weakMap);
+        console.debug('WeakMap:', weakMap);
+      } else {
+        console[this.selectedMethod]('WeakMap:', weakMap);
+      }
     },
     logRegExp() {
       const regex = /abc/i;
-      console[this.selectedMethod]('RegExp:', regex);
+      if (this.selectedMethod === 'all') {
+        console.log('RegExp:', regex);
+        console.info('RegExp:', regex);
+        console.warn('RegExp:', regex);
+        console.error('RegExp:', regex);
+        console.debug('RegExp:', regex);
+      } else {
+        console[this.selectedMethod]('RegExp:', regex);
+      }
     },
     logArrayBuffer() {
       const buffer = new ArrayBuffer(8);
-      console[this.selectedMethod]('ArrayBuffer:', buffer);
+      if (this.selectedMethod === 'all') {
+        console.log('ArrayBuffer:', buffer);
+        console.info('ArrayBuffer:', buffer);
+        console.warn('ArrayBuffer:', buffer);
+        console.error('ArrayBuffer:', buffer);
+        console.debug('ArrayBuffer:', buffer);
+      } else {
+        console[this.selectedMethod]('ArrayBuffer:', buffer);
+      }
     },
     logDataView() {
       const buffer = new ArrayBuffer(8);
       const view = new DataView(buffer);
-      console[this.selectedMethod]('DataView:', view);
+      if (this.selectedMethod === 'all') {
+        console.log('DataView:', view);
+        console.info('DataView:', view);
+        console.warn('DataView:', view);
+        console.error('DataView:', view);
+        console.debug('DataView:', view);
+      } else {
+        console[this.selectedMethod]('DataView:', view);
+      }
     },
     logTypedArray() {
       const arr = new Uint8Array([1, 2, 3, 4]);
-      console[this.selectedMethod]('Uint8Array:', arr);
+      if (this.selectedMethod === 'all') {
+        console.log('Uint8Array:', arr);
+        console.info('Uint8Array:', arr);
+        console.warn('Uint8Array:', arr);
+        console.error('Uint8Array:', arr);
+        console.debug('Uint8Array:', arr);
+      } else {
+        console[this.selectedMethod]('Uint8Array:', arr);
+      }
     },
     logResolvedPromise() {
       const promise = Promise.resolve('resolved value');
-      console[this.selectedMethod]('Resolved Promise:', promise);
+      if (this.selectedMethod === 'all') {
+        console.log('Resolved Promise:', promise);
+        console.info('Resolved Promise:', promise);
+        console.warn('Resolved Promise:', promise);
+        console.error('Resolved Promise:', promise);
+        console.debug('Resolved Promise:', promise);
+      } else {
+        console[this.selectedMethod]('Resolved Promise:', promise);
+      }
     },
     logPendingPromise() {
       const promise = new Promise(() => {});
-      console[this.selectedMethod]('Pending Promise:', promise);
+      if (this.selectedMethod === 'all') {
+        console.log('Pending Promise:', promise);
+        console.info('Pending Promise:', promise);
+        console.warn('Pending Promise:', promise);
+        console.error('Pending Promise:', promise);
+        console.debug('Pending Promise:', promise);
+      } else {
+        console[this.selectedMethod]('Pending Promise:', promise);
+      }
     },
     logRejectedPromise() {
       try {
         const promise = Promise.reject('rejected value');
-        console[this.selectedMethod]('Rejected Promise:', promise);
+        if (this.selectedMethod === 'all') {
+          console.log('Rejected Promise:', promise);
+          console.info('Rejected Promise:', promise);
+          console.warn('Rejected Promise:', promise);
+          console.error('Rejected Promise:', promise);
+          console.debug('Rejected Promise:', promise);
+        } else {
+          console[this.selectedMethod]('Rejected Promise:', promise);
+        }
       } catch (e) {
         console.error('Caught error from rejected promise:', e);
       }
     },
     logFunction(fn) {
-      console[this.selectedMethod]('Function:', fn);
+      if (this.selectedMethod === 'all') {
+        console.log('Function:', fn);
+        console.info('Function:', fn);
+        console.warn('Function:', fn);
+        console.error('Function:', fn);
+        console.debug('Function:', fn);
+      } else {
+        console[this.selectedMethod]('Function:', fn);
+      }
     },
     logError(err) {
-      console.error('Error:', err);
+      if (this.selectedMethod === 'all') {
+        console.log('Error:', err);
+        console.info('Error:', err);
+        console.warn('Error:', err);
+        console.error('Error:', err);
+        console.debug('Error:', err);
+      } else {
+        console.error('Error:', err);
+      }
     },
     logDOMElement() {
       const container = document.createElement('div');
@@ -566,7 +705,15 @@ export default {
         current.appendChild(child);
         current = child;
       }
-      console[this.selectedMethod]('Deeply Nested DOM Element:', container);
+      if (this.selectedMethod === 'all') {
+        console.log('Deeply Nested DOM Element:', container);
+        console.info('Deeply Nested DOM Element:', container);
+        console.warn('Deeply Nested DOM Element:', container);
+        console.error('Deeply Nested DOM Element:', container);
+        console.debug('Deeply Nested DOM Element:', container);
+      } else {
+        console[this.selectedMethod]('Deeply Nested DOM Element:', container);
+      }
     },
     logIframe() {
       if (!this.iframe) {
@@ -574,27 +721,67 @@ export default {
         this.iframe.src = 'about:blank';
         document.getElementById('iframe-container').appendChild(this.iframe);
       }
-      console[this.selectedMethod]('Iframe:', this.iframe);
+      if (this.selectedMethod === 'all') {
+        console.log('Iframe:', this.iframe);
+        console.info('Iframe:', this.iframe);
+        console.warn('Iframe:', this.iframe);
+        console.error('Iframe:', this.iframe);
+        console.debug('Iframe:', this.iframe);
+      } else {
+        console[this.selectedMethod]('Iframe:', this.iframe);
+      }
     },
     logDeduped(message, count) {
       for (let i = 0; i < count; i++) {
-        console[this.selectedMethod](message);
+        if (this.selectedMethod === 'all') {
+          console.log(message);
+          console.info(message);
+          console.warn(message);
+          console.error(message);
+          console.debug(message);
+        } else {
+          console[this.selectedMethod](message);
+        }
       }
     },
     logAllTypes(message) {
-      console.log(message);
-      console.info(message);
-      console.warn(message);
-      console.error(message);
+      if (this.selectedMethod === 'all') {
+        console.log(message);
+        console.info(message);
+        console.warn(message);
+        console.error(message);
+        console.debug(message);
+      } else {
+        console.log(message);
+        console.info(message);
+        console.warn(message);
+        console.error(message);
+      }
     },
     logCircularReference() {
       const obj = {};
       obj.self = obj;
-      console[this.selectedMethod]('Circular Reference:', obj);
+      if (this.selectedMethod === 'all') {
+        console.log('Circular Reference:', obj);
+        console.info('Circular Reference:', obj);
+        console.warn('Circular Reference:', obj);
+        console.error('Circular Reference:', obj);
+        console.debug('Circular Reference:', obj);
+      } else {
+        console[this.selectedMethod]('Circular Reference:', obj);
+      }
     },
     logDate() {
       const date = new Date();
-      console[this.selectedMethod]('Date:', date);
+      if (this.selectedMethod === 'all') {
+        console.log('Date:', date);
+        console.info('Date:', date);
+        console.warn('Date:', date);
+        console.error('Date:', date);
+        console.debug('Date:', date);
+      } else {
+        console[this.selectedMethod]('Date:', date);
+      }
     },
     getSymbolKeyObject() {
       const sym = Symbol('sym');
@@ -674,7 +861,15 @@ export default {
         }))
       };
       for (let i = 0; i < logCount; i++) {
-        console[this.selectedMethod]('Large Object:', largeObject);
+        if (this.selectedMethod === 'all') {
+          console.log('Large Object:', largeObject);
+          console.info('Large Object:', largeObject);
+          console.warn('Large Object:', largeObject);
+          console.error('Large Object:', largeObject);
+          console.debug('Large Object:', largeObject);
+        } else {
+          console[this.selectedMethod]('Large Object:', largeObject);
+        }
       }
     },
     // Faker methods
@@ -704,7 +899,15 @@ export default {
           github: faker.internet.username()
         }
       };
-      console[this.selectedMethod]('Faker User:', user);
+      if (this.selectedMethod === 'all') {
+        console.log('Faker User:', user);
+        console.info('Faker User:', user);
+        console.warn('Faker User:', user);
+        console.error('Faker User:', user);
+        console.debug('Faker User:', user);
+      } else {
+        console[this.selectedMethod]('Faker User:', user);
+      }
     },
     logFakerCompany() {
       const company = {
@@ -735,7 +938,15 @@ export default {
           employees: faker.number.int({ min: 5, max: 50 })
         }))
       };
-      console[this.selectedMethod]('Faker Company:', company);
+      if (this.selectedMethod === 'all') {
+        console.log('Faker Company:', company);
+        console.info('Faker Company:', company);
+        console.warn('Faker Company:', company);
+        console.error('Faker Company:', company);
+        console.debug('Faker Company:', company);
+      } else {
+        console[this.selectedMethod]('Faker Company:', company);
+      }
     },
     logFakerAddress() {
       const address = {
@@ -758,7 +969,15 @@ export default {
           distance: faker.number.float({ min: 0.1, max: 5.0, fractionDigits: 1 })
         }))
       };
-      console[this.selectedMethod]('Faker Address:', address);
+      if (this.selectedMethod === 'all') {
+        console.log('Faker Address:', address);
+        console.info('Faker Address:', address);
+        console.warn('Faker Address:', address);
+        console.error('Faker Address:', address);
+        console.debug('Faker Address:', address);
+      } else {
+        console[this.selectedMethod]('Faker Address:', address);
+      }
     },
     logFakerProduct() {
       const product = {
@@ -791,7 +1010,15 @@ export default {
           date: faker.date.recent()
         }))
       };
-      console[this.selectedMethod]('Faker Product:', product);
+      if (this.selectedMethod === 'all') {
+        console.log('Faker Product:', product);
+        console.info('Faker Product:', product);
+        console.warn('Faker Product:', product);
+        console.error('Faker Product:', product);
+        console.debug('Faker Product:', product);
+      } else {
+        console[this.selectedMethod]('Faker Product:', product);
+      }
     },
     logFakerOrder() {
       const order = {
@@ -834,7 +1061,15 @@ export default {
         estimatedDelivery: faker.date.future(),
         trackingNumber: faker.string.alphanumeric(12).toUpperCase()
       };
-      console[this.selectedMethod]('Faker Order:', order);
+      if (this.selectedMethod === 'all') {
+        console.log('Faker Order:', order);
+        console.info('Faker Order:', order);
+        console.warn('Faker Order:', order);
+        console.error('Faker Order:', order);
+        console.debug('Faker Order:', order);
+      } else {
+        console[this.selectedMethod]('Faker Order:', order);
+      }
     },
     logFakerUsers() {
       const users = Array.from({ length: faker.number.int({ min: 5, max: 15 }) }, () => ({
@@ -849,7 +1084,15 @@ export default {
         hireDate: faker.date.past(),
         isActive: faker.datatype.boolean()
       }));
-      console[this.selectedMethod]('Faker Users Array:', users);
+      if (this.selectedMethod === 'all') {
+        console.log('Faker Users Array:', users);
+        console.info('Faker Users Array:', users);
+        console.warn('Faker Users Array:', users);
+        console.error('Faker Users Array:', users);
+        console.debug('Faker Users Array:', users);
+      } else {
+        console[this.selectedMethod]('Faker Users Array:', users);
+      }
     },
     logFakerProducts() {
       const products = Array.from({ length: faker.number.int({ min: 8, max: 20 }) }, () => ({
@@ -865,7 +1108,15 @@ export default {
         image: faker.image.url(),
         description: faker.commerce.productDescription()
       }));
-      console[this.selectedMethod]('Faker Products Array:', products);
+      if (this.selectedMethod === 'all') {
+        console.log('Faker Products Array:', products);
+        console.info('Faker Products Array:', products);
+        console.warn('Faker Products Array:', products);
+        console.error('Faker Products Array:', products);
+        console.debug('Faker Products Array:', products);
+      } else {
+        console[this.selectedMethod]('Faker Products Array:', products);
+      }
     },
     logFakerMixed() {
       const mixedData = {
@@ -903,241 +1154,302 @@ export default {
           currency: faker.helpers.arrayElement(['USD', 'EUR', 'GBP', 'CAD'])
         }
       };
-      console[this.selectedMethod]('Faker Mixed Data:', mixedData);
+      if (this.selectedMethod === 'all') {
+        console.log('Faker Mixed Data:', mixedData);
+        console.info('Faker Mixed Data:', mixedData);
+        console.warn('Faker Mixed Data:', mixedData);
+        console.error('Faker Mixed Data:', mixedData);
+        console.debug('Faker Mixed Data:', mixedData);
+      } else {
+        console[this.selectedMethod]('Faker Mixed Data:', mixedData);
+      }
     },
     // HTML/Script Tags
     logXSSScriptTag() {
-      console[this.selectedMethod](xssTestCases.scriptTag());
+      if (this.selectedMethod === 'all') {
+        console.log(xssTestCases.scriptTag());
+        console.info(xssTestCases.scriptTag());
+        console.warn(xssTestCases.scriptTag());
+        console.error(xssTestCases.scriptTag());
+        console.debug(xssTestCases.scriptTag());
+      } else {
+        console[this.selectedMethod](xssTestCases.scriptTag());
+      }
     },
     logXSSImgOnError() {
-      console[this.selectedMethod](xssTestCases.imgOnError());
+      if (this.selectedMethod === 'all') {
+        console.log(xssTestCases.imgOnError());
+        console.info(xssTestCases.imgOnError());
+        console.warn(xssTestCases.imgOnError());
+        console.error(xssTestCases.imgOnError());
+        console.debug(xssTestCases.imgOnError());
+      } else {
+        console[this.selectedMethod](xssTestCases.imgOnError());
+      }
     },
     logXSSSvgOnLoad() {
-      console[this.selectedMethod](xssTestCases.svgOnLoad());
+      if (this.selectedMethod === 'all') {
+        console.log(xssTestCases.svgOnLoad());
+        console.info(xssTestCases.svgOnLoad());
+        console.warn(xssTestCases.svgOnLoad());
+        console.error(xssTestCases.svgOnLoad());
+        console.debug(xssTestCases.svgOnLoad());
+      } else {
+        console[this.selectedMethod](xssTestCases.svgOnLoad());
+      }
     },
     logXSSJavaScriptUrl() {
-      console[this.selectedMethod](xssTestCases.javascriptUrl());
+      if (this.selectedMethod === 'all') {
+        console.log(xssTestCases.javascriptUrl());
+        console.info(xssTestCases.javascriptUrl());
+        console.warn(xssTestCases.javascriptUrl());
+        console.error(xssTestCases.javascriptUrl());
+        console.debug(xssTestCases.javascriptUrl());
+      } else {
+        console[this.selectedMethod](xssTestCases.javascriptUrl());
+      }
     },
     
     // Event Handlers
     logXSSOnClick() {
-      console[this.selectedMethod](xssTestCases.onClick());
+      this.logWithAllMethods(xssTestCases.onClick());
     },
     logXSSOnLoad() {
-      console[this.selectedMethod](xssTestCases.onLoad());
+      this.logWithAllMethods(xssTestCases.onLoad());
     },
     logXSSOnFocus() {
-      console[this.selectedMethod](xssTestCases.onFocus());
+      this.logWithAllMethods(xssTestCases.onFocus());
     },
     
     // URL Schemes
     logXSSDataUrl() {
-      console[this.selectedMethod](xssTestCases.dataUrl());
+      this.logWithAllMethods(xssTestCases.dataUrl());
     },
     logXSSVBScript() {
-      console[this.selectedMethod](xssTestCases.vbScript());
+      this.logWithAllMethods(xssTestCases.vbScript());
     },
     
     // Object Properties
     logXSSObjectMalicious() {
-      console[this.selectedMethod](xssTestCases.maliciousObject());
+      this.logWithAllMethods(xssTestCases.maliciousObject());
     },
     logXSSObjectHtml() {
-      console[this.selectedMethod](xssTestCases.htmlObject());
+      this.logWithAllMethods(xssTestCases.htmlObject());
     },
     logXSSDOMElement() {
-      console[this.selectedMethod](xssTestCases.createMaliciousElement());
+      this.logWithAllMethods(xssTestCases.createMaliciousElement());
     },
     
     // Length & Encoding
     logXSSLongPayload() {
-      console[this.selectedMethod](xssTestCases.longPayload());
+      this.logWithAllMethods(xssTestCases.longPayload());
     },
     logXSSUnicode() {
-      console[this.selectedMethod](xssTestCases.unicode());
+      this.logWithAllMethods(xssTestCases.unicode());
     },
     logXSSHtmlEntities() {
-      console[this.selectedMethod](xssTestCases.htmlEntities());
+      this.logWithAllMethods(xssTestCases.htmlEntities());
     },
     
     // PII & Errors
     logXSSWithPII() {
-      console[this.selectedMethod](xssTestCases.withPii());
+      this.logWithAllMethods(xssTestCases.withPii());
     },
     logXSSInUrl() {
-      console[this.selectedMethod](xssTestCases.inUrl());
+      this.logWithAllMethods(xssTestCases.inUrl());
     },
     logXSSError() {
-      console.error(xssTestCases.createMaliciousError());
+      if (this.selectedMethod === 'all') {
+        console.log(xssTestCases.createMaliciousError());
+        console.info(xssTestCases.createMaliciousError());
+        console.warn(xssTestCases.createMaliciousError());
+        console.error(xssTestCases.createMaliciousError());
+        console.debug(xssTestCases.createMaliciousError());
+      } else {
+        console.error(xssTestCases.createMaliciousError());
+      }
     },
     
     // Additional XSS Test Cases - CSS-based
     logXSSCssExpression() {
-      console[this.selectedMethod](xssTestCases.cssExpression());
+      this.logWithAllMethods(xssTestCases.cssExpression());
     },
     logXSSCssUrl() {
-      console[this.selectedMethod](xssTestCases.cssUrl());
+      this.logWithAllMethods(xssTestCases.cssUrl());
     },
     logXSSCssImport() {
-      console[this.selectedMethod](xssTestCases.cssImport());
+      this.logWithAllMethods(xssTestCases.cssImport());
     },
     
     // Additional XSS Test Cases - Advanced Event Handlers
     logXSSOnMouseOver() {
-      console[this.selectedMethod](xssTestCases.onMouseOver());
+      this.logWithAllMethods(xssTestCases.onMouseOver());
     },
     logXSSOnKeyPress() {
-      console[this.selectedMethod](xssTestCases.onKeyPress());
+      this.logWithAllMethods(xssTestCases.onKeyPress());
     },
     logXSSOnBlur() {
-      console[this.selectedMethod](xssTestCases.onBlur());
+      this.logWithAllMethods(xssTestCases.onBlur());
     },
     logXSSOnContextMenu() {
-      console[this.selectedMethod](xssTestCases.onContextMenu());
+      this.logWithAllMethods(xssTestCases.onContextMenu());
     },
     logXSSOnDoubleClick() {
-      console[this.selectedMethod](xssTestCases.onDoubleClick());
+      this.logWithAllMethods(xssTestCases.onDoubleClick());
     },
     
     // Additional XSS Test Cases - Frame/Iframe
     logXSSIframeSrc() {
-      console[this.selectedMethod](xssTestCases.iframeSrc());
+      this.logWithAllMethods(xssTestCases.iframeSrc());
     },
     logXSSFrameSrc() {
-      console[this.selectedMethod](xssTestCases.frameSrc());
+      this.logWithAllMethods(xssTestCases.frameSrc());
     },
     logXSSEmbedSrc() {
-      console[this.selectedMethod](xssTestCases.embedSrc());
+      this.logWithAllMethods(xssTestCases.embedSrc());
     },
     logXSSObjectData() {
-      console[this.selectedMethod](xssTestCases.objectData());
+      this.logWithAllMethods(xssTestCases.objectData());
     },
     
     // Additional XSS Test Cases - Meta/Link
     logXSSMetaRefresh() {
-      console[this.selectedMethod](xssTestCases.metaRefresh());
+      this.logWithAllMethods(xssTestCases.metaRefresh());
     },
     logXSSLinkHref() {
-      console[this.selectedMethod](xssTestCases.linkHref());
+      this.logWithAllMethods(xssTestCases.linkHref());
     },
     logXSSAnchorHref() {
-      console[this.selectedMethod](xssTestCases.anchorHref());
+      this.logWithAllMethods(xssTestCases.anchorHref());
     },
     
     // Additional XSS Test Cases - Form
     logXSSFormAction() {
-      console[this.selectedMethod](xssTestCases.formAction());
+      this.logWithAllMethods(xssTestCases.formAction());
     },
     logXSSInputFormaction() {
-      console[this.selectedMethod](xssTestCases.inputFormaction());
+      this.logWithAllMethods(xssTestCases.inputFormaction());
     },
     
     // Additional XSS Test Cases - Advanced URL Schemes
     logXSSDataUrlWithBase64() {
-      console[this.selectedMethod](xssTestCases.dataUrlWithBase64());
+      this.logWithAllMethods(xssTestCases.dataUrlWithBase64());
     },
     logXSSDataUrlWithCharset() {
-      console[this.selectedMethod](xssTestCases.dataUrlWithCharset());
+      this.logWithAllMethods(xssTestCases.dataUrlWithCharset());
     },
     logXSSFileUrl() {
-      console[this.selectedMethod](xssTestCases.fileUrl());
+      this.logWithAllMethods(xssTestCases.fileUrl());
     },
     logXSSFtpUrl() {
-      console[this.selectedMethod](xssTestCases.ftpUrl());
+      this.logWithAllMethods(xssTestCases.ftpUrl());
     },
     
     // Additional XSS Test Cases - Unicode and Encoding
     logXSSUnicodeHex() {
-      console[this.selectedMethod](xssTestCases.unicodeHex());
+      this.logWithAllMethods(xssTestCases.unicodeHex());
     },
     logXSSUnicodeDecimal() {
-      console[this.selectedMethod](xssTestCases.unicodeDecimal());
+      this.logWithAllMethods(xssTestCases.unicodeDecimal());
     },
     logXSSUnicodeMixed() {
-      console[this.selectedMethod](xssTestCases.unicodeMixed());
+      this.logWithAllMethods(xssTestCases.unicodeMixed());
     },
     logXSSUrlEncoded() {
-      console[this.selectedMethod](xssTestCases.urlEncoded());
+      this.logWithAllMethods(xssTestCases.urlEncoded());
     },
     logXSSDoubleEncoded() {
-      console[this.selectedMethod](xssTestCases.doubleEncoded());
+      this.logWithAllMethods(xssTestCases.doubleEncoded());
     },
     
     // Additional XSS Test Cases - Template Literals
     logXSSTemplateLiteral() {
-      console[this.selectedMethod](xssTestCases.templateLiteral());
+      this.logWithAllMethods(xssTestCases.templateLiteral());
     },
     logXSSStringInterpolation() {
-      console[this.selectedMethod](xssTestCases.stringInterpolation());
+      this.logWithAllMethods(xssTestCases.stringInterpolation());
     },
     
     // Additional XSS Test Cases - Complex Objects
     logXSSNestedArray() {
-      console[this.selectedMethod](xssTestCases.nestedArray());
+      this.logWithAllMethods(xssTestCases.nestedArray());
     },
     logXSSNestedObject() {
-      console[this.selectedMethod](xssTestCases.nestedObject());
+      this.logWithAllMethods(xssTestCases.nestedObject());
     },
     logXSSMixedData() {
-      console[this.selectedMethod](xssTestCases.mixedData());
+      this.logWithAllMethods(xssTestCases.mixedData());
     },
     
     // Additional XSS Test Cases - Functions and Classes
     logXSSFunctionName() {
-      console[this.selectedMethod](xssTestCases.functionName());
+      this.logWithAllMethods(xssTestCases.functionName());
     },
     logXSSSymbolKey() {
-      console[this.selectedMethod](xssTestCases.symbolKey());
+      this.logWithAllMethods(xssTestCases.symbolKey());
     },
     logXSSProxyObject() {
-      console[this.selectedMethod](xssTestCases.proxyObject());
+      this.logWithAllMethods(xssTestCases.proxyObject());
     },
     logXSSGeneratorFunction() {
-      console[this.selectedMethod](xssTestCases.generatorFunction());
+      this.logWithAllMethods(xssTestCases.generatorFunction());
     },
     logXSSAsyncFunction() {
-      console[this.selectedMethod](xssTestCases.asyncFunction());
+      this.logWithAllMethods(xssTestCases.asyncFunction());
     },
     logXSSMaliciousClass() {
-      console[this.selectedMethod](xssTestCases.maliciousClass());
+      this.logWithAllMethods(xssTestCases.maliciousClass());
     },
     
     // Additional XSS Test Cases - Collections
     logXSSMaliciousMap() {
-      console[this.selectedMethod](xssTestCases.maliciousMap());
+      this.logWithAllMethods(xssTestCases.maliciousMap());
     },
     logXSSMaliciousSet() {
-      console[this.selectedMethod](xssTestCases.maliciousSet());
+      this.logWithAllMethods(xssTestCases.maliciousSet());
     },
     logXSSMaliciousTypedArray() {
-      console[this.selectedMethod](xssTestCases.maliciousTypedArray());
+      this.logWithAllMethods(xssTestCases.maliciousTypedArray());
     },
     
     // Additional XSS Test Cases - Built-in Objects
     logXSSMaliciousDate() {
-      console[this.selectedMethod](xssTestCases.maliciousDate());
+      this.logWithAllMethods(xssTestCases.maliciousDate());
     },
     logXSSMaliciousRegExp() {
-      console[this.selectedMethod](xssTestCases.maliciousRegExp());
+      this.logWithAllMethods(xssTestCases.maliciousRegExp());
     },
     logXSSMaliciousErrorStack() {
-      console[this.selectedMethod](xssTestCases.maliciousErrorStack());
+      this.logWithAllMethods(xssTestCases.maliciousErrorStack());
     },
     
     // Additional XSS Test Cases - Advanced Patterns
     logXSSCircularXSS() {
-      console[this.selectedMethod](xssTestCases.circularXSS());
+      this.logWithAllMethods(xssTestCases.circularXSS());
     },
     logXSSDeepNestedXSS() {
-      console[this.selectedMethod](xssTestCases.deepNestedXSS());
+      this.logWithAllMethods(xssTestCases.deepNestedXSS());
     },
     logXSSMaliciousArrayMethods() {
       const maliciousArray = xssTestCases.maliciousArrayMethods();
-      console[this.selectedMethod](maliciousArray.toString());
-      console[this.selectedMethod](maliciousArray.join(''));
+      if (this.selectedMethod === 'all') {
+        console.log(maliciousArray.toString());
+        console.info(maliciousArray.toString());
+        console.warn(maliciousArray.toString());
+        console.error(maliciousArray.toString());
+        console.debug(maliciousArray.toString());
+        console.log(maliciousArray.join(''));
+        console.info(maliciousArray.join(''));
+        console.warn(maliciousArray.join(''));
+        console.error(maliciousArray.join(''));
+        console.debug(maliciousArray.join(''));
+      } else {
+        console[this.selectedMethod](maliciousArray.toString());
+        console[this.selectedMethod](maliciousArray.join(''));
+      }
     },
     logXSSMaliciousPrototype() {
-      console[this.selectedMethod](xssTestCases.maliciousPrototype());
+      this.logWithAllMethods(xssTestCases.maliciousPrototype());
     },
     
     // Toggle all XSS sections
