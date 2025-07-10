@@ -568,7 +568,7 @@
           </section>
 
           <!-- Continuous Logging Section -->
-          <section class="section" v-if="!isProduction">
+          <section class="section" v-if="!isProduction || showAutolog">
             <h2 class="section-title">Continuous Logging</h2>
             <div class="button-grid">
               <button @click="startContinuousLogging" class="btn btn-error" :disabled="isLogging">Start 2min Continuous Logging</button>
@@ -587,6 +587,7 @@
 <script>
 import { faker } from '@faker-js/faker';
 import { xssTestCases } from './xssTestCases.js';
+
 
 export default {
   name: 'ConsoleSandbox',
@@ -638,6 +639,9 @@ export default {
     },
     allStylingSectionsExpanded() {
       return Object.values(this.stylingSections).every(expanded => expanded);
+    },
+    showAutolog() {
+      return this.$route.query.showAutolog === 'true';
     }
   },
   mounted() {
