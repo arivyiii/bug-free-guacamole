@@ -641,7 +641,7 @@ export default {
       return Object.values(this.stylingSections).every(expanded => expanded);
     },
     showAutolog() {
-      return this.$route.query.showAutolog === 'true' || !this.isProduction;
+      return this.$route.query.showAutolog === 'true' || !this.isProduction
     }
   },
   mounted() {

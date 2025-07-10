@@ -9,11 +9,12 @@ app.config.errorHandler = (err, instance, info) => {
   console.error('[Vue Global Error Handler]', err, info)
 }
 
+// Manual way to check query parameters after the #
+const hashQueryString = window.location.hash.split('?')[1] || '';
+const hashParams = new URLSearchParams(hashQueryString);
 
-
-// Check for query parameter to override agent selection
-const urlParams = new URLSearchParams(window.location.search);
-const hasLocalAgentParam = urlParams.get(localAgentUrlParam) === 'true';
+// Check for query parameter to override agent selection (manual way - after the #)
+const hasLocalAgentParam = hashParams.get(localAgentUrlParam) === 'true';
 const useLocalAgent = hasLocalAgentParam || import.meta.env.VITE_USE_LOCAL_AGENT;
 
 // Initialize Pendo based on environment and query parameter

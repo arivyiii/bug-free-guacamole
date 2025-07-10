@@ -11,40 +11,43 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { computed } from 'vue'
 import { localAgentUrlParam } from '../constants'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
 const route = useRoute()
+const router = useRouter()
 
-
-const agentType = ref('production')
-const agentReason = ref('')
 
 const toggleAgentType = () => {
-  const hasLocalAgentParam = route.query.localAgent === 'true'
-  
-  if (hasLocalAgentParam) {
+  const query = { ...route.query }
+  if (query[localAgentUrlParam]) {
     // Remove the parameter
-    delete route.query.localAgent
+    delete query[localAgentUrlParam]
   } else {
     // Add the parameter
-    route.query.localAgent = 'true'
+    query[localAgentUrlParam] = 'true'
   }
-  
-  // Reload the page with the new URL
-  window.open(route.href, '_self');
+
+  // Update route and force refresh in one go
+  router.push({ query }).then(() => {
+    window.location.reload()
+  })
 }
 
-onMounted(() => {
-  const hasLocalAgentParam = route.query.localAgent === 'true'
-  const useLocalAgent = hasLocalAgentParam || import.meta.env.VITE_USE_LOCAL_AGENT
-  
-  if (useLocalAgent) {
-    agentType.value = 'local'
-    agentReason.value = hasLocalAgentParam ? 'query parameter' : 'environment variable'
-  }
+const hasLocalAgentParam = computed(() => {
+  return route.query[localAgentUrlParam] === 'true'
 })
+
+const agentType = computed(() => {
+  const useLocalAgent = hasLocalAgentParam.value || import.meta.env.VITE_USE_LOCAL_AGENT
+
+  return useLocalAgent ? 'local' : 'production'
+})
+
+const agentReason = computed(() => {
+  return hasLocalAgentParam.value ? 'query parameter' : 'environment variable'
+});
 </script>
 
 <style scoped>
