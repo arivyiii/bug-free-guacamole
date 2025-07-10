@@ -110,6 +110,176 @@
             </div>
           </section>
 
+                    <!-- Console Styling Section -->
+          <section class="section">
+            <div class="section-header">
+              <h2 class="section-title">Console Styling</h2>
+              <button @click="toggleAllStylingSections" class="btn btn-toggle">
+                {{ allStylingSectionsExpanded ? 'Collapse All' : 'Show All' }}
+              </button>
+            </div>
+            
+            <!-- Text Styling -->
+            <div class="xss-subsection">
+              <h3 class="subsection-title" @click="stylingSections.text = !stylingSections.text">
+                <span class="toggle-icon">{{ stylingSections.text ? '▼' : '▶' }}</span>
+                Text Styling (Font, Weight, Style, Transform)
+              </h3>
+              <div class="button-grid" v-show="stylingSections.text">
+                <button @click="logStyledBold()" class="btn">Bold Text</button>
+                <button @click="logStyledItalic()" class="btn">Italic Text</button>
+                <button @click="logStyledUnderline()" class="btn">Underlined Text</button>
+                <button @click="logStyledStrikethrough()" class="btn">Strikethrough</button>
+                <button @click="logStyledUppercase()" class="btn">Uppercase</button>
+                <button @click="logStyledMonospace()" class="btn">Monospace</button>
+              </div>
+            </div>
+
+            <!-- Text Colors -->
+            <div class="xss-subsection">
+              <h3 class="subsection-title" @click="stylingSections.colors = !stylingSections.colors">
+                <span class="toggle-icon">{{ stylingSections.colors ? '▼' : '▶' }}</span>
+                Text Colors
+              </h3>
+              <div class="button-grid" v-show="stylingSections.colors">
+                <button @click="logColorNormal()" class="btn">Normal Color</button>
+                <button @click="logColorSuccess()" class="btn">Success Color</button>
+                <button @click="logColorWarning()" class="btn">Warning Color</button>
+                <button @click="logColorError()" class="btn">Error Color</button>
+                <button @click="logColorInfo()" class="btn">Info Color</button>
+                <button @click="logColorDebug()" class="btn">Debug Color</button>
+              </div>
+            </div>
+
+            <!-- Font Sizes -->
+            <div class="xss-subsection">
+              <h3 class="subsection-title" @click="stylingSections.fontSizes = !stylingSections.fontSizes">
+                <span class="toggle-icon">{{ stylingSections.fontSizes ? '▼' : '▶' }}</span>
+                Font Sizes
+              </h3>
+              <div class="button-grid" v-show="stylingSections.fontSizes">
+                <button @click="logFontSmall()" class="btn">Small Text</button>
+                <button @click="logFontNormal()" class="btn">Normal Text</button>
+                <button @click="logFontLarge()" class="btn">Large Text</button>
+                <button @click="logFontExtraLarge()" class="btn">Extra Large</button>
+                <button @click="logFontHuge()" class="btn">Huge Text</button>
+                <button @click="logFontMassive()" class="btn">Massive Text</button>
+              </div>
+            </div>
+
+            <!-- Borders -->
+            <div class="xss-subsection">
+              <h3 class="subsection-title" @click="stylingSections.borders = !stylingSections.borders">
+                <span class="toggle-icon">{{ stylingSections.borders ? '▼' : '▶' }}</span>
+                Borders
+              </h3>
+              <div class="button-grid" v-show="stylingSections.borders">
+                <button @click="logBorderSolid()" class="btn">Solid Border</button>
+                <button @click="logBorderDashed()" class="btn">Dashed Border</button>
+                <button @click="logBorderDotted()" class="btn">Dotted Border</button>
+                <button @click="logBorderDouble()" class="btn">Double Border</button>
+                <button @click="logBorderRounded()" class="btn">Rounded Border</button>
+                <button @click="logBorderThick()" class="btn">Thick Border</button>
+              </div>
+            </div>
+
+            <!-- Shadows -->
+            <div class="xss-subsection">
+              <h3 class="subsection-title" @click="stylingSections.shadows = !stylingSections.shadows">
+                <span class="toggle-icon">{{ stylingSections.shadows ? '▼' : '▶' }}</span>
+                Text Shadows
+              </h3>
+              <div class="button-grid" v-show="stylingSections.shadows">
+                <button @click="logShadowBasic()" class="btn">Shadow Text</button>
+                <button @click="logShadowGlow()" class="btn">Glow Effect</button>
+                <button @click="logShadowMultiple()" class="btn">Multiple Shadows</button>
+                <button @click="logShadowOutlined()" class="btn">Outlined Text</button>
+                <button @click="logShadowNeon()" class="btn">Neon Effect</button>
+                <button @click="logShadowDrop()" class="btn">Drop Shadow</button>
+              </div>
+            </div>
+
+            <!-- Background Colors -->
+            <div class="xss-subsection">
+              <h3 class="subsection-title" @click="stylingSections.backgrounds = !stylingSections.backgrounds">
+                <span class="toggle-icon">{{ stylingSections.backgrounds ? '▼' : '▶' }}</span>
+                Background Colors
+              </h3>
+              <div class="button-grid" v-show="stylingSections.backgrounds">
+                <button @click="logBgNormal()" class="btn">Normal Background</button>
+                <button @click="logBgSuccess()" class="btn">Success Background</button>
+                <button @click="logBgWarning()" class="btn">Warning Background</button>
+                <button @click="logBgError()" class="btn">Error Background</button>
+                <button @click="logBgInfo()" class="btn">Info Background</button>
+                <button @click="logBgDebug()" class="btn">Debug Background</button>
+              </div>
+            </div>
+
+            <!-- Gradients -->
+            <div class="xss-subsection">
+              <h3 class="subsection-title" @click="stylingSections.gradients = !stylingSections.gradients">
+                <span class="toggle-icon">{{ stylingSections.gradients ? '▼' : '▶' }}</span>
+                Gradients
+              </h3>
+              <div class="button-grid" v-show="stylingSections.gradients">
+                <button @click="logGradientText()" class="btn">Gradient Text</button>
+                <button @click="logGradientRainbow()" class="btn">Rainbow Text</button>
+                <button @click="logGradientBlue()" class="btn">Blue Gradient</button>
+                <button @click="logGradientGreen()" class="btn">Green Gradient</button>
+                <button @click="logGradientOrange()" class="btn">Orange Gradient</button>
+                <button @click="logGradientRed()" class="btn">Red Gradient</button>
+              </div>
+            </div>
+
+            <!-- Animations -->
+            <div class="xss-subsection">
+              <h3 class="subsection-title" @click="stylingSections.animations = !stylingSections.animations">
+                <span class="toggle-icon">{{ stylingSections.animations ? '▼' : '▶' }}</span>
+                Animations
+              </h3>
+              <div class="button-grid" v-show="stylingSections.animations">
+                <button @click="logAnimationPulse()" class="btn">Pulse Animation</button>
+                <button @click="logAnimationBounce()" class="btn">Bounce Animation</button>
+                <button @click="logAnimationFade()" class="btn">Fade Animation</button>
+                <button @click="logAnimationRotate()" class="btn">Rotate Animation</button>
+                <button @click="logAnimationSlide()" class="btn">Slide Animation</button>
+                <button @click="logAnimationScale()" class="btn">Scale Animation</button>
+              </div>
+            </div>
+
+            <!-- Emojis -->
+            <div class="xss-subsection">
+              <h3 class="subsection-title" @click="stylingSections.emojis = !stylingSections.emojis">
+                <span class="toggle-icon">{{ stylingSections.emojis ? '▼' : '▶' }}</span>
+                Emojis
+              </h3>
+              <div class="button-grid" v-show="stylingSections.emojis">
+                <button @click="logEmojiLaunch()" class="btn">🚀 Launch</button>
+                <button @click="logEmojiSuccess()" class="btn">✨ Success</button>
+                <button @click="logEmojiWarning()" class="btn">⚠️ Warning</button>
+                <button @click="logEmojiError()" class="btn">💥 Error</button>
+                <button @click="logEmojiInfo()" class="btn">ℹ️ Info</button>
+                <button @click="logEmojiDebug()" class="btn">🐞 Debug</button>
+              </div>
+            </div>
+
+            <!-- Icons -->
+            <div class="xss-subsection">
+              <h3 class="subsection-title" @click="stylingSections.icons = !stylingSections.icons">
+                <span class="toggle-icon">{{ stylingSections.icons ? '▼' : '▶' }}</span>
+                Icons
+              </h3>
+              <div class="button-grid" v-show="stylingSections.icons">
+                <button @click="logIconSettings()" class="btn">🔧 Settings</button>
+                <button @click="logIconSuccess()" class="btn">✅ Success</button>
+                <button @click="logIconWarning()" class="btn">⚠️ Warning</button>
+                <button @click="logIconError()" class="btn">❌ Error</button>
+                <button @click="logIconInfo()" class="btn">ℹ️ Information</button>
+                <button @click="logIconBug()" class="btn">🐛 Bug Report</button>
+              </div>
+            </div>
+          </section>
+
           <!-- XSS Test Cases Section -->
           <section class="section">
             <div class="section-header">
@@ -443,6 +613,19 @@ export default {
         collections: false,
         builtins: false,
         patterns: false
+      },
+      // Styling section collapse states
+      stylingSections: {
+        text: false,
+        colors: false,
+        fontSizes: false,
+        borders: false,
+        shadows: false,
+        backgrounds: false,
+        gradients: false,
+        animations: false,
+        emojis: false,
+        icons: false
       }
     };
   },
@@ -452,6 +635,9 @@ export default {
     },
     allXssSectionsExpanded() {
       return Object.values(this.xssSections).every(expanded => expanded);
+    },
+    allStylingSectionsExpanded() {
+      return Object.values(this.stylingSections).every(expanded => expanded);
     }
   },
   mounted() {
@@ -462,13 +648,13 @@ export default {
   },
   methods: {
     // Helper function to log with all console methods when 'all' is selected
-    logWithAllMethods(data) {
+    logWithAllMethods(...args) {
       if (this.selectedMethod === 'all') {
-        console.info(data);
-        console.warn(data);
-        console.error(data);
+        console.info(...args);
+        console.warn(...args);
+        console.error(...args);
       } else {
-        console[this.selectedMethod](data);
+        console[this.selectedMethod](...args);
       }
     },
     handleScroll() {
@@ -1459,6 +1645,13 @@ export default {
         this.xssSections[key] = shouldExpand;
       });
     },
+    // Toggle all styling sections
+    toggleAllStylingSections() {
+      const shouldExpand = !this.allStylingSectionsExpanded;
+      Object.keys(this.stylingSections).forEach(key => {
+        this.stylingSections[key] = shouldExpand;
+      });
+    },
     
     dedupeSameMethodMessageStack() {
       // Same method, message, and stack - log from same function multiple times
@@ -1647,7 +1840,7 @@ export default {
       const spamConsole = () => {
         const now = Date.now();
         if (now - startTime >= duration) {
-          console.log(`Console spam completed. Total logs: ${logCount}`);
+          console.debug(`Console spam completed. Total logs: ${logCount}`);
           this.isLogging = false;
           return;
         }
@@ -1668,9 +1861,208 @@ export default {
         setTimeout(spamConsole, 0);
       };
       
-      console.log('Starting console spam for 2 minutes...');
+      console.debug('Starting console spam for 2 minutes...');
       spamConsole();
-    }
+    },
+    // Individual Text Styling Methods
+    logStyledBold() {
+      this.logWithAllMethods('%cStyled Text', 'color: #ff0000; font-weight: bold; font-size: 18px;');
+    },
+    logStyledItalic() {
+      this.logWithAllMethods('%cBold and Italic', 'color: #007bff; font-weight: bold; font-style: italic;');
+    },
+    logStyledUnderline() {
+      this.logWithAllMethods('%cUnderlined Text', 'color: #28a745; text-decoration: underline; font-size: 16px;');
+    },
+    logStyledStrikethrough() {
+      this.logWithAllMethods('%cStrikethrough', 'color: #dc3545; text-decoration: line-through;');
+    },
+    logStyledUppercase() {
+      this.logWithAllMethods('%cUppercase', 'color: #ffc107; text-transform: uppercase; font-weight: bold;');
+    },
+    logStyledMonospace() {
+      this.logWithAllMethods('%cMonospace', 'color: #6c757d; font-family: monospace; font-size: 14px;');
+    },
+    
+    // Individual Color Methods
+    logColorNormal() {
+      this.logWithAllMethods('%cNormal Log', 'color: #333; font-weight: normal;');
+    },
+    logColorSuccess() {
+      this.logWithAllMethods('%cSuccess Log', 'color: #28a745; font-weight: bold;');
+    },
+    logColorWarning() {
+      this.logWithAllMethods('%cWarning Log', 'color: #ffc107; font-weight: bold;');
+    },
+    logColorError() {
+      this.logWithAllMethods('%cError Log', 'color: #dc3545; font-weight: bold;');
+    },
+    logColorInfo() {
+      this.logWithAllMethods('%cInfo Log', 'color: #17a2b8; font-weight: bold;');
+    },
+    logColorDebug() {
+      this.logWithAllMethods('%cDebug Log', 'color: #6c757d; font-weight: normal;');
+    },
+    
+    // Individual Font Size Methods
+    logFontSmall() {
+      this.logWithAllMethods('%cSmall Text', 'font-size: 12px; color: #333;');
+    },
+    logFontNormal() {
+      this.logWithAllMethods('%cNormal Text', 'font-size: 14px; color: #333;');
+    },
+    logFontLarge() {
+      this.logWithAllMethods('%cLarge Text', 'font-size: 18px; color: #333; font-weight: bold;');
+    },
+    logFontExtraLarge() {
+      this.logWithAllMethods('%cExtra Large', 'font-size: 24px; color: #007bff; font-weight: bold;');
+    },
+    logFontHuge() {
+      this.logWithAllMethods('%cHuge Text', 'font-size: 32px; color: #28a745; font-weight: bold;');
+    },
+    logFontMassive() {
+      this.logWithAllMethods('%cMassive Text', 'font-size: 48px; color: #dc3545; font-weight: bold;');
+    },
+    
+    // Individual Border Methods
+    logBorderSolid() {
+      this.logWithAllMethods('%cBordered Text', 'border: 2px solid #007bff; padding: 8px; border-radius: 5px; color: #007bff;');
+    },
+    logBorderDashed() {
+      this.logWithAllMethods('%cDashed Border', 'border: 2px dashed #28a745; padding: 8px; border-radius: 5px; color: #28a745;');
+    },
+    logBorderDotted() {
+      this.logWithAllMethods('%cDotted Border', 'border: 2px dotted #ffc107; padding: 8px; border-radius: 5px; color: #856404;');
+    },
+    logBorderDouble() {
+      this.logWithAllMethods('%cDouble Border', 'border: 4px double #dc3545; padding: 8px; border-radius: 5px; color: #dc3545;');
+    },
+    logBorderRounded() {
+      this.logWithAllMethods('%cRounded Border', 'border: 3px solid #17a2b8; padding: 10px; border-radius: 15px; color: #17a2b8;');
+    },
+    logBorderThick() {
+      this.logWithAllMethods('%cThick Border', 'border: 5px solid #6c757d; padding: 12px; border-radius: 8px; color: #6c757d;');
+    },
+    
+    // Individual Shadow Methods
+    logShadowBasic() {
+      this.logWithAllMethods('%cShadow Text', 'text-shadow: 2px 2px 4px rgba(0,0,0,0.3); color: #007bff; font-size: 18px; font-weight: bold;');
+    },
+    logShadowGlow() {
+      this.logWithAllMethods('%cGlow Effect', 'text-shadow: 0 0 10px #28a745; color: #28a745; font-size: 18px; font-weight: bold;');
+    },
+    logShadowMultiple() {
+      this.logWithAllMethods('%cMultiple Shadows', 'text-shadow: 2px 2px 4px rgba(0,0,0,0.5), 0 0 20px rgba(255,193,7,0.8); color: #ffc107; font-size: 18px; font-weight: bold;');
+    },
+    logShadowOutlined() {
+      this.logWithAllMethods('%cOutlined Text', 'text-shadow: -1px -1px 0 #dc3545, 1px -1px 0 #dc3545, -1px 1px 0 #dc3545, 1px 1px 0 #dc3545; color: #dc3545; font-size: 18px; font-weight: bold;');
+    },
+    logShadowNeon() {
+      this.logWithAllMethods('%cNeon Effect', 'text-shadow: 0 0 5px #17a2b8, 0 0 10px #17a2b8, 0 0 15px #17a2b8; color: #17a2b8; font-size: 18px; font-weight: bold;');
+    },
+    logShadowDrop() {
+      this.logWithAllMethods('%cDrop Shadow', 'text-shadow: 3px 3px 6px rgba(108,117,125,0.8); color: #6c757d; font-size: 18px; font-weight: bold;');
+    },
+    
+    // Individual Background Methods
+    logBgNormal() {
+      this.logWithAllMethods('%cNormal Log', 'background-color: #f8f9fa; color: #333; padding: 5px; border-radius: 3px;');
+    },
+    logBgSuccess() {
+      this.logWithAllMethods('%cSuccess Log', 'background-color: #d4edda; color: #155724; padding: 5px; border-radius: 3px;');
+    },
+    logBgWarning() {
+      this.logWithAllMethods('%cWarning Log', 'background-color: #fff3cd; color: #856404; padding: 5px; border-radius: 3px;');
+    },
+    logBgError() {
+      this.logWithAllMethods('%cError Log', 'background-color: #f8d7da; color: #721c24; padding: 5px; border-radius: 3px;');
+    },
+    logBgInfo() {
+      this.logWithAllMethods('%cInfo Log', 'background-color: #d1ecf1; color: #0c5460; padding: 5px; border-radius: 3px;');
+    },
+    logBgDebug() {
+      this.logWithAllMethods('%cDebug Log', 'background-color: #e2e3e5; color: #383d41; padding: 5px; border-radius: 3px;');
+    },
+    
+    // Individual Gradient Methods
+    logGradientText() {
+      this.logWithAllMethods('%cGradient Text', 'background: linear-gradient(45deg, #007bff, #28a745); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 18px; font-weight: bold;');
+    },
+    logGradientRainbow() {
+      this.logWithAllMethods('%cRainbow Text', 'background: linear-gradient(45deg, #ff0000, #ff8000, #ffff00, #80ff00, #00ff00, #00ff80, #00ffff, #0080ff, #0000ff, #8000ff, #ff00ff, #ff0080); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 18px; font-weight: bold;');
+    },
+    logGradientBlue() {
+      this.logWithAllMethods('%cBlue Gradient', 'background: linear-gradient(to right, #007bff, #0056b3); color: white; padding: 8px; border-radius: 5px; font-weight: bold;');
+    },
+    logGradientGreen() {
+      this.logWithAllMethods('%cGreen Gradient', 'background: linear-gradient(to right, #28a745, #1e7e34); color: white; padding: 8px; border-radius: 5px; font-weight: bold;');
+    },
+    logGradientOrange() {
+      this.logWithAllMethods('%cOrange Gradient', 'background: linear-gradient(to right, #ffc107, #e0a800); color: #856404; padding: 8px; border-radius: 5px; font-weight: bold;');
+    },
+    logGradientRed() {
+      this.logWithAllMethods('%cRed Gradient', 'background: linear-gradient(to right, #dc3545, #c82333); color: white; padding: 8px; border-radius: 5px; font-weight: bold;');
+    },
+    
+    // Individual Animation Methods
+    logAnimationPulse() {
+      this.logWithAllMethods('%cAnimated Text', 'color: #007bff; font-weight: bold; animation: pulse 2s infinite;');
+    },
+    logAnimationBounce() {
+      this.logWithAllMethods('%cBouncing Text', 'color: #28a745; font-weight: bold; animation: bounce 1s infinite;');
+    },
+    logAnimationFade() {
+      this.logWithAllMethods('%cFading Text', 'color: #ffc107; font-weight: bold; animation: fade 3s infinite;');
+    },
+    logAnimationRotate() {
+      this.logWithAllMethods('%cRotating Text', 'color: #dc3545; font-weight: bold; animation: rotate 2s linear infinite;');
+    },
+    logAnimationSlide() {
+      this.logWithAllMethods('%cSliding Text', 'color: #17a2b8; font-weight: bold; animation: slide 2s ease-in-out infinite;');
+    },
+    logAnimationScale() {
+      this.logWithAllMethods('%cScaling Text', 'color: #6c757d; font-weight: bold; animation: scale 1.5s ease-in-out infinite;');
+    },
+    
+    // Individual Emoji Methods
+    logEmojiLaunch() {
+      this.logWithAllMethods('%c🚀 Launch', 'color: #007bff; font-size: 16px; font-weight: bold;');
+    },
+    logEmojiSuccess() {
+      this.logWithAllMethods('%c✨ Success', 'color: #28a745; font-size: 16px; font-weight: bold;');
+    },
+    logEmojiWarning() {
+      this.logWithAllMethods('%c⚠️ Warning', 'color: #ffc107; font-size: 16px; font-weight: bold;');
+    },
+    logEmojiError() {
+      this.logWithAllMethods('%c💥 Error', 'color: #dc3545; font-size: 16px; font-weight: bold;');
+    },
+    logEmojiInfo() {
+      this.logWithAllMethods('%cℹ️ Info', 'color: #17a2b8; font-size: 16px; font-weight: bold;');
+    },
+    logEmojiDebug() {
+      this.logWithAllMethods('%c🐞 Debug', 'color: #6c757d; font-size: 16px; font-weight: bold;');
+    },
+    
+    // Individual Icon Methods
+    logIconSettings() {
+      this.logWithAllMethods('%c🔧 Settings', 'color: #007bff; font-weight: bold');
+    },
+    logIconSuccess() {
+      this.logWithAllMethods('%c✅ Success', 'color: #28a745; font-weight: bold');
+    },
+    logIconWarning() {
+      this.logWithAllMethods('%c⚠️ Warning', 'color: #ffc107; font-weight: bold');
+    },
+    logIconError() {
+      this.logWithAllMethods('%c❌ Error', 'color: #dc3545; font-weight: bold');
+    },
+    logIconInfo() {
+      this.logWithAllMethods('%cℹ️ Information', 'color: #17a2b8; font-weight: bold');
+    },
+    logIconBug() {
+      this.logWithAllMethods('%c🐛 Bug Report', 'color: #6c757d; font-weight: bold');
+    },
   }
 };
 </script>
