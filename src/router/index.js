@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 
 const ConsoleSandbox = () => import('../components/ConsoleSandbox.vue')
 const JzbDecoder = () => import('../components/JzbDecoder.vue')
+const JzbEncoder = () => import('../components/JzbEncoder.vue')
 
 const routes = [
   {
@@ -13,6 +14,11 @@ const routes = [
     path: '/jzb-decoder',
     name: 'JzbDecoder',
     component: JzbDecoder
+  },
+  {
+    path: '/jzb-encoder',
+    name: 'JzbEncoder',
+    component: JzbEncoder
   }
 ]
 
