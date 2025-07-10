@@ -13,31 +13,31 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { localAgentUrlParam } from '../constants'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+
 
 const agentType = ref('production')
 const agentReason = ref('')
 
 const toggleAgentType = () => {
-  const url = new URL(window.location.href)
-  const urlParams = url.searchParams
-  
-  const hasLocalAgentParam = urlParams.get(localAgentUrlParam) === 'true'
+  const hasLocalAgentParam = route.query.localAgent === 'true'
   
   if (hasLocalAgentParam) {
     // Remove the parameter
-    urlParams.delete(localAgentUrlParam)
+    delete route.query.localAgent
   } else {
     // Add the parameter
-    urlParams.set(localAgentUrlParam, 'true')
+    route.query.localAgent = 'true'
   }
   
   // Reload the page with the new URL
-  window.location.href = url.toString()
+  window.open(route.href, '_self');
 }
 
 onMounted(() => {
-  const urlParams = new URLSearchParams(window.location.search)
-  const hasLocalAgentParam = urlParams.get(localAgentUrlParam) === 'true'
+  const hasLocalAgentParam = route.query.localAgent === 'true'
   const useLocalAgent = hasLocalAgentParam || import.meta.env.VITE_USE_LOCAL_AGENT
   
   if (useLocalAgent) {

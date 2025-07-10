@@ -568,7 +568,7 @@
           </section>
 
           <!-- Continuous Logging Section -->
-          <section class="section" v-if="!isProduction || showAutolog">
+          <section class="section" v-if="showAutolog">
             <h2 class="section-title">Continuous Logging</h2>
             <div class="button-grid">
               <button @click="startContinuousLogging" class="btn btn-error" :disabled="isLogging">Start 2min Continuous Logging</button>
@@ -641,7 +641,7 @@ export default {
       return Object.values(this.stylingSections).every(expanded => expanded);
     },
     showAutolog() {
-      return this.$route.query.showAutolog === 'true';
+      return this.$route.query.showAutolog === 'true' || !this.isProduction;
     }
   },
   mounted() {
