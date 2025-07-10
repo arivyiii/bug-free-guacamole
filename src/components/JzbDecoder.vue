@@ -27,13 +27,14 @@
         </section>
   
         <section class="payload-section">
-          <header class="section-header">
-            <h3 class="section-title">Output #{{ idx + 1 }}</h3>
-            <div class="actions">
-              <button @click="copyOutput(idx)" class="btn copy-btn">Copy</button>
-              <button @click="downloadJson(idx)" class="btn download-btn">Download</button>
-            </div>
-          </header>
+        <header class="section-header">
+          <h3 class="section-title">Output #{{ idx + 1 }}</h3>
+          <div class="actions">
+            <button @click="copyOutput(idx)" class="btn copy-btn">Copy</button>
+            <button @click="openInEncoder(idx)" class="btn encode-btn">Encode</button>
+            <button @click="downloadJson(idx)" class="btn download-btn">Download</button>
+          </div>
+        </header>
           <pre class="output-area">{{ p.humanReadable }}</pre>
         </section>
       </div>
@@ -42,12 +43,15 @@
   
   <script>
   import { ref, onMounted } from 'vue'
-  import pako from 'pako'
-  import base64js from 'base64-js'
+import { useRouter } from 'vue-router'
+import pako from 'pako'
+import base64js from 'base64-js'
   
   export default {
     name: 'JzbDecoder',
     setup() {
+      const router = useRouter()
+      
       const example = 'eJzVVscO60h2_Ze3bvZjDr1jDKIYxCjRMAoUUxBzDMb8e1OvZ7wwbAP2YoBZqXjq1q1Tp26dq3_7jx9rOZVzN6rJjz9-AEs0BBO4QH7YnuWL9Ht8__jtRxTH3dLOv0L0g_3r68Lno08vKEnXusuv72l5u39BcddOXZ1e2DV57_J7uqb1hZdt1v0nyP9K8weN__bjPXbblI5gLptrOUIRCE4hMIkxJPmPaCs66i76UkhvZ90gyNqcm5dbtIY3w-rr7CvHZcppaMQNBuzdzBiMODbr6Yz4yjdbGwawxiQZp_BCWEkbHu-CKw5a0dOdyRtMwIgqIZJqRmtsadM7Bp-zZgCmDvHQnZ-JkqVkIEMMuaVyZcDPChr21lQEynpWvYm5dwzTdeYdwJHdTOcC27mbNCEUaOOjkmQkEUUqshG4JEc_XHaE4RQQ1hqSNGm30zKpBCJy_1gV5rTjOStJSoB0Y96GKFMJGifs-UaPNzMtdl1aDVzNw56FQYw2VT3a5RDN04fz749ZrP2Ui0x1cIxBmx306fuDSloCQ9_j-bW3p_6hAITo1cSIC9y8xwVD-jv_GO2beoB2R23tjvJJ1w71rHcQXDhxXGvsLiRCo-GkcTAG-TLaPqjC3idddAY3dA8Lsq19iBTIcKeOGWRPbGcyZiWJFSEgGrwHBjxT1_c1jJ6IZzbQUj0aptIBZ1tXlKB7JlmifqzJOzEe3CVttvbZLMxNf9RZ3mk9QIsID0ZKfFVEqZum1ePuRln-5xS6JLFMh-ClJnc1HkUPobFuyg3quU0C7ad1EGSMkLmmCGAJ9oFlOyXTaTCK56eTnevONSpOGMxN5sg_kLjT6lHKPZVRp9Hse1jZ4kxro1Zz5nzFXNqd5I68IUfj33b-40sUYm_6hywGs0z61iWx0WHd0H2YhMdzbce7wzceaxKFbD3JndxKbzhbbl-SC7tVE65Fqpcz2b9umuYd-ZAO6eKQ91JSBw0baqpLVa_sxmR4bVL9lNcH6e9W6N1yBp1MVv7mhN3uqQ9CKXXDtVEvhwfO2bC7GmTmML_m8-lgaJcbjDIhWldeA85jRNx1m4CR8EPDmtoMcyzrEg2_IZSohd4uFrm_JqZ4Wp5XqWMaeWFzPuSLK9E_ghDiP6FEVXY1ikVnqkHVtdlQT8d3XHZtPAyvncKjC7ZDD4y6YdPPxeDf58pusfRGXH2l34V2iXaM6lME3Fc_pxxP7_xqEEv9qT3Z6CJMj7fxemZeIlJuXE7m63u2RbJ6m2A_5M1SoCj26ma1vzoi_TaVekp_NYevKyKfqRcw2aawQ99bl_Es49eFinnupz9-_ozGcj3Ksvw9L-dief9edj_fSw5lY5pC-RLFUXN52M8ff_vtn-ySWzS2_9Ulcfh_cUnqf3JJD9PQk30UA1OuclfM1ZNUCLrAHgHJS7U692ejUpLQK0RSGxsT5V_-ZCLHjaD0ZeYTY0VhodmCdV5FKCOTwaQisAXGmqAgn1ty7dMzME5HqeF5d85FjkED45aueWQf9gEwUPeJxdlAnPF2EFBqtYhyEl7cMRWtb2cwAxda6CSS4gdGAP_ImNlAZbJV58dBFk8tLODXktZoSYlcZpNpUfVoqrX-UAbcu-8akQEWCgCdV2aoVk0EwGWhfXGcRdKAsSmVmeOWWRAYTNQKWdfk3GmSh3cPxIfrTZ7PJ8VHQXT5eeOHxPb4q49I02yx_SAEoueLcTeoRB7PXt9IO4LWH89XJ3fj8Dbn2iZaiFuHFvmICsvAUMIqqpscOsfOdo3PtLzDFk19J4Yi4KW8Hmr1MQwPsmX9iteKOyvqlLlzllFGYisQfEc0d0K7S3JUvRwbQl6DzH6KVxqNftW9hGgTXdYPnFU4GfYq_C3T_2UqOh3Hbvy_lTT935b0jInSeJW0xwF-Fdtb1IWv2aHUSd_CCkV9eBL1tYNmbmr8Z4PqykHj0T4SFOLfAq43TCsj1vIpwK6lCQz5aAnoja2j2Q5Yg09lTFH9wjzDkEB9Gqowan_sFcUIVUBp5HxVskJScEoZ9DgWWYK2nGHCDKSU8E6fIbLs65zA9ImlVIpp2Ai7CYG1L9dMhr45TaaaO7Bu5PlRXhAhK2YUY8xQZ0-iwtY0Sd_abDb383b1Qmuv-kFnoncHIWrUXS2RUdpjOxMPHrUCX-4UowQhRTOfVs0wHCsYqx6BWMMr1dro2Svc-EzfakCZpxt-QHCbjeYgkVeyMVSLYgMOJYjRUpRpFS2TFhPM7A1Xq5szK7hBy3R5O68GDb89UDrhujFwNjM-SgGCoInBHpCuk8s7aGpi9qcu8uury6vdAjRytIoTw5PJq_WZ52NShFr9pgBhz3aovJ4XvYmZZx8fKdM5BWHjVQMlW5G5lWcbr2yf7DPpSqbbDKKOPIedYiY9JLK2cMfKu48PchWSBen8ex4632j2O4CcLU9oW0HUcu0Eq7iizM6CxArHuTtFAvZKKBYrzV1bpAZg1Yy3aY3ArSsfWfXFyUigVCGUraESXKkTuztpRcHErMxHr_-up6VH9mt9XN-e5wU4ijbyUPGCXhXZdZKqW5BakbywTn9xoh1yzy7exSMVcM1aVEi7keCK9wRizwr8-sUp6P68Di2WMcB5q2DBtdfFTJJL6_vHw6Z1CLWuAJ4DAGIr4mGVGX7_6jOx91EC34PyxYoBijWI7jb-_x3h3_8EA1AJcw'
       const payloads = ref([
         { id: Date.now(), text: example, humanReadable: '' }
@@ -118,19 +122,53 @@
         URL.revokeObjectURL(url)
       }
 
-      onMounted(() => {
-      decodePayload(0)
-    })
-  
-      return {
-        payloads,
-        addPayload,
-        decodePayload,
-        clearPayload,
-        removePayload,
-        copyOutput,
-        downloadJson
+      function openInEncoder(idx) {
+        const jsonOutput = payloads.value[idx].humanReadable
+        if (jsonOutput && !jsonOutput.startsWith('Error:')) {
+          try {
+            // Parse to ensure it's valid JSON
+            JSON.parse(jsonOutput)
+            // Store the JSON output in localStorage for the encoder to pick up
+            localStorage.setItem('jsonToEncode', jsonOutput)
+            // Open encoder in new tab
+            window.open('/#/jzb-encoder', '_blank')
+          } catch (e) {
+            console.error('Invalid JSON, cannot encode:', e)
+          }
+        }
       }
+
+      onMounted(() => {
+        // Check if there's JZB data from the encoder
+        const jzbFromEncoder = localStorage.getItem('jzbToDecode')
+        if (jzbFromEncoder) {
+          payloads.value = []
+          // Add a new payload with the JZB data from encoder
+          payloads.value.push({
+            id: Date.now() + Math.random(),
+            text: jzbFromEncoder,
+            humanReadable: ''
+          })
+          // Remove the data from localStorage
+          localStorage.removeItem('jzbToDecode')
+          // Decode the new payload
+          decodePayload(payloads.value.length - 1)
+        } else {
+          // Default behavior - decode the example
+          decodePayload(0)
+        }
+      })
+  
+              return {
+          payloads,
+          addPayload,
+          decodePayload,
+          clearPayload,
+          removePayload,
+          copyOutput,
+          downloadJson,
+          openInEncoder
+        }
     }
   }
   </script>
@@ -247,6 +285,7 @@
   .clear-btn { background: #e0e0e0; color: #555; }
   .remove-btn { background: #f44336; color: #fff; }
   .copy-btn { background: #4caf50; color: #fff; }
+  .encode-btn { background: #ff9800; color: #fff; }
   .download-btn { background: #2196f3; color: #fff; }
   
   .decode-btn:hover { opacity: 0.9; }

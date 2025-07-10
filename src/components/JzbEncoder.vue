@@ -31,6 +31,7 @@
           <h3 class="section-title">JZB Output #{{ idx + 1 }}</h3>
           <div class="actions">
             <button @click="copyOutput(idx)" class="btn copy-btn">Copy</button>
+            <button @click="openInDecoder(idx)" class="btn decode-btn">Decode</button>
             <button @click="downloadJzb(idx)" class="btn download-btn">Download</button>
           </div>
         </header>
@@ -42,12 +43,15 @@
 
 <script>
 import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import pako from 'pako'
 import base64js from 'base64-js'
 
 export default {
   name: 'JzbEncoder',
   setup() {
+    const router = useRouter()
+    
     const example = JSON.stringify({
       name: "John Doe",
       age: 30,
@@ -131,8 +135,35 @@ export default {
       URL.revokeObjectURL(url)
     }
 
+    function openInDecoder(idx) {
+      const jzbOutput = payloads.value[idx].jzbOutput
+      if (jzbOutput && !jzbOutput.startsWith('Error:')) {
+        // Store the JZB output in localStorage for the decoder to pick up
+        localStorage.setItem('jzbToDecode', jzbOutput)
+        // Open decoder in new tab
+        window.open('/#/jzb-decoder', '_blank')
+      }
+    }
+
     onMounted(() => {
-      encodePayload(0)
+      // Check if there's JSON data from the decoder
+      const jsonFromDecoder = localStorage.getItem('jsonToEncode')
+      if (jsonFromDecoder) {
+        payloads.value = []
+        // Add a new payload with the JSON data from decoder
+        payloads.value.push({
+          id: Date.now() + Math.random(),
+          text: jsonFromDecoder,
+          jzbOutput: ''
+        })
+        // Remove the data from localStorage
+        localStorage.removeItem('jsonToEncode')
+        // Encode the new payload
+        encodePayload(payloads.value.length - 1)
+      } else {
+        // Default behavior - encode the example
+        encodePayload(0)
+      }
     })
 
     return {
@@ -142,7 +173,8 @@ export default {
       clearPayload,
       removePayload,
       copyOutput,
-      downloadJzb
+      downloadJzb,
+      openInDecoder
     }
   }
 }
@@ -260,6 +292,7 @@ export default {
 .clear-btn { background: #e0e0e0; color: #555; }
 .remove-btn { background: #f44336; color: #fff; }
 .copy-btn { background: #4caf50; color: #fff; }
+.decode-btn { background: #ff9800; color: #fff; }
 .download-btn { background: #2196f3; color: #fff; }
 
 .encode-btn:hover { opacity: 0.9; }
