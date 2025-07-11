@@ -925,10 +925,6 @@ export default {
       for (let i = 0; i < count; i++) {
         if (this.selectedMethod === 'all') {
           console.log(message);
-          console.info(message);
-          console.warn(message);
-          console.error(message);
-          console.debug(message);
         } else {
           console[this.selectedMethod](message);
         }
@@ -1661,7 +1657,11 @@ export default {
       // Same method, message, and stack - log from same function multiple times
       const logSameStack = () => {
         const err = new Error('dedupe');
-        console[this.selectedMethod]('dedupe message', err);
+        if (this.selectedMethod === 'all') {
+            console.log('dedupe message', err);
+        } else {
+            console[this.selectedMethod]('dedupe message', err);
+        }
       };
       
       for(let i = 0; i < 5; i++) {
@@ -1706,7 +1706,11 @@ export default {
       // Same method and stack, but different messages
       const logWithMessage = (message) => {
         const err = new Error('dedupe');
-        console[this.selectedMethod](message, err);
+        if (this.selectedMethod === 'all') {
+            console.log(message, err);
+        } else {
+            console[this.selectedMethod](message, err);
+        }
       };
       
       for(let i = 0; i < 5; i++) {
