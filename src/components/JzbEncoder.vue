@@ -1,41 +1,41 @@
 <template>
   <div class="jzb-encoder">
-    <div class="controls">
-      <h2 class="title">JZB Encoder</h2>
-      <button @click="addPayload" class="btn add-btn">+ Add Payload</button>
+    <div class="jzb-encoder__controls">
+      <h2 class="jzb-encoder__title">JZB Encoder</h2>
+      <button @click="addPayload" class="jzb-encoder__btn jzb-encoder__btn--add">+ Add Payload</button>
     </div>
 
     <div
       v-for="(p, idx) in payloads"
       :key="p.id"
-      class="payload-card"
+      class="jzb-encoder__payload-card"
     >
-      <section class="payload-section">
-        <header class="section-header">
-          <h3 class="section-title">Input #{{ idx + 1 }}</h3>
-          <div class="actions">
-            <button @click="encodePayload(idx)" class="btn encode-btn">Encode</button>
-            <button @click="clearPayload(idx)" class="btn clear-btn">Clear</button>
-            <button @click="removePayload(idx)" class="btn remove-btn">Remove</button>
+      <section class="jzb-encoder__payload-section">
+        <header class="jzb-encoder__section-header">
+          <h3 class="jzb-encoder__section-title">Input #{{ idx + 1 }}</h3>
+          <div class="jzb-encoder__actions">
+            <button @click="encodePayload(idx)" class="jzb-encoder__btn jzb-encoder__btn--encode">Encode</button>
+            <button @click="clearPayload(idx)" class="jzb-encoder__btn jzb-encoder__btn--clear">Clear</button>
+            <button @click="removePayload(idx)" class="jzb-encoder__btn jzb-encoder__btn--remove">Remove</button>
           </div>
         </header>
         <textarea
           v-model="p.text"
           placeholder="Paste JSON object here..."
-          class="input-area"
+          class="jzb-encoder__input-area"
         ></textarea>
       </section>
 
-      <section class="payload-section">
-        <header class="section-header">
-          <h3 class="section-title">JZB Output #{{ idx + 1 }}</h3>
-          <div class="actions">
-            <button @click="copyOutput(idx)" class="btn copy-btn">Copy</button>
-            <button @click="openInDecoder(idx)" class="btn decode-btn">Decode</button>
-            <button @click="downloadJzb(idx)" class="btn download-btn">Download</button>
+      <section class="jzb-encoder__payload-section">
+        <header class="jzb-encoder__section-header">
+          <h3 class="jzb-encoder__section-title">JZB Output #{{ idx + 1 }}</h3>
+          <div class="jzb-encoder__actions">
+            <button @click="copyOutput(idx)" class="jzb-encoder__btn jzb-encoder__btn--copy">Copy</button>
+            <button @click="openInDecoder(idx)" class="jzb-encoder__btn jzb-encoder__btn--decode">Decode</button>
+            <button @click="downloadJzb(idx)" class="jzb-encoder__btn jzb-encoder__btn--download">Download</button>
           </div>
         </header>
-        <pre class="output-area">{{ p.jzbOutput }}</pre>
+        <pre class="jzb-encoder__output-area">{{ p.jzbOutput }}</pre>
       </section>
     </div>
   </div>
@@ -181,7 +181,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .jzb-encoder {
   display: flex;
   flex-direction: column;
@@ -190,162 +190,209 @@ export default {
   background: #fafafa;
   min-height: 100vh;
   box-sizing: border-box;
-}
 
-.controls {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+  // Elements
+  &__controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
-.title {
-  margin: 0;
-  font-size: 1.5rem;
-  font-weight: 500;
-  color: #333;
-}
+  &__title {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #333;
+  }
 
-.add-btn {
-  font-size: 0.9rem;
-  padding: 8px 16px;
-  background: transparent;
-  border: 1px solid #007acc;
-  border-radius: 4px;
-  color: #007acc;
-  transition: background 0.2s;
-}
-.add-btn:hover {
-  background: rgba(0, 122, 204, 0.1);
-}
+  &__btn {
+    font-size: 0.85rem;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
 
-.payload-card {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  background: #fff;
-  border-radius: 6px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-  padding: 24px;
-}
+    // Button modifiers
+    &--add {
+      font-size: 0.9rem;
+      padding: 8px 16px;
+      background: transparent;
+      border: 1px solid #007acc;
+      border-radius: 4px;
+      color: #007acc;
+      transition: background 0.2s;
 
-.payload-section {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
+      &:hover {
+        background: rgba(0, 122, 204, 0.1);
+      }
+    }
 
-.section-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
-}
+    &--encode { 
+      background: #007acc; 
+      color: #fff; 
+      
+      &:hover { 
+        opacity: 0.9; 
+      }
+    }
 
-.section-title {
-  margin: 0;
-  font-size: 1.1rem;
-  font-weight: 400;
-  color: #555;
-}
+    &--clear { 
+      background: #e0e0e0; 
+      color: #555; 
+      
+      &:hover { 
+        opacity: 0.9; 
+      }
+    }
 
-.actions button {
-  margin-left: 8px;
-}
+    &--remove { 
+      background: #f44336; 
+      color: #fff; 
+      
+      &:hover { 
+        opacity: 0.9; 
+      }
+    }
 
-.input-area {
-  flex: 1;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 12px;
-  font-family: 'Courier New', monospace;
-  font-size: 0.95rem;
-  color: #333;
-  resize: vertical;
-  background: #fefefe;
-}
+    &--copy { 
+      background: #4caf50; 
+      color: #fff; 
+      
+      &:hover { 
+        opacity: 0.9; 
+      }
+    }
 
-.output-area {
-  flex: 1;
-  background: #f7f7f7;
-  border-radius: 4px;
-  padding: 12px;
-  font-family: 'Courier New', monospace;
-  font-size: 0.95rem;
-  color: #333;
-  overflow-y: auto;
-  /* allow wrapping and break long lines */
-  white-space: pre-wrap;
-  word-break: break-word;
-  line-height: 1.4;
-  /* optional max height to keep cards uniform */
-  max-height: 60vh;
-}
+    &--decode { 
+      background: #ff9800; 
+      color: #fff; 
+      
+      &:hover { 
+        opacity: 0.9; 
+      }
+    }
 
-.btn {
-  font-size: 0.85rem;
-  padding: 6px 12px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
+    &--download { 
+      background: #2196f3; 
+      color: #fff; 
+      
+      &:hover { 
+        opacity: 0.9; 
+      }
+    }
+  }
 
-.encode-btn { background: #007acc; color: #fff; }
-.clear-btn { background: #e0e0e0; color: #555; }
-.remove-btn { background: #f44336; color: #fff; }
-.copy-btn { background: #4caf50; color: #fff; }
-.decode-btn { background: #ff9800; color: #fff; }
-.download-btn { background: #2196f3; color: #fff; }
+  &__payload-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    padding: 24px;
+  }
 
-.encode-btn:hover { opacity: 0.9; }
-.clear-btn:hover { opacity: 0.9; }
-.remove-btn:hover { opacity: 0.9; }
-.copy-btn:hover { opacity: 0.9; }
-.download-btn:hover { opacity: 0.9; }
+  &__payload-section {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
 
-/* Dark mode styles */
-.dark .jzb-encoder {
-  background: #1a1a1a;
-}
+  &__section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
 
-.dark .title {
-  color: #ffffff;
-}
+  &__section-title {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: #555;
+  }
 
-.dark .add-btn {
-  border-color: #007acc;
-  color: #007acc;
-}
+  &__actions {
+    button {
+      margin-left: 8px;
+    }
+  }
 
-.dark .add-btn:hover {
-  background: rgba(0, 122, 204, 0.2);
-}
+  &__input-area {
+    flex: 1;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 12px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.95rem;
+    color: #333;
+    resize: vertical;
+    background: #fefefe;
+  }
 
-.dark .payload-card {
-  background: #2d2d2d;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-}
+  &__output-area {
+    flex: 1;
+    background: #f7f7f7;
+    border-radius: 4px;
+    padding: 12px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.95rem;
+    color: #333;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+    line-height: 1.4;
+    max-height: 60vh;
+  }
 
-.dark .section-title {
-  color: #e0e0e0;
-}
+  // Dark mode styles
+  .dark & {
+    background: #1a1a1a;
 
-.dark .input-area {
-  border-color: #404040;
-  color: #e0e0e0;
-  background: #1a1a1a;
-}
+    &__title {
+      color: #ffffff;
+    }
 
-.dark .output-area {
-  background: #1a1a1a;
-  color: #e0e0e0;
-}
+    &__btn {
+      &--add {
+        border-color: #007acc;
+        color: #007acc;
 
-.dark .clear-btn {
-  background: #404040;
-  color: #e0e0e0;
-}
+        &:hover {
+          background: rgba(0, 122, 204, 0.2);
+        }
+      }
 
-.dark .clear-btn:hover {
-  background: #505050;
+      &--clear {
+        background: #404040;
+        color: #e0e0e0;
+
+        &:hover {
+          background: #505050;
+        }
+      }
+    }
+
+    &__payload-card {
+      background: #2d2d2d;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    &__section-title {
+      color: #e0e0e0;
+    }
+
+    &__input-area {
+      border-color: #404040;
+      color: #e0e0e0;
+      background: #1a1a1a;
+    }
+
+    &__output-area {
+      background: #1a1a1a;
+      color: #e0e0e0;
+    }
+  }
 }
 </style> 

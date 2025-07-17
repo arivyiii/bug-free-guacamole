@@ -1,41 +1,41 @@
 <template>
     <div class="jzb-decoder">
-      <div class="controls">
-        <h2 class="title">JZB Decoder</h2>
-        <button @click="addPayload" class="btn add-btn">+ Add Payload</button>
+      <div class="jzb-decoder__controls">
+        <h2 class="jzb-decoder__title">JZB Decoder</h2>
+        <button @click="addPayload" class="jzb-decoder__btn jzb-decoder__btn--add">+ Add Payload</button>
       </div>
   
       <div
         v-for="(p, idx) in payloads"
         :key="p.id"
-        class="payload-card"
+        class="jzb-decoder__payload-card"
       >
-        <section class="payload-section">
-          <header class="section-header">
-            <h3 class="section-title">Payload #{{ idx + 1 }}</h3>
-            <div class="actions">
-              <button @click="decodePayload(idx)" class="btn decode-btn">Decode</button>
-              <button @click="clearPayload(idx)" class="btn clear-btn">Clear</button>
-              <button @click="removePayload(idx)" class="btn remove-btn">Remove</button>
+        <section class="jzb-decoder__payload-section">
+          <header class="jzb-decoder__section-header">
+            <h3 class="jzb-decoder__section-title">Payload #{{ idx + 1 }}</h3>
+            <div class="jzb-decoder__actions">
+              <button @click="decodePayload(idx)" class="jzb-decoder__btn jzb-decoder__btn--decode">Decode</button>
+              <button @click="clearPayload(idx)" class="jzb-decoder__btn jzb-decoder__btn--clear">Clear</button>
+              <button @click="removePayload(idx)" class="jzb-decoder__btn jzb-decoder__btn--remove">Remove</button>
             </div>
           </header>
           <textarea
             v-model="p.text"
             placeholder="Paste JZB string here..."
-            class="input-area"
+            class="jzb-decoder__input-area"
           ></textarea>
         </section>
   
-        <section class="payload-section">
-        <header class="section-header">
-          <h3 class="section-title">Output #{{ idx + 1 }}</h3>
-          <div class="actions">
-            <button @click="copyOutput(idx)" class="btn copy-btn">Copy</button>
-            <button @click="openInEncoder(idx)" class="btn encode-btn">Encode</button>
-            <button @click="downloadJson(idx)" class="btn download-btn">Download</button>
+        <section class="jzb-decoder__payload-section">
+        <header class="jzb-decoder__section-header">
+          <h3 class="jzb-decoder__section-title">Output #{{ idx + 1 }}</h3>
+          <div class="jzb-decoder__actions">
+            <button @click="copyOutput(idx)" class="jzb-decoder__btn jzb-decoder__btn--copy">Copy</button>
+            <button @click="openInEncoder(idx)" class="jzb-decoder__btn jzb-decoder__btn--encode">Encode</button>
+            <button @click="downloadJson(idx)" class="jzb-decoder__btn jzb-decoder__btn--download">Download</button>
           </div>
         </header>
-          <pre class="output-area">{{ p.humanReadable }}</pre>
+          <pre class="jzb-decoder__output-area">{{ p.humanReadable }}</pre>
         </section>
       </div>
     </div>
@@ -173,44 +173,109 @@ import base64js from 'base64-js'
   }
   </script>
   
-  <style scoped>
-  .jzb-decoder {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-    padding: 24px;
-    background: #fafafa;
-    min-height: 100vh;
-    box-sizing: border-box;
-  }
-  
-  .controls {
+  <style scoped lang="scss">
+.jzb-decoder {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 24px;
+  background: #fafafa;
+  min-height: 100vh;
+  box-sizing: border-box;
+
+  // Elements
+  &__controls {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-  
-  .title {
+
+  &__title {
     margin: 0;
     font-size: 1.5rem;
     font-weight: 500;
     color: #333;
   }
-  
-  .add-btn {
-    font-size: 0.9rem;
-    padding: 8px 16px;
-    background: transparent;
-    border: 1px solid #007acc;
+
+  &__btn {
+    font-size: 0.85rem;
+    padding: 6px 12px;
+    border: none;
     border-radius: 4px;
-    color: #007acc;
-    transition: background 0.2s;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    // Button modifiers
+    &--add {
+      font-size: 0.9rem;
+      padding: 8px 16px;
+      background: transparent;
+      border: 1px solid #007acc;
+      border-radius: 4px;
+      color: #007acc;
+      transition: background 0.2s;
+
+      &:hover {
+        background: rgba(0, 122, 204, 0.1);
+      }
+    }
+
+    &--decode { 
+      background: #007acc; 
+      color: #fff; 
+      
+      &:hover { 
+        opacity: 0.9; 
+      }
+    }
+
+    &--clear { 
+      background: #e0e0e0; 
+      color: #555; 
+      
+      &:hover { 
+        opacity: 0.9; 
+      }
+    }
+
+    &--remove { 
+      background: #f44336; 
+      color: #fff; 
+      
+      &:hover { 
+        opacity: 0.9; 
+      }
+    }
+
+    &--copy { 
+      background: #4caf50; 
+      color: #fff; 
+      
+      &:hover { 
+        opacity: 0.9; 
+      }
+    }
+
+    &--encode { 
+      background: #ff9800; 
+      color: #fff; 
+      
+      &:hover { 
+        opacity: 0.9; 
+      }
+    }
+
+    &--download { 
+      background: #2196f3; 
+      color: #fff; 
+      
+      &:hover { 
+        opacity: 0.9; 
+      }
+    }
   }
-  .add-btn:hover {
-    background: rgba(0, 122, 204, 0.1);
-  }
-  
-  .payload-card {
+
+  &__payload-card {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 24px;
@@ -219,32 +284,34 @@ import base64js from 'base64-js'
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     padding: 24px;
   }
-  
-  .payload-section {
+
+  &__payload-section {
     display: flex;
     flex-direction: column;
     height: 100%;
   }
-  
-  .section-header {
+
+  &__section-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 12px;
   }
-  
-  .section-title {
+
+  &__section-title {
     margin: 0;
     font-size: 1.1rem;
     font-weight: 400;
     color: #555;
   }
-  
-  .actions button {
-    margin-left: 8px;
+
+  &__actions {
+    button {
+      margin-left: 8px;
+    }
   }
-  
-  .input-area {
+
+  &__input-area {
     flex: 1;
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -255,8 +322,8 @@ import base64js from 'base64-js'
     resize: vertical;
     background: #fefefe;
   }
-  
-  .output-area {
+
+  &__output-area {
     flex: 1;
     background: #f7f7f7;
     border-radius: 4px;
@@ -265,80 +332,60 @@ import base64js from 'base64-js'
     font-size: 0.95rem;
     color: #333;
     overflow-y: auto;
-    /* allow wrapping and break long lines */
     white-space: pre-wrap;
     word-break: break-word;
     line-height: 1.4;
-    /* optional max height to keep cards uniform */
     max-height: 60vh;
   }
-  
-  .btn {
-    font-size: 0.85rem;
-    padding: 6px 12px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+
+  // Dark mode styles
+  .dark & {
+    background: #1a1a1a;
+
+    &__title {
+      color: #ffffff;
+    }
+
+    &__btn {
+      &--add {
+        border-color: #007acc;
+        color: #007acc;
+
+        &:hover {
+          background: rgba(0, 122, 204, 0.2);
+        }
+      }
+
+      &--clear {
+        background: #404040;
+        color: #e0e0e0;
+
+        &:hover {
+          background: #505050;
+        }
+      }
+    }
+
+    &__payload-card {
+      background: #2d2d2d;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    &__section-title {
+      color: #e0e0e0;
+    }
+
+    &__input-area {
+      border-color: #404040;
+      color: #e0e0e0;
+      background: #1a1a1a;
+    }
+
+    &__output-area {
+      background: #1a1a1a;
+      color: #e0e0e0;
+    }
   }
-  
-  .decode-btn { background: #007acc; color: #fff; }
-  .clear-btn { background: #e0e0e0; color: #555; }
-  .remove-btn { background: #f44336; color: #fff; }
-  .copy-btn { background: #4caf50; color: #fff; }
-  .encode-btn { background: #ff9800; color: #fff; }
-  .download-btn { background: #2196f3; color: #fff; }
-  
-  .decode-btn:hover { opacity: 0.9; }
-.clear-btn:hover { opacity: 0.9; }
-.remove-btn:hover { opacity: 0.9; }
-.copy-btn:hover { opacity: 0.9; }
-.download-btn:hover { opacity: 0.9; }
-
-/* Dark mode styles */
-.dark .jzb-decoder {
-  background: #1a1a1a;
-}
-
-.dark .title {
-  color: #ffffff;
-}
-
-.dark .add-btn {
-  border-color: #007acc;
-  color: #007acc;
-}
-
-.dark .add-btn:hover {
-  background: rgba(0, 122, 204, 0.2);
-}
-
-.dark .payload-card {
-  background: #2d2d2d;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-}
-
-.dark .section-title {
-  color: #e0e0e0;
-}
-
-.dark .input-area {
-  border-color: #404040;
-  color: #e0e0e0;
-  background: #1a1a1a;
-}
-
-.dark .output-area {
-  background: #1a1a1a;
-  color: #e0e0e0;
-}
-
-.dark .clear-btn {
-  background: #404040;
-  color: #e0e0e0;
-}
-
-.dark .clear-btn:hover {
-  background: #505050;
 }
 </style>
   

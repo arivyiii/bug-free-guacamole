@@ -1,13 +1,13 @@
 <template>
   <div class="console-sandbox">
-    <header class="header" :class="{ 'header-sticky': isHeaderSticky }">
-      <div class="container">
-        <h1 class="title">Console Sandbox</h1>
-        <p class="subtitle">Test JavaScript console methods with various data types</p>
+    <header class="console-sandbox__header" :class="{ 'console-sandbox__header--sticky': isHeaderSticky }">
+      <div class="console-sandbox__container">
+        <h1 class="console-sandbox__title">Console Sandbox</h1>
+        <p class="console-sandbox__subtitle">Test JavaScript console methods with various data types</p>
         
-        <div class="method-selector">
+        <div class="console-sandbox__method-selector">
           <label for="method-select">Console Method:</label>
-          <select id="method-select" v-model="selectedMethod" class="method-select">
+          <select id="method-select" v-model="selectedMethod" class="console-sandbox__method-select">
             <option value="log">console.log</option>
             <option value="info">console.info</option>
             <option value="warn">console.warn</option>
@@ -20,559 +20,559 @@
     </header>
 
     <!-- Placeholder to prevent layout shift -->
-    <div class="header-placeholder" v-show="isHeaderSticky"></div>
+    <div class="console-sandbox__header-placeholder" v-show="isHeaderSticky"></div>
 
-    <main class="main">
-      <div class="container">
-        <div class="sections">
+    <main class="console-sandbox__main">
+      <div class="console-sandbox__container">
+        <div class="console-sandbox__sections">
           <!-- Primitives Section -->
-          <section class="section">
-            <h2 class="section-title">Primitives</h2>
-            <div class="button-grid">
-              <button @click="logPrimitive('string', 'Hello, world!')" class="btn">String</button>
-              <button @click="logPrimitive('number', 42)" class="btn">Number</button>
-              <button @click="logPrimitive('boolean', true)" class="btn">Boolean</button>
-              <button @click="logPrimitive('null', null)" class="btn">Null</button>
-              <button @click="logPrimitive('undefined', undefined)" class="btn">Undefined</button>
+          <section class="console-sandbox__section">
+            <h2 class="console-sandbox__section-title">Primitives</h2>
+            <div class="console-sandbox__button-grid">
+              <button @click="logPrimitive('string', 'Hello, world!')" class="console-sandbox__btn">String</button>
+              <button @click="logPrimitive('number', 42)" class="console-sandbox__btn">Number</button>
+              <button @click="logPrimitive('boolean', true)" class="console-sandbox__btn">Boolean</button>
+              <button @click="logPrimitive('null', null)" class="console-sandbox__btn">Null</button>
+              <button @click="logPrimitive('undefined', undefined)" class="console-sandbox__btn">Undefined</button>
             </div>
           </section>
 
           <!-- Objects & Arrays Section -->
-          <section class="section">
-            <h2 class="section-title">Objects & Arrays</h2>
-            <div class="button-grid">
-              <button @click="logObject({ key: 'value', nested: { foo: 'bar' } })" class="btn">Object</button>
-              <button @click="logObject({})" class="btn">Empty Object</button>
-              <button @click="logObject({ a: { b: { c: { d: 1 } } } })" class="btn">Nested Object</button>
-              <button @click="logObject(getSymbolKeyObject())" class="btn">Symbol Keys</button>
-              <button @click="logArray([1, 2, 3, 4, 5])" class="btn">Array</button>
-              <button @click="logArray([])" class="btn">Empty Array</button>
-              <button @click="logArray([{id:1},{id:2}])" class="btn">Object Array</button>
-              <button @click="logArray([1, 'two', null, {foo:'bar'}, [5,6]])" class="btn">Mixed Array</button>
-              <button @click="logSet()" class="btn">Set</button>
-              <button @click="logWeakSet()" class="btn">WeakSet</button>
-              <button @click="logMap()" class="btn">Map</button>
-              <button @click="logWeakMap()" class="btn">WeakMap</button>
-              <button @click="logRegExp()" class="btn">RegExp</button>
-              <button @click="logArrayBuffer()" class="btn">ArrayBuffer</button>
-              <button @click="logDataView()" class="btn">DataView</button>
-              <button @click="logTypedArray()" class="btn">Uint8Array</button>
-              <button @click="logCircularReference()" class="btn">Circular Ref</button>
-              <button @click="logDate()" class="btn">Date</button>
-              <button @click="logLargeObject()" class="btn">Large Object</button>
-              <button @click="logLargeObject(50)" class="btn">Large Object (50)</button>
+          <section class="console-sandbox__section">
+            <h2 class="console-sandbox__section-title">Objects & Arrays</h2>
+            <div class="console-sandbox__button-grid">
+              <button @click="logObject({ key: 'value', nested: { foo: 'bar' } })" class="console-sandbox__btn">Object</button>
+              <button @click="logObject({})" class="console-sandbox__btn">Empty Object</button>
+              <button @click="logObject({ a: { b: { c: { d: 1 } } } })" class="console-sandbox__btn">Nested Object</button>
+              <button @click="logObject(getSymbolKeyObject())" class="console-sandbox__btn">Symbol Keys</button>
+              <button @click="logArray([1, 2, 3, 4, 5])" class="console-sandbox__btn">Array</button>
+              <button @click="logArray([])" class="console-sandbox__btn">Empty Array</button>
+              <button @click="logArray([{id:1},{id:2}])" class="console-sandbox__btn">Object Array</button>
+              <button @click="logArray([1, 'two', null, {foo:'bar'}, [5,6]])" class="console-sandbox__btn">Mixed Array</button>
+              <button @click="logSet()" class="console-sandbox__btn">Set</button>
+              <button @click="logWeakSet()" class="console-sandbox__btn">WeakSet</button>
+              <button @click="logMap()" class="console-sandbox__btn">Map</button>
+              <button @click="logWeakMap()" class="console-sandbox__btn">WeakMap</button>
+              <button @click="logRegExp()" class="console-sandbox__btn">RegExp</button>
+              <button @click="logArrayBuffer()" class="console-sandbox__btn">ArrayBuffer</button>
+              <button @click="logDataView()" class="console-sandbox__btn">DataView</button>
+              <button @click="logTypedArray()" class="console-sandbox__btn">Uint8Array</button>
+              <button @click="logCircularReference()" class="console-sandbox__btn">Circular Ref</button>
+              <button @click="logDate()" class="console-sandbox__btn">Date</button>
+              <button @click="logLargeObject()" class="console-sandbox__btn">Large Object</button>
+              <button @click="logLargeObject(50)" class="console-sandbox__btn">Large Object (50)</button>
             </div>
           </section>
 
           <!-- Faker Data Section -->
-          <section class="section">
-            <h2 class="section-title">Faker Data</h2>
-            <div class="button-grid">
-              <button @click="logFakerUser()" class="btn">User Profile</button>
-              <button @click="logFakerCompany()" class="btn">Company</button>
-              <button @click="logFakerAddress()" class="btn">Address</button>
-              <button @click="logFakerProduct()" class="btn">Product</button>
-              <button @click="logFakerOrder()" class="btn">Order</button>
-              <button @click="logFakerUsers()" class="btn">User Array</button>
-              <button @click="logFakerProducts()" class="btn">Product Array</button>
-              <button @click="logFakerMixed()" class="btn">Mixed Data</button>
+          <section class="console-sandbox__section">
+            <h2 class="console-sandbox__section-title">Faker Data</h2>
+            <div class="console-sandbox__button-grid">
+              <button @click="logFakerUser()" class="console-sandbox__btn">User Profile</button>
+              <button @click="logFakerCompany()" class="console-sandbox__btn">Company</button>
+              <button @click="logFakerAddress()" class="console-sandbox__btn">Address</button>
+              <button @click="logFakerProduct()" class="console-sandbox__btn">Product</button>
+              <button @click="logFakerOrder()" class="console-sandbox__btn">Order</button>
+              <button @click="logFakerUsers()" class="console-sandbox__btn">User Array</button>
+              <button @click="logFakerProducts()" class="console-sandbox__btn">Product Array</button>
+              <button @click="logFakerMixed()" class="console-sandbox__btn">Mixed Data</button>
             </div>
           </section>
 
           <!-- Functions & Errors Section -->
-          <section class="section">
-            <h2 class="section-title">Functions & Errors</h2>
-            <div class="button-grid">
-              <button @click="logFunction(() => console.log('Function executed'))" class="btn">Function</button>
-              <button @click="logError(new Error('Test error with stack trace'))" class="btn btn-error">Error</button>
-              <button @click="logResolvedPromise()" class="btn">Resolved Promise</button>
-              <button @click="logPendingPromise()" class="btn">Pending Promise</button>
-              <button @click="logRejectedPromise()" class="btn btn-error">Rejected Promise</button>
+          <section class="console-sandbox__section">
+            <h2 class="console-sandbox__section-title">Functions & Errors</h2>
+            <div class="console-sandbox__button-grid">
+              <button @click="logFunction(() => console.log('Function executed'))" class="console-sandbox__btn">Function</button>
+              <button @click="logError(new Error('Test error with stack trace'))" class="console-sandbox__btn console-sandbox__btn--error">Error</button>
+              <button @click="logResolvedPromise()" class="console-sandbox__btn">Resolved Promise</button>
+              <button @click="logPendingPromise()" class="console-sandbox__btn">Pending Promise</button>
+              <button @click="logRejectedPromise()" class="console-sandbox__btn console-sandbox__btn--error">Rejected Promise</button>
             </div>
           </section>
 
           <!-- DOM Elements Section -->
-          <section class="section">
-            <h2 class="section-title">DOM Elements</h2>
-            <div class="button-grid">
-              <button @click="logDOMElement()" class="btn">DOM Element</button>
-              <button @click="logIframe()" class="btn">Iframe</button>
+          <section class="console-sandbox__section">
+            <h2 class="console-sandbox__section-title">DOM Elements</h2>
+            <div class="console-sandbox__button-grid">
+              <button @click="logDOMElement()" class="console-sandbox__btn">DOM Element</button>
+              <button @click="logIframe()" class="console-sandbox__btn">Iframe</button>
             </div>
-            <div id="iframe-container" class="iframe-container"></div>
+            <div id="iframe-container" class="console-sandbox__iframe-container"></div>
           </section>
 
           <!-- Utilities Section -->
-          <section class="section">
-            <h2 class="section-title">Utilities</h2>
-            <div class="button-grid">
-              <button @click="logDeduped('This is a deduped log', 200)" class="btn">Deduped Log</button>
-              <button @click="logAllTypes('Test message')" class="btn">All Types</button>
+          <section class="console-sandbox__section">
+            <h2 class="console-sandbox__section-title">Utilities</h2>
+            <div class="console-sandbox__button-grid">
+              <button @click="logDeduped('This is a deduped log', 200)" class="console-sandbox__btn">Deduped Log</button>
+              <button @click="logAllTypes('Test message')" class="console-sandbox__btn">All Types</button>
             </div>
           </section>
 
-                    <!-- Console Styling Section -->
-          <section class="section">
-            <div class="section-header">
-              <h2 class="section-title">Console Styling</h2>
-              <button @click="toggleAllStylingSections" class="btn btn-toggle">
+          <!-- Console Styling Section -->
+          <section class="console-sandbox__section">
+            <div class="console-sandbox__section-header">
+              <h2 class="console-sandbox__section-title">Console Styling</h2>
+              <button @click="toggleAllStylingSections" class="console-sandbox__btn console-sandbox__btn--toggle">
                 {{ allStylingSectionsExpanded ? 'Collapse All' : 'Show All' }}
               </button>
             </div>
             
             <!-- Text Styling -->
-            <div class="xss-subsection">
-              <h3 class="subsection-title" @click="stylingSections.text = !stylingSections.text">
-                <span class="toggle-icon">{{ stylingSections.text ? '▼' : '▶' }}</span>
+            <div class="console-sandbox__xss-subsection">
+              <h3 class="console-sandbox__subsection-title" @click="stylingSections.text = !stylingSections.text">
+                <span class="console-sandbox__toggle-icon">{{ stylingSections.text ? '▼' : '▶' }}</span>
                 Text Styling (Font, Weight, Style, Transform)
               </h3>
-              <div class="button-grid" v-show="stylingSections.text">
-                <button @click="logStyledBold()" class="btn">Bold Text</button>
-                <button @click="logStyledItalic()" class="btn">Italic Text</button>
-                <button @click="logStyledUnderline()" class="btn">Underlined Text</button>
-                <button @click="logStyledStrikethrough()" class="btn">Strikethrough</button>
-                <button @click="logStyledUppercase()" class="btn">Uppercase</button>
-                <button @click="logStyledMonospace()" class="btn">Monospace</button>
+              <div class="console-sandbox__button-grid" v-show="stylingSections.text">
+                <button @click="logStyledBold()" class="console-sandbox__btn">Bold Text</button>
+                <button @click="logStyledItalic()" class="console-sandbox__btn">Italic Text</button>
+                <button @click="logStyledUnderline()" class="console-sandbox__btn">Underlined Text</button>
+                <button @click="logStyledStrikethrough()" class="console-sandbox__btn">Strikethrough</button>
+                <button @click="logStyledUppercase()" class="console-sandbox__btn">Uppercase</button>
+                <button @click="logStyledMonospace()" class="console-sandbox__btn">Monospace</button>
               </div>
             </div>
 
             <!-- Text Colors -->
-            <div class="xss-subsection">
-              <h3 class="subsection-title" @click="stylingSections.colors = !stylingSections.colors">
-                <span class="toggle-icon">{{ stylingSections.colors ? '▼' : '▶' }}</span>
+            <div class="console-sandbox__xss-subsection">
+              <h3 class="console-sandbox__subsection-title" @click="stylingSections.colors = !stylingSections.colors">
+                <span class="console-sandbox__toggle-icon">{{ stylingSections.colors ? '▼' : '▶' }}</span>
                 Text Colors
               </h3>
-              <div class="button-grid" v-show="stylingSections.colors">
-                <button @click="logColorNormal()" class="btn">Normal Color</button>
-                <button @click="logColorSuccess()" class="btn">Success Color</button>
-                <button @click="logColorWarning()" class="btn">Warning Color</button>
-                <button @click="logColorError()" class="btn">Error Color</button>
-                <button @click="logColorInfo()" class="btn">Info Color</button>
-                <button @click="logColorDebug()" class="btn">Debug Color</button>
+              <div class="console-sandbox__button-grid" v-show="stylingSections.colors">
+                <button @click="logColorNormal()" class="console-sandbox__btn">Normal Color</button>
+                <button @click="logColorSuccess()" class="console-sandbox__btn">Success Color</button>
+                <button @click="logColorWarning()" class="console-sandbox__btn">Warning Color</button>
+                <button @click="logColorError()" class="console-sandbox__btn">Error Color</button>
+                <button @click="logColorInfo()" class="console-sandbox__btn">Info Color</button>
+                <button @click="logColorDebug()" class="console-sandbox__btn">Debug Color</button>
               </div>
             </div>
 
             <!-- Font Sizes -->
-            <div class="xss-subsection">
-              <h3 class="subsection-title" @click="stylingSections.fontSizes = !stylingSections.fontSizes">
-                <span class="toggle-icon">{{ stylingSections.fontSizes ? '▼' : '▶' }}</span>
+            <div class="console-sandbox__xss-subsection">
+              <h3 class="console-sandbox__subsection-title" @click="stylingSections.fontSizes = !stylingSections.fontSizes">
+                <span class="console-sandbox__toggle-icon">{{ stylingSections.fontSizes ? '▼' : '▶' }}</span>
                 Font Sizes
               </h3>
-              <div class="button-grid" v-show="stylingSections.fontSizes">
-                <button @click="logFontSmall()" class="btn">Small Text</button>
-                <button @click="logFontNormal()" class="btn">Normal Text</button>
-                <button @click="logFontLarge()" class="btn">Large Text</button>
-                <button @click="logFontExtraLarge()" class="btn">Extra Large</button>
-                <button @click="logFontHuge()" class="btn">Huge Text</button>
-                <button @click="logFontMassive()" class="btn">Massive Text</button>
+              <div class="console-sandbox__button-grid" v-show="stylingSections.fontSizes">
+                <button @click="logFontSmall()" class="console-sandbox__btn">Small Text</button>
+                <button @click="logFontNormal()" class="console-sandbox__btn">Normal Text</button>
+                <button @click="logFontLarge()" class="console-sandbox__btn">Large Text</button>
+                <button @click="logFontExtraLarge()" class="console-sandbox__btn">Extra Large</button>
+                <button @click="logFontHuge()" class="console-sandbox__btn">Huge Text</button>
+                <button @click="logFontMassive()" class="console-sandbox__btn">Massive Text</button>
               </div>
             </div>
 
             <!-- Borders -->
-            <div class="xss-subsection">
-              <h3 class="subsection-title" @click="stylingSections.borders = !stylingSections.borders">
-                <span class="toggle-icon">{{ stylingSections.borders ? '▼' : '▶' }}</span>
+            <div class="console-sandbox__xss-subsection">
+              <h3 class="console-sandbox__subsection-title" @click="stylingSections.borders = !stylingSections.borders">
+                <span class="console-sandbox__toggle-icon">{{ stylingSections.borders ? '▼' : '▶' }}</span>
                 Borders
               </h3>
-              <div class="button-grid" v-show="stylingSections.borders">
-                <button @click="logBorderSolid()" class="btn">Solid Border</button>
-                <button @click="logBorderDashed()" class="btn">Dashed Border</button>
-                <button @click="logBorderDotted()" class="btn">Dotted Border</button>
-                <button @click="logBorderDouble()" class="btn">Double Border</button>
-                <button @click="logBorderRounded()" class="btn">Rounded Border</button>
-                <button @click="logBorderThick()" class="btn">Thick Border</button>
+              <div class="console-sandbox__button-grid" v-show="stylingSections.borders">
+                <button @click="logBorderSolid()" class="console-sandbox__btn">Solid Border</button>
+                <button @click="logBorderDashed()" class="console-sandbox__btn">Dashed Border</button>
+                <button @click="logBorderDotted()" class="console-sandbox__btn">Dotted Border</button>
+                <button @click="logBorderDouble()" class="console-sandbox__btn">Double Border</button>
+                <button @click="logBorderRounded()" class="console-sandbox__btn">Rounded Border</button>
+                <button @click="logBorderThick()" class="console-sandbox__btn">Thick Border</button>
               </div>
             </div>
 
             <!-- Shadows -->
-            <div class="xss-subsection">
-              <h3 class="subsection-title" @click="stylingSections.shadows = !stylingSections.shadows">
-                <span class="toggle-icon">{{ stylingSections.shadows ? '▼' : '▶' }}</span>
+            <div class="console-sandbox__xss-subsection">
+              <h3 class="console-sandbox__subsection-title" @click="stylingSections.shadows = !stylingSections.shadows">
+                <span class="console-sandbox__toggle-icon">{{ stylingSections.shadows ? '▼' : '▶' }}</span>
                 Text Shadows
               </h3>
-              <div class="button-grid" v-show="stylingSections.shadows">
-                <button @click="logShadowBasic()" class="btn">Shadow Text</button>
-                <button @click="logShadowGlow()" class="btn">Glow Effect</button>
-                <button @click="logShadowMultiple()" class="btn">Multiple Shadows</button>
-                <button @click="logShadowOutlined()" class="btn">Outlined Text</button>
-                <button @click="logShadowNeon()" class="btn">Neon Effect</button>
-                <button @click="logShadowDrop()" class="btn">Drop Shadow</button>
+              <div class="console-sandbox__button-grid" v-show="stylingSections.shadows">
+                <button @click="logShadowBasic()" class="console-sandbox__btn">Shadow Text</button>
+                <button @click="logShadowGlow()" class="console-sandbox__btn">Glow Effect</button>
+                <button @click="logShadowMultiple()" class="console-sandbox__btn">Multiple Shadows</button>
+                <button @click="logShadowOutlined()" class="console-sandbox__btn">Outlined Text</button>
+                <button @click="logShadowNeon()" class="console-sandbox__btn">Neon Effect</button>
+                <button @click="logShadowDrop()" class="console-sandbox__btn">Drop Shadow</button>
               </div>
             </div>
 
             <!-- Background Colors -->
-            <div class="xss-subsection">
-              <h3 class="subsection-title" @click="stylingSections.backgrounds = !stylingSections.backgrounds">
-                <span class="toggle-icon">{{ stylingSections.backgrounds ? '▼' : '▶' }}</span>
+            <div class="console-sandbox__xss-subsection">
+              <h3 class="console-sandbox__subsection-title" @click="stylingSections.backgrounds = !stylingSections.backgrounds">
+                <span class="console-sandbox__toggle-icon">{{ stylingSections.backgrounds ? '▼' : '▶' }}</span>
                 Background Colors
               </h3>
-              <div class="button-grid" v-show="stylingSections.backgrounds">
-                <button @click="logBgNormal()" class="btn">Normal Background</button>
-                <button @click="logBgSuccess()" class="btn">Success Background</button>
-                <button @click="logBgWarning()" class="btn">Warning Background</button>
-                <button @click="logBgError()" class="btn">Error Background</button>
-                <button @click="logBgInfo()" class="btn">Info Background</button>
-                <button @click="logBgDebug()" class="btn">Debug Background</button>
+              <div class="console-sandbox__button-grid" v-show="stylingSections.backgrounds">
+                <button @click="logBgNormal()" class="console-sandbox__btn">Normal Background</button>
+                <button @click="logBgSuccess()" class="console-sandbox__btn">Success Background</button>
+                <button @click="logBgWarning()" class="console-sandbox__btn">Warning Background</button>
+                <button @click="logBgError()" class="console-sandbox__btn">Error Background</button>
+                <button @click="logBgInfo()" class="console-sandbox__btn">Info Background</button>
+                <button @click="logBgDebug()" class="console-sandbox__btn">Debug Background</button>
               </div>
             </div>
 
             <!-- Gradients -->
-            <div class="xss-subsection">
-              <h3 class="subsection-title" @click="stylingSections.gradients = !stylingSections.gradients">
-                <span class="toggle-icon">{{ stylingSections.gradients ? '▼' : '▶' }}</span>
+            <div class="console-sandbox__xss-subsection">
+              <h3 class="console-sandbox__subsection-title" @click="stylingSections.gradients = !stylingSections.gradients">
+                <span class="console-sandbox__toggle-icon">{{ stylingSections.gradients ? '▼' : '▶' }}</span>
                 Gradients
               </h3>
-              <div class="button-grid" v-show="stylingSections.gradients">
-                <button @click="logGradientText()" class="btn">Gradient Text</button>
-                <button @click="logGradientRainbow()" class="btn">Rainbow Text</button>
-                <button @click="logGradientBlue()" class="btn">Blue Gradient</button>
-                <button @click="logGradientGreen()" class="btn">Green Gradient</button>
-                <button @click="logGradientOrange()" class="btn">Orange Gradient</button>
-                <button @click="logGradientRed()" class="btn">Red Gradient</button>
+              <div class="console-sandbox__button-grid" v-show="stylingSections.gradients">
+                <button @click="logGradientText()" class="console-sandbox__btn">Gradient Text</button>
+                <button @click="logGradientRainbow()" class="console-sandbox__btn">Rainbow Text</button>
+                <button @click="logGradientBlue()" class="console-sandbox__btn">Blue Gradient</button>
+                <button @click="logGradientGreen()" class="console-sandbox__btn">Green Gradient</button>
+                <button @click="logGradientOrange()" class="console-sandbox__btn">Orange Gradient</button>
+                <button @click="logGradientRed()" class="console-sandbox__btn">Red Gradient</button>
               </div>
             </div>
 
             <!-- Animations -->
-            <div class="xss-subsection">
-              <h3 class="subsection-title" @click="stylingSections.animations = !stylingSections.animations">
-                <span class="toggle-icon">{{ stylingSections.animations ? '▼' : '▶' }}</span>
+            <div class="console-sandbox__xss-subsection">
+              <h3 class="console-sandbox__subsection-title" @click="stylingSections.animations = !stylingSections.animations">
+                <span class="console-sandbox__toggle-icon">{{ stylingSections.animations ? '▼' : '▶' }}</span>
                 Animations
               </h3>
-              <div class="button-grid" v-show="stylingSections.animations">
-                <button @click="logAnimationPulse()" class="btn">Pulse Animation</button>
-                <button @click="logAnimationBounce()" class="btn">Bounce Animation</button>
-                <button @click="logAnimationFade()" class="btn">Fade Animation</button>
-                <button @click="logAnimationRotate()" class="btn">Rotate Animation</button>
-                <button @click="logAnimationSlide()" class="btn">Slide Animation</button>
-                <button @click="logAnimationScale()" class="btn">Scale Animation</button>
+              <div class="console-sandbox__button-grid" v-show="stylingSections.animations">
+                <button @click="logAnimationPulse()" class="console-sandbox__btn">Pulse Animation</button>
+                <button @click="logAnimationBounce()" class="console-sandbox__btn">Bounce Animation</button>
+                <button @click="logAnimationFade()" class="console-sandbox__btn">Fade Animation</button>
+                <button @click="logAnimationRotate()" class="console-sandbox__btn">Rotate Animation</button>
+                <button @click="logAnimationSlide()" class="console-sandbox__btn">Slide Animation</button>
+                <button @click="logAnimationScale()" class="console-sandbox__btn">Scale Animation</button>
               </div>
             </div>
 
             <!-- Emojis -->
-            <div class="xss-subsection">
-              <h3 class="subsection-title" @click="stylingSections.emojis = !stylingSections.emojis">
-                <span class="toggle-icon">{{ stylingSections.emojis ? '▼' : '▶' }}</span>
+            <div class="console-sandbox__xss-subsection">
+              <h3 class="console-sandbox__subsection-title" @click="stylingSections.emojis = !stylingSections.emojis">
+                <span class="console-sandbox__toggle-icon">{{ stylingSections.emojis ? '▼' : '▶' }}</span>
                 Emojis
               </h3>
-              <div class="button-grid" v-show="stylingSections.emojis">
-                <button @click="logEmojiLaunch()" class="btn">🚀 Launch</button>
-                <button @click="logEmojiSuccess()" class="btn">✨ Success</button>
-                <button @click="logEmojiWarning()" class="btn">⚠️ Warning</button>
-                <button @click="logEmojiError()" class="btn">💥 Error</button>
-                <button @click="logEmojiInfo()" class="btn">ℹ️ Info</button>
-                <button @click="logEmojiDebug()" class="btn">🐞 Debug</button>
+              <div class="console-sandbox__button-grid" v-show="stylingSections.emojis">
+                <button @click="logEmojiLaunch()" class="console-sandbox__btn">🚀 Launch</button>
+                <button @click="logEmojiSuccess()" class="console-sandbox__btn">✨ Success</button>
+                <button @click="logEmojiWarning()" class="console-sandbox__btn">⚠️ Warning</button>
+                <button @click="logEmojiError()" class="console-sandbox__btn">💥 Error</button>
+                <button @click="logEmojiInfo()" class="console-sandbox__btn">ℹ️ Info</button>
+                <button @click="logEmojiDebug()" class="console-sandbox__btn">🐞 Debug</button>
               </div>
             </div>
 
             <!-- Icons -->
-            <div class="xss-subsection">
-              <h3 class="subsection-title" @click="stylingSections.icons = !stylingSections.icons">
-                <span class="toggle-icon">{{ stylingSections.icons ? '▼' : '▶' }}</span>
+            <div class="console-sandbox__xss-subsection">
+              <h3 class="console-sandbox__subsection-title" @click="stylingSections.icons = !stylingSections.icons">
+                <span class="console-sandbox__toggle-icon">{{ stylingSections.icons ? '▼' : '▶' }}</span>
                 Icons
               </h3>
-              <div class="button-grid" v-show="stylingSections.icons">
-                <button @click="logIconSettings()" class="btn">🔧 Settings</button>
-                <button @click="logIconSuccess()" class="btn">✅ Success</button>
-                <button @click="logIconWarning()" class="btn">⚠️ Warning</button>
-                <button @click="logIconError()" class="btn">❌ Error</button>
-                <button @click="logIconInfo()" class="btn">ℹ️ Information</button>
-                <button @click="logIconBug()" class="btn">🐛 Bug Report</button>
+              <div class="console-sandbox__button-grid" v-show="stylingSections.icons">
+                <button @click="logIconSettings()" class="console-sandbox__btn">🔧 Settings</button>
+                <button @click="logIconSuccess()" class="console-sandbox__btn">✅ Success</button>
+                <button @click="logIconWarning()" class="console-sandbox__btn">⚠️ Warning</button>
+                <button @click="logIconError()" class="console-sandbox__btn">❌ Error</button>
+                <button @click="logIconInfo()" class="console-sandbox__btn">ℹ️ Information</button>
+                <button @click="logIconBug()" class="console-sandbox__btn">🐛 Bug Report</button>
               </div>
             </div>
           </section>
 
           <!-- XSS Test Cases Section -->
-          <section class="section">
-            <div class="section-header">
-              <h2 class="section-title">XSS Test Cases</h2>
-              <button @click="toggleAllXssSections" class="btn btn-toggle">
+          <section class="console-sandbox__section">
+            <div class="console-sandbox__section-header">
+              <h2 class="console-sandbox__section-title">XSS Test Cases</h2>
+              <button @click="toggleAllXssSections" class="console-sandbox__btn console-sandbox__btn--toggle">
                 {{ allXssSectionsExpanded ? 'Collapse All' : 'Show All' }}
               </button>
             </div>
             
             <!-- Basic XSS -->
-            <div class="xss-subsection">
-              <h3 class="subsection-title" @click="xssSections.basic = !xssSections.basic">
-                <span class="toggle-icon">{{ xssSections.basic ? '▼' : '▶' }}</span>
+            <div class="console-sandbox__xss-subsection">
+              <h3 class="console-sandbox__subsection-title" @click="xssSections.basic = !xssSections.basic">
+                <span class="console-sandbox__toggle-icon">{{ xssSections.basic ? '▼' : '▶' }}</span>
                 Basic XSS (HTML/Script Tags, Event Handlers, URL Schemes)
               </h3>
-              <div class="button-grid" v-show="xssSections.basic">
-                <button @click="logXSSScriptTag()" class="btn btn-error">Script Tag</button>
-                <button @click="logXSSImgOnError()" class="btn btn-error">Img onerror</button>
-                <button @click="logXSSSvgOnLoad()" class="btn btn-error">SVG onload</button>
-                <button @click="logXSSJavaScriptUrl()" class="btn btn-error">JS URL</button>
-                <button @click="logXSSOnClick()" class="btn btn-error">onclick</button>
-                <button @click="logXSSOnLoad()" class="btn btn-error">onload</button>
-                <button @click="logXSSOnFocus()" class="btn btn-error">onfocus</button>
-                <button @click="logXSSDataUrl()" class="btn btn-error">Data URL</button>
-                <button @click="logXSSVBScript()" class="btn btn-error">VBScript</button>
-                <button @click="logXSSObjectMalicious()" class="btn btn-error">Malicious Object</button>
-                <button @click="logXSSObjectHtml()" class="btn btn-error">HTML Object</button>
-                <button @click="logXSSDOMElement()" class="btn btn-error">DOM Element</button>
-                <button @click="logXSSLongPayload()" class="btn btn-error">Long Payload</button>
-                <button @click="logXSSUnicode()" class="btn btn-error">Unicode</button>
-                <button @click="logXSSHtmlEntities()" class="btn btn-error">HTML Entities</button>
-                <button @click="logXSSWithPII()" class="btn btn-error">XSS + PII</button>
-                <button @click="logXSSInUrl()" class="btn btn-error">XSS in URL</button>
-                <button @click="logXSSError()" class="btn btn-error">XSS Error</button>
+              <div class="console-sandbox__button-grid" v-show="xssSections.basic">
+                <button @click="logXSSScriptTag()" class="console-sandbox__btn console-sandbox__btn--error">Script Tag</button>
+                <button @click="logXSSImgOnError()" class="console-sandbox__btn console-sandbox__btn--error">Img onerror</button>
+                <button @click="logXSSSvgOnLoad()" class="console-sandbox__btn console-sandbox__btn--error">SVG onload</button>
+                <button @click="logXSSJavaScriptUrl()" class="console-sandbox__btn console-sandbox__btn--error">JS URL</button>
+                <button @click="logXSSOnClick()" class="console-sandbox__btn console-sandbox__btn--error">onclick</button>
+                <button @click="logXSSOnLoad()" class="console-sandbox__btn console-sandbox__btn--error">onload</button>
+                <button @click="logXSSOnFocus()" class="console-sandbox__btn console-sandbox__btn--error">onfocus</button>
+                <button @click="logXSSDataUrl()" class="console-sandbox__btn console-sandbox__btn--error">Data URL</button>
+                <button @click="logXSSVBScript()" class="console-sandbox__btn console-sandbox__btn--error">VBScript</button>
+                <button @click="logXSSObjectMalicious()" class="console-sandbox__btn console-sandbox__btn--error">Malicious Object</button>
+                <button @click="logXSSObjectHtml()" class="console-sandbox__btn console-sandbox__btn--error">HTML Object</button>
+                <button @click="logXSSDOMElement()" class="console-sandbox__btn console-sandbox__btn--error">DOM Element</button>
+                <button @click="logXSSLongPayload()" class="console-sandbox__btn console-sandbox__btn--error">Long Payload</button>
+                <button @click="logXSSUnicode()" class="console-sandbox__btn console-sandbox__btn--error">Unicode</button>
+                <button @click="logXSSHtmlEntities()" class="console-sandbox__btn console-sandbox__btn--error">HTML Entities</button>
+                <button @click="logXSSWithPII()" class="console-sandbox__btn console-sandbox__btn--error">XSS + PII</button>
+                <button @click="logXSSInUrl()" class="console-sandbox__btn console-sandbox__btn--error">XSS in URL</button>
+                <button @click="logXSSError()" class="console-sandbox__btn console-sandbox__btn--error">XSS Error</button>
               </div>
             </div>
 
             <!-- CSS-based XSS -->
-            <div class="xss-subsection">
-              <h3 class="subsection-title" @click="xssSections.css = !xssSections.css">
-                <span class="toggle-icon">{{ xssSections.css ? '▼' : '▶' }}</span>
+            <div class="console-sandbox__xss-subsection">
+              <h3 class="console-sandbox__subsection-title" @click="xssSections.css = !xssSections.css">
+                <span class="console-sandbox__toggle-icon">{{ xssSections.css ? '▼' : '▶' }}</span>
                 CSS-based XSS
               </h3>
-              <div class="button-grid" v-show="xssSections.css">
-                <button @click="logXSSCssExpression()" class="btn btn-error">CSS Expression</button>
-                <button @click="logXSSCssUrl()" class="btn btn-error">CSS URL</button>
-                <button @click="logXSSCssImport()" class="btn btn-error">CSS Import</button>
+              <div class="console-sandbox__button-grid" v-show="xssSections.css">
+                <button @click="logXSSCssExpression()" class="console-sandbox__btn console-sandbox__btn--error">CSS Expression</button>
+                <button @click="logXSSCssUrl()" class="console-sandbox__btn console-sandbox__btn--error">CSS URL</button>
+                <button @click="logXSSCssImport()" class="console-sandbox__btn console-sandbox__btn--error">CSS Import</button>
               </div>
             </div>
 
             <!-- Advanced Event Handlers -->
-            <div class="xss-subsection">
-              <h3 class="subsection-title" @click="xssSections.events = !xssSections.events">
-                <span class="toggle-icon">{{ xssSections.events ? '▼' : '▶' }}</span>
+            <div class="console-sandbox__xss-subsection">
+              <h3 class="console-sandbox__subsection-title" @click="xssSections.events = !xssSections.events">
+                <span class="console-sandbox__toggle-icon">{{ xssSections.events ? '▼' : '▶' }}</span>
                 Advanced Event Handlers
               </h3>
-              <div class="button-grid" v-show="xssSections.events">
-                <button @click="logXSSOnMouseOver()" class="btn btn-error">onmouseover</button>
-                <button @click="logXSSOnKeyPress()" class="btn btn-error">onkeypress</button>
-                <button @click="logXSSOnBlur()" class="btn btn-error">onblur</button>
-                <button @click="logXSSOnContextMenu()" class="btn btn-error">oncontextmenu</button>
-                <button @click="logXSSOnDoubleClick()" class="btn btn-error">ondblclick</button>
+              <div class="console-sandbox__button-grid" v-show="xssSections.events">
+                <button @click="logXSSOnMouseOver()" class="console-sandbox__btn console-sandbox__btn--error">onmouseover</button>
+                <button @click="logXSSOnKeyPress()" class="console-sandbox__btn console-sandbox__btn--error">onkeypress</button>
+                <button @click="logXSSOnBlur()" class="console-sandbox__btn console-sandbox__btn--error">onblur</button>
+                <button @click="logXSSOnContextMenu()" class="console-sandbox__btn console-sandbox__btn--error">oncontextmenu</button>
+                <button @click="logXSSOnDoubleClick()" class="console-sandbox__btn console-sandbox__btn--error">ondblclick</button>
               </div>
             </div>
 
             <!-- Frame/Iframe XSS -->
-            <div class="xss-subsection">
-              <h3 class="subsection-title" @click="xssSections.frames = !xssSections.frames">
-                <span class="toggle-icon">{{ xssSections.frames ? '▼' : '▶' }}</span>
+            <div class="console-sandbox__xss-subsection">
+              <h3 class="console-sandbox__subsection-title" @click="xssSections.frames = !xssSections.frames">
+                <span class="console-sandbox__toggle-icon">{{ xssSections.frames ? '▼' : '▶' }}</span>
                 Frame/Iframe XSS
               </h3>
-              <div class="button-grid" v-show="xssSections.frames">
-                <button @click="logXSSIframeSrc()" class="btn btn-error">Iframe src</button>
-                <button @click="logXSSFrameSrc()" class="btn btn-error">Frame src</button>
-                <button @click="logXSSEmbedSrc()" class="btn btn-error">Embed src</button>
-                <button @click="logXSSObjectData()" class="btn btn-error">Object data</button>
+              <div class="console-sandbox__button-grid" v-show="xssSections.frames">
+                <button @click="logXSSIframeSrc()" class="console-sandbox__btn console-sandbox__btn--error">Iframe src</button>
+                <button @click="logXSSFrameSrc()" class="console-sandbox__btn console-sandbox__btn--error">Frame src</button>
+                <button @click="logXSSEmbedSrc()" class="console-sandbox__btn console-sandbox__btn--error">Embed src</button>
+                <button @click="logXSSObjectData()" class="console-sandbox__btn console-sandbox__btn--error">Object data</button>
               </div>
             </div>
 
             <!-- Meta/Link XSS -->
-            <div class="xss-subsection">
-              <h3 class="subsection-title" @click="xssSections.meta = !xssSections.meta">
-                <span class="toggle-icon">{{ xssSections.meta ? '▼' : '▶' }}</span>
+            <div class="console-sandbox__xss-subsection">
+              <h3 class="console-sandbox__subsection-title" @click="xssSections.meta = !xssSections.meta">
+                <span class="console-sandbox__toggle-icon">{{ xssSections.meta ? '▼' : '▶' }}</span>
                 Meta/Link XSS
               </h3>
-              <div class="button-grid" v-show="xssSections.meta">
-                <button @click="logXSSMetaRefresh()" class="btn btn-error">Meta refresh</button>
-                <button @click="logXSSLinkHref()" class="btn btn-error">Link href</button>
-                <button @click="logXSSAnchorHref()" class="btn btn-error">Anchor href</button>
+              <div class="console-sandbox__button-grid" v-show="xssSections.meta">
+                <button @click="logXSSMetaRefresh()" class="console-sandbox__btn console-sandbox__btn--error">Meta refresh</button>
+                <button @click="logXSSLinkHref()" class="console-sandbox__btn console-sandbox__btn--error">Link href</button>
+                <button @click="logXSSAnchorHref()" class="console-sandbox__btn console-sandbox__btn--error">Anchor href</button>
               </div>
             </div>
 
             <!-- Form XSS -->
-            <div class="xss-subsection">
-              <h3 class="subsection-title" @click="xssSections.forms = !xssSections.forms">
-                <span class="toggle-icon">{{ xssSections.forms ? '▼' : '▶' }}</span>
+            <div class="console-sandbox__xss-subsection">
+              <h3 class="console-sandbox__subsection-title" @click="xssSections.forms = !xssSections.forms">
+                <span class="console-sandbox__toggle-icon">{{ xssSections.forms ? '▼' : '▶' }}</span>
                 Form XSS
               </h3>
-              <div class="button-grid" v-show="xssSections.forms">
-                <button @click="logXSSFormAction()" class="btn btn-error">Form action</button>
-                <button @click="logXSSInputFormaction()" class="btn btn-error">Input formaction</button>
+              <div class="console-sandbox__button-grid" v-show="xssSections.forms">
+                <button @click="logXSSFormAction()" class="console-sandbox__btn console-sandbox__btn--error">Form action</button>
+                <button @click="logXSSInputFormaction()" class="console-sandbox__btn console-sandbox__btn--error">Input formaction</button>
               </div>
             </div>
 
             <!-- Advanced URL Schemes -->
-            <div class="xss-subsection">
-              <h3 class="subsection-title" @click="xssSections.urls = !xssSections.urls">
-                <span class="toggle-icon">{{ xssSections.urls ? '▼' : '▶' }}</span>
+            <div class="console-sandbox__xss-subsection">
+              <h3 class="console-sandbox__subsection-title" @click="xssSections.urls = !xssSections.urls">
+                <span class="console-sandbox__toggle-icon">{{ xssSections.urls ? '▼' : '▶' }}</span>
                 Advanced URL Schemes
               </h3>
-              <div class="button-grid" v-show="xssSections.urls">
-                <button @click="logXSSDataUrlWithBase64()" class="btn btn-error">Data URL Base64</button>
-                <button @click="logXSSDataUrlWithCharset()" class="btn btn-error">Data URL Charset</button>
-                <button @click="logXSSFileUrl()" class="btn btn-error">File URL</button>
-                <button @click="logXSSFtpUrl()" class="btn btn-error">FTP URL</button>
+              <div class="console-sandbox__button-grid" v-show="xssSections.urls">
+                <button @click="logXSSDataUrlWithBase64()" class="console-sandbox__btn console-sandbox__btn--error">Data URL Base64</button>
+                <button @click="logXSSDataUrlWithCharset()" class="console-sandbox__btn console-sandbox__btn--error">Data URL Charset</button>
+                <button @click="logXSSFileUrl()" class="console-sandbox__btn console-sandbox__btn--error">File URL</button>
+                <button @click="logXSSFtpUrl()" class="console-sandbox__btn console-sandbox__btn--error">FTP URL</button>
               </div>
             </div>
 
             <!-- Unicode and Encoding -->
-            <div class="xss-subsection">
-              <h3 class="subsection-title" @click="xssSections.encoding = !xssSections.encoding">
-                <span class="toggle-icon">{{ xssSections.encoding ? '▼' : '▶' }}</span>
+            <div class="console-sandbox__xss-subsection">
+              <h3 class="console-sandbox__subsection-title" @click="xssSections.encoding = !xssSections.encoding">
+                <span class="console-sandbox__toggle-icon">{{ xssSections.encoding ? '▼' : '▶' }}</span>
                 Unicode and Encoding Variations
               </h3>
-              <div class="button-grid" v-show="xssSections.encoding">
-                <button @click="logXSSUnicodeHex()" class="btn btn-error">Unicode Hex</button>
-                <button @click="logXSSUnicodeDecimal()" class="btn btn-error">Unicode Decimal</button>
-                <button @click="logXSSUnicodeMixed()" class="btn btn-error">Unicode Mixed</button>
-                <button @click="logXSSUrlEncoded()" class="btn btn-error">URL Encoded</button>
-                <button @click="logXSSDoubleEncoded()" class="btn btn-error">Double Encoded</button>
+              <div class="console-sandbox__button-grid" v-show="xssSections.encoding">
+                <button @click="logXSSUnicodeHex()" class="console-sandbox__btn console-sandbox__btn--error">Unicode Hex</button>
+                <button @click="logXSSUnicodeDecimal()" class="console-sandbox__btn console-sandbox__btn--error">Unicode Decimal</button>
+                <button @click="logXSSUnicodeMixed()" class="console-sandbox__btn console-sandbox__btn--error">Unicode Mixed</button>
+                <button @click="logXSSUrlEncoded()" class="console-sandbox__btn console-sandbox__btn--error">URL Encoded</button>
+                <button @click="logXSSDoubleEncoded()" class="console-sandbox__btn console-sandbox__btn--error">Double Encoded</button>
               </div>
             </div>
 
             <!-- Template Literals -->
-            <div class="xss-subsection">
-              <h3 class="subsection-title" @click="xssSections.templates = !xssSections.templates">
-                <span class="toggle-icon">{{ xssSections.templates ? '▼' : '▶' }}</span>
+            <div class="console-sandbox__xss-subsection">
+              <h3 class="console-sandbox__subsection-title" @click="xssSections.templates = !xssSections.templates">
+                <span class="console-sandbox__toggle-icon">{{ xssSections.templates ? '▼' : '▶' }}</span>
                 Template Literals and String Interpolation
               </h3>
-              <div class="button-grid" v-show="xssSections.templates">
-                <button @click="logXSSTemplateLiteral()" class="btn btn-error">Template Literal</button>
-                <button @click="logXSSStringInterpolation()" class="btn btn-error">String Interpolation</button>
+              <div class="console-sandbox__button-grid" v-show="xssSections.templates">
+                <button @click="logXSSTemplateLiteral()" class="console-sandbox__btn console-sandbox__btn--error">Template Literal</button>
+                <button @click="logXSSStringInterpolation()" class="console-sandbox__btn console-sandbox__btn--error">String Interpolation</button>
               </div>
             </div>
 
             <!-- Complex Objects -->
-            <div class="xss-subsection">
-              <h3 class="subsection-title" @click="xssSections.objects = !xssSections.objects">
-                <span class="toggle-icon">{{ xssSections.objects ? '▼' : '▶' }}</span>
+            <div class="console-sandbox__xss-subsection">
+              <h3 class="console-sandbox__subsection-title" @click="xssSections.objects = !xssSections.objects">
+                <span class="console-sandbox__toggle-icon">{{ xssSections.objects ? '▼' : '▶' }}</span>
                 Complex Objects and Nesting
               </h3>
-              <div class="button-grid" v-show="xssSections.objects">
-                <button @click="logXSSNestedArray()" class="btn btn-error">Nested Array</button>
-                <button @click="logXSSNestedObject()" class="btn btn-error">Nested Object</button>
-                <button @click="logXSSMixedData()" class="btn btn-error">Mixed Data</button>
+              <div class="console-sandbox__button-grid" v-show="xssSections.objects">
+                <button @click="logXSSNestedArray()" class="console-sandbox__btn console-sandbox__btn--error">Nested Array</button>
+                <button @click="logXSSNestedObject()" class="console-sandbox__btn console-sandbox__btn--error">Nested Object</button>
+                <button @click="logXSSMixedData()" class="console-sandbox__btn console-sandbox__btn--error">Mixed Data</button>
               </div>
             </div>
 
             <!-- Functions and Classes -->
-            <div class="xss-subsection">
-              <h3 class="subsection-title" @click="xssSections.functions = !xssSections.functions">
-                <span class="toggle-icon">{{ xssSections.functions ? '▼' : '▶' }}</span>
+            <div class="console-sandbox__xss-subsection">
+              <h3 class="console-sandbox__subsection-title" @click="xssSections.functions = !xssSections.functions">
+                <span class="console-sandbox__toggle-icon">{{ xssSections.functions ? '▼' : '▶' }}</span>
                 Functions and Classes
               </h3>
-              <div class="button-grid" v-show="xssSections.functions">
-                <button @click="logXSSFunctionName()" class="btn btn-error">Function Name</button>
-                <button @click="logXSSSymbolKey()" class="btn btn-error">Symbol Key</button>
-                <button @click="logXSSProxyObject()" class="btn btn-error">Proxy Object</button>
-                <button @click="logXSSGeneratorFunction()" class="btn btn-error">Generator Function</button>
-                <button @click="logXSSAsyncFunction()" class="btn btn-error">Async Function</button>
-                <button @click="logXSSMaliciousClass()" class="btn btn-error">Malicious Class</button>
+              <div class="console-sandbox__button-grid" v-show="xssSections.functions">
+                <button @click="logXSSFunctionName()" class="console-sandbox__btn console-sandbox__btn--error">Function Name</button>
+                <button @click="logXSSSymbolKey()" class="console-sandbox__btn console-sandbox__btn--error">Symbol Key</button>
+                <button @click="logXSSProxyObject()" class="console-sandbox__btn console-sandbox__btn--error">Proxy Object</button>
+                <button @click="logXSSGeneratorFunction()" class="console-sandbox__btn console-sandbox__btn--error">Generator Function</button>
+                <button @click="logXSSAsyncFunction()" class="console-sandbox__btn console-sandbox__btn--error">Async Function</button>
+                <button @click="logXSSMaliciousClass()" class="console-sandbox__btn console-sandbox__btn--error">Malicious Class</button>
               </div>
             </div>
 
             <!-- Collections -->
-            <div class="xss-subsection">
-              <h3 class="subsection-title" @click="xssSections.collections = !xssSections.collections">
-                <span class="toggle-icon">{{ xssSections.collections ? '▼' : '▶' }}</span>
+            <div class="console-sandbox__xss-subsection">
+              <h3 class="console-sandbox__subsection-title" @click="xssSections.collections = !xssSections.collections">
+                <span class="console-sandbox__toggle-icon">{{ xssSections.collections ? '▼' : '▶' }}</span>
                 Collections (Map, Set, TypedArray)
               </h3>
-              <div class="button-grid" v-show="xssSections.collections">
-                <button @click="logXSSMaliciousMap()" class="btn btn-error">Malicious Map</button>
-                <button @click="logXSSMaliciousSet()" class="btn btn-error">Malicious Set</button>
-                <button @click="logXSSMaliciousTypedArray()" class="btn btn-error">Malicious TypedArray</button>
+              <div class="console-sandbox__button-grid" v-show="xssSections.collections">
+                <button @click="logXSSMaliciousMap()" class="console-sandbox__btn console-sandbox__btn--error">Malicious Map</button>
+                <button @click="logXSSMaliciousSet()" class="console-sandbox__btn console-sandbox__btn--error">Malicious Set</button>
+                <button @click="logXSSMaliciousTypedArray()" class="console-sandbox__btn console-sandbox__btn--error">Malicious TypedArray</button>
               </div>
             </div>
 
             <!-- Built-in Objects -->
-            <div class="xss-subsection">
-              <h3 class="subsection-title" @click="xssSections.builtins = !xssSections.builtins">
-                <span class="toggle-icon">{{ xssSections.builtins ? '▼' : '▶' }}</span>
+            <div class="console-sandbox__xss-subsection">
+              <h3 class="console-sandbox__subsection-title" @click="xssSections.builtins = !xssSections.builtins">
+                <span class="console-sandbox__toggle-icon">{{ xssSections.builtins ? '▼' : '▶' }}</span>
                 Built-in Objects
               </h3>
-              <div class="button-grid" v-show="xssSections.builtins">
-                <button @click="logXSSMaliciousDate()" class="btn btn-error">Malicious Date</button>
-                <button @click="logXSSMaliciousRegExp()" class="btn btn-error">Malicious RegExp</button>
-                <button @click="logXSSMaliciousErrorStack()" class="btn btn-error">Malicious Error Stack</button>
+              <div class="console-sandbox__button-grid" v-show="xssSections.builtins">
+                <button @click="logXSSMaliciousDate()" class="console-sandbox__btn console-sandbox__btn--error">Malicious Date</button>
+                <button @click="logXSSMaliciousRegExp()" class="console-sandbox__btn console-sandbox__btn--error">Malicious RegExp</button>
+                <button @click="logXSSMaliciousErrorStack()" class="console-sandbox__btn console-sandbox__btn--error">Malicious Error Stack</button>
               </div>
             </div>
 
             <!-- Advanced Patterns -->
-            <div class="xss-subsection">
-              <h3 class="subsection-title" @click="xssSections.patterns = !xssSections.patterns">
-                <span class="toggle-icon">{{ xssSections.patterns ? '▼' : '▶' }}</span>
+            <div class="console-sandbox__xss-subsection">
+              <h3 class="console-sandbox__subsection-title" @click="xssSections.patterns = !xssSections.patterns">
+                <span class="console-sandbox__toggle-icon">{{ xssSections.patterns ? '▼' : '▶' }}</span>
                 Advanced Patterns
               </h3>
-              <div class="button-grid" v-show="xssSections.patterns">
-                <button @click="logXSSCircularXSS()" class="btn btn-error">Circular XSS</button>
-                <button @click="logXSSDeepNestedXSS()" class="btn btn-error">Deep Nested XSS</button>
-                <button @click="logXSSMaliciousArrayMethods()" class="btn btn-error">Malicious Array Methods</button>
-                <button @click="logXSSMaliciousPrototype()" class="btn btn-error">Malicious Prototype</button>
+              <div class="console-sandbox__button-grid" v-show="xssSections.patterns">
+                <button @click="logXSSCircularXSS()" class="console-sandbox__btn console-sandbox__btn--error">Circular XSS</button>
+                <button @click="logXSSDeepNestedXSS()" class="console-sandbox__btn console-sandbox__btn--error">Deep Nested XSS</button>
+                <button @click="logXSSMaliciousArrayMethods()" class="console-sandbox__btn console-sandbox__btn--error">Malicious Array Methods</button>
+                <button @click="logXSSMaliciousPrototype()" class="console-sandbox__btn console-sandbox__btn--error">Malicious Prototype</button>
               </div>
             </div>
           </section>
 
           <!-- IP Address Test Cases Section -->
-          <section class="section">
-            <h2 class="section-title">IP Address Test Cases</h2>
-            <div class="button-grid">
-              <button @click="console[this.selectedMethod]('192.168.1.1')" class="btn">IP: 192.168.1.1</button>
-              <button @click="console[this.selectedMethod]('192.168.001.001')" class="btn">IP: 192.168.001.001</button>
-              <button @click="console[this.selectedMethod]('192 . 168 . 1 . 1')" class="btn">IP: 192 . 168 . 1 . 1</button>
-              <button @click="console[this.selectedMethod]('[192.168.1.1]')" class="btn">IP: [192.168.1.1]</button>
-              <button @click="console[this.selectedMethod]('2001:0db8:85a3:0000:0000:8a2e:0370:7334')" class="btn">IPv6: 2001:0db8:85a3:0000:0000:8a2e:0370:7334</button>
-              <button @click="console[this.selectedMethod]('The user connected from 192.168.1.1 and accessed the system.')" class="btn">IP in text</button>
+          <section class="console-sandbox__section">
+            <h2 class="console-sandbox__section-title">IP Address Test Cases</h2>
+            <div class="console-sandbox__button-grid">
+              <button @click="console[this.selectedMethod]('192.168.1.1')" class="console-sandbox__btn">IP: 192.168.1.1</button>
+              <button @click="console[this.selectedMethod]('192.168.001.001')" class="console-sandbox__btn">IP: 192.168.001.001</button>
+              <button @click="console[this.selectedMethod]('192 . 168 . 1 . 1')" class="console-sandbox__btn">IP: 192 . 168 . 1 . 1</button>
+              <button @click="console[this.selectedMethod]('[192.168.1.1]')" class="console-sandbox__btn">IP: [192.168.1.1]</button>
+              <button @click="console[this.selectedMethod]('2001:0db8:85a3:0000:0000:8a2e:0370:7334')" class="console-sandbox__btn">IPv6: 2001:0db8:85a3:0000:0000:8a2e:0370:7334</button>
+              <button @click="console[this.selectedMethod]('The user connected from 192.168.1.1 and accessed the system.')" class="console-sandbox__btn">IP in text</button>
             </div>
           </section>
 
           <!-- SSN Test Cases Section -->
-          <section class="section">
-            <h2 class="section-title">SSN Test Cases</h2>
-            <div class="button-grid">
-              <button @click="console[this.selectedMethod]('123-45-6789')" class="btn">SSN: 123-45-6789</button>
-              <button @click="console[this.selectedMethod]('12345678')" class="btn">SSN: 12345678</button>
-              <button @click="console[this.selectedMethod]('123 45 6789')" class="btn">SSN: 123 45 6789</button>
-              <button @click="console[this.selectedMethod]('123.45.6789')" class="btn">SSN: 123.45.6789</button>
-              <button @click="console[this.selectedMethod]('123/45/6789')" class="btn">SSN: 123/45/6789</button>
-              <button @click="console[this.selectedMethod]('(123) 45-6789')" class="btn">SSN: (123) 45-6789</button>
-              <button @click="console[this.selectedMethod]('The provided SSN is 123-45-6789 and should be scrubbed.')" class="btn">SSN in text</button>
+          <section class="console-sandbox__section">
+            <h2 class="console-sandbox__section-title">SSN Test Cases</h2>
+            <div class="console-sandbox__button-grid">
+              <button @click="console[this.selectedMethod]('123-45-6789')" class="console-sandbox__btn">SSN: 123-45-6789</button>
+              <button @click="console[this.selectedMethod]('12345678')" class="console-sandbox__btn">SSN: 12345678</button>
+              <button @click="console[this.selectedMethod]('123 45 6789')" class="console-sandbox__btn">SSN: 123 45 6789</button>
+              <button @click="console[this.selectedMethod]('123.45.6789')" class="console-sandbox__btn">SSN: 123.45.6789</button>
+              <button @click="console[this.selectedMethod]('123/45/6789')" class="console-sandbox__btn">SSN: 123/45/6789</button>
+              <button @click="console[this.selectedMethod]('(123) 45-6789')" class="console-sandbox__btn">SSN: (123) 45-6789</button>
+              <button @click="console[this.selectedMethod]('The provided SSN is 123-45-6789 and should be scrubbed.')" class="console-sandbox__btn">SSN in text</button>
             </div>
           </section>
 
           <!-- Credit Card Test Cases Section -->
-          <section class="section">
-            <h2 class="section-title">Credit Card Test Cases</h2>
-            <div class="button-grid">
-              <button @click="console[this.selectedMethod]('4111 1111 1111 1111')" class="btn">Visa: 4111 1111 1111 1111</button>
-              <button @click="console[this.selectedMethod]('5500 0000 0000 0000')" class="btn">Mastercard: 5500 0000 0000 0000</button>
-              <button @click="console[this.selectedMethod]('3400 000000 00009')" class="btn">Amex: 3400 000000 00009</button>
-              <button @click="console[this.selectedMethod]('6011 0000 0000 0004')" class="btn">Discover: 6011 0000 0000 0004</button>
-              <button @click="console[this.selectedMethod]('4111-1111-1111-1111')" class="btn">Visa (dashes): 4111-1111-1111-1111</button>
-              <button @click="console[this.selectedMethod]('4111.1111.1111.1111')" class="btn">Visa (dots): 4111.1111.1111.1111</button>
-              <button @click="console[this.selectedMethod]('4111/1111/1111/1111')" class="btn">Visa (slashes): 4111/1111/1111/1111</button>
-              <button @click="console[this.selectedMethod]('4111111111111111')" class="btn">Visa (no spaces): 4111111111111111</button>
-              <button @click="console[this.selectedMethod]('The card number 4111 1111 1111 1111 was used for the transaction.')" class="btn">Credit Card in text</button>
+          <section class="console-sandbox__section">
+            <h2 class="console-sandbox__section-title">Credit Card Test Cases</h2>
+            <div class="console-sandbox__button-grid">
+              <button @click="console[this.selectedMethod]('4111 1111 1111 1111')" class="console-sandbox__btn">Visa: 4111 1111 1111 1111</button>
+              <button @click="console[this.selectedMethod]('5500 0000 0000 0000')" class="console-sandbox__btn">Mastercard: 5500 0000 0000 0000</button>
+              <button @click="console[this.selectedMethod]('3400 000000 00009')" class="console-sandbox__btn">Amex: 3400 000000 00009</button>
+              <button @click="console[this.selectedMethod]('6011 0000 0000 0004')" class="console-sandbox__btn">Discover: 6011 0000 0000 0004</button>
+              <button @click="console[this.selectedMethod]('4111-1111-1111-1111')" class="console-sandbox__btn">Visa (dashes): 4111-1111-1111-1111</button>
+              <button @click="console[this.selectedMethod]('4111.1111.1111.1111')" class="console-sandbox__btn">Visa (dots): 4111.1111.1111.1111</button>
+              <button @click="console[this.selectedMethod]('4111/1111/1111/1111')" class="console-sandbox__btn">Visa (slashes): 4111/1111/1111/1111</button>
+              <button @click="console[this.selectedMethod]('4111111111111111')" class="console-sandbox__btn">Visa (no spaces): 4111111111111111</button>
+              <button @click="console[this.selectedMethod]('The card number 4111 1111 1111 1111 was used for the transaction.')" class="console-sandbox__btn">Credit Card in text</button>
             </div>
           </section>
 
           <!-- HTTPS URL Test Cases Section -->
-          <section class="section">
-            <h2 class="section-title">HTTPS URL Test Cases</h2>
-            <div class="button-grid">
-              <button @click="console[this.selectedMethod]('https://example.com')" class="btn">URL: beginning</button>
-              <button @click="console[this.selectedMethod]('foo https://example.com bar')" class="btn">URL: middle</button>
-              <button @click="console[this.selectedMethod]('foo bar https://example.com')" class="btn">URL: end</button>
-              <button @click="console[this.selectedMethod]('https://example.com/path/to/resource')" class="btn">URL: with path</button>
-              <button @click="console[this.selectedMethod]('https://example.com?foo=bar&baz=qux')" class="btn">URL: with query</button>
-              <button @click="console[this.selectedMethod]('https://example.com:8080')" class="btn">URL: with port</button>
-              <button @click="console[this.selectedMethod]('https://example.com#fragment')" class="btn">URL: with fragment</button>
-              <button @click="console[this.selectedMethod]('https://sub.example.com')" class="btn">URL: with subdomain</button>
-              <button @click="console[this.selectedMethod]('https://user:pass@example.com')" class="btn">URL: with credentials</button>
-              <button @click="console[this.selectedMethod]('The user visited https://example.com while browsing the site.')" class="btn">URL in text</button>
+          <section class="console-sandbox__section">
+            <h2 class="console-sandbox__section-title">HTTPS URL Test Cases</h2>
+            <div class="console-sandbox__button-grid">
+              <button @click="console[this.selectedMethod]('https://example.com')" class="console-sandbox__btn">URL: beginning</button>
+              <button @click="console[this.selectedMethod]('foo https://example.com bar')" class="console-sandbox__btn">URL: middle</button>
+              <button @click="console[this.selectedMethod]('foo bar https://example.com')" class="console-sandbox__btn">URL: end</button>
+              <button @click="console[this.selectedMethod]('https://example.com/path/to/resource')" class="console-sandbox__btn">URL: with path</button>
+              <button @click="console[this.selectedMethod]('https://example.com?foo=bar&baz=qux')" class="console-sandbox__btn">URL: with query</button>
+              <button @click="console[this.selectedMethod]('https://example.com:8080')" class="console-sandbox__btn">URL: with port</button>
+              <button @click="console[this.selectedMethod]('https://example.com#fragment')" class="console-sandbox__btn">URL: with fragment</button>
+              <button @click="console[this.selectedMethod]('https://sub.example.com')" class="console-sandbox__btn">URL: with subdomain</button>
+              <button @click="console[this.selectedMethod]('https://user:pass@example.com')" class="console-sandbox__btn">URL: with credentials</button>
+              <button @click="console[this.selectedMethod]('The user visited https://example.com while browsing the site.')" class="console-sandbox__btn">URL in text</button>
             </div>
           </section>
 
           <!-- Dedupe Test Cases Section -->
-          <section class="section">
-            <h2 class="section-title">Dedupe Test Cases</h2>
-            <div class="button-grid">
-              <button @click="dedupeSameMethodMessageStack" class="btn">Same method, message, stack (x5)</button>
-              <button @click="dedupeSameMethodMessageDiffStack" class="btn">Same method+message, diff stack (x5)</button>
-              <button @click="dedupeSameMethodStackDiffMessage" class="btn">Same method+stack, diff message (x5)</button>
-              <button @click="dedupeDiffMethodSameMessageStack" class="btn">Diff method, same message+stack (x5)</button>
-              <button @click="dedupeDiffMethodMessageStack" class="btn">Diff method, message, stack (x5)</button>
+          <section class="console-sandbox__section">
+            <h2 class="console-sandbox__section-title">Dedupe Test Cases</h2>
+            <div class="console-sandbox__button-grid">
+              <button @click="dedupeSameMethodMessageStack" class="console-sandbox__btn">Same method, message, stack (x5)</button>
+              <button @click="dedupeSameMethodMessageDiffStack" class="console-sandbox__btn">Same method+message, diff stack (x5)</button>
+              <button @click="dedupeSameMethodStackDiffMessage" class="console-sandbox__btn">Same method+stack, diff message (x5)</button>
+              <button @click="dedupeDiffMethodSameMessageStack" class="console-sandbox__btn">Diff method, same message+stack (x5)</button>
+              <button @click="dedupeDiffMethodMessageStack" class="console-sandbox__btn">Diff method, message, stack (x5)</button>
             </div>
           </section>
 
           <!-- Continuous Logging Section -->
-          <section class="section" v-if="showAutolog">
-            <h2 class="section-title">Continuous Logging</h2>
-            <div class="button-grid">
-              <button @click="startContinuousLogging" class="btn btn-error" :disabled="isLogging">Start 2min Continuous Logging</button>
-              <button @click="startConsoleSpam" class="btn btn-error" :disabled="isLogging">Start 2min Console Spam</button>
+          <section class="console-sandbox__section" v-if="showAutolog">
+            <h2 class="console-sandbox__section-title">Continuous Logging</h2>
+            <div class="console-sandbox__button-grid">
+              <button @click="startContinuousLogging" class="console-sandbox__btn console-sandbox__btn--error" :disabled="isLogging">Start 2min Continuous Logging</button>
+              <button @click="startConsoleSpam" class="console-sandbox__btn console-sandbox__btn--error" :disabled="isLogging">Start 2min Console Spam</button>
             </div>
             <p style="margin-top: 0.5rem; font-size: 0.875rem; color: #6c757d;">
               Left: Random intervals (0-2s) | Right: Maximum spam for rate limiting tests
@@ -1782,433 +1782,437 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .console-sandbox {
   min-height: 100vh;
   background-color: #f8f9fa;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   color: #333;
-}
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.header {
-  background-color: white;
-  border-bottom: 1px solid #e9ecef;
-  padding: 2rem 0;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  transform: translateZ(0);
-  will-change: transform, padding, box-shadow;
-}
-
-.header-placeholder {
-  height: 8rem;
-  transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.header-sticky {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  padding: 1rem 0;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  background-color: rgba(255, 255, 255, 0.98);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-}
-
-.header-sticky .title {
-  font-size: 1.5rem;
-  margin: 0 0 0.25rem 0;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.header-sticky .subtitle {
-  font-size: 0.875rem;
-  margin: 0 0 0.75rem 0;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.header-sticky .method-selector {
-  gap: 0.5rem;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.header-sticky .method-selector label {
-  font-size: 0.8rem;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.header-sticky .method-select {
-  padding: 0.375rem 0.5rem;
-  font-size: 0.8rem;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.title {
-  font-size: 2rem;
-  font-weight: 600;
-  margin: 0 0 0.5rem 0;
-  color: #212529;
-}
-
-.subtitle {
-  font-size: 1rem;
-  color: #6c757d;
-  margin: 0 0 1.5rem 0;
-}
-
-.method-selector {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.method-selector label {
-  font-weight: 500;
-  color: #495057;
-  font-size: 0.9rem;
-}
-
-.method-select {
-  padding: 0.5rem 0.75rem;
-  border: 1px solid #ced4da;
-  border-radius: 4px;
-  background-color: white;
-  font-size: 0.9rem;
-  color: #495057;
-  cursor: pointer;
-}
-
-.method-select:focus {
-  outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
-}
-
-.main {
-  padding: 2rem 0;
-}
-
-.sections {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 2rem;
-}
-
-.section {
-  background-color: white;
-  border: 1px solid #e9ecef;
-  border-radius: 8px;
-  padding: 1.5rem;
-}
-
-.section-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin: 0 0 1rem 0;
-  color: #212529;
-  border-bottom: 2px solid #f8f9fa;
-  padding-bottom: 0.5rem;
-}
-
-.section-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-  border-bottom: 2px solid #f8f9fa;
-  padding-bottom: 0.5rem;
-}
-
-.section-header .section-title {
-  margin: 0;
-  border-bottom: none;
-  padding-bottom: 0;
-}
-
-.btn-toggle {
-  background-color: #e9ecef;
-  border-color: #ced4da;
-  color: #495057;
-  font-size: 0.8rem;
-  padding: 0.5rem 0.75rem;
-  min-width: 100px;
-}
-
-.btn-toggle:hover {
-  background-color: #dee2e6;
-  border-color: #adb5bd;
-}
-
-.button-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 0.5rem;
-}
-
-.btn {
-  padding: 0.75rem 1rem;
-  background-color: #f8f9fa;
-  border: 1px solid #dee2e6;
-  border-radius: 4px;
-  color: #495057;
-  font-size: 0.875rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.15s ease;
-  text-align: center;
-}
-
-.btn:hover {
-  background-color: #e9ecef;
-  border-color: #adb5bd;
-}
-
-.btn:active {
-  background-color: #dee2e6;
-}
-
-.btn:focus {
-  outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
-}
-
-.btn-error {
-  background-color: #f8d7da;
-  border-color: #f5c6cb;
-  color: #721c24;
-}
-
-.btn-error:hover {
-  background-color: #f1b0b7;
-  border-color: #ed969e;
-}
-
-.iframe-container {
-  margin-top: 1rem;
-  height: 100px;
-  border: 1px dashed #dee2e6;
-  border-radius: 4px;
-  background-color: #f8f9fa;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #6c757d;
-  font-size: 0.875rem;
-}
-
-/* XSS Collapsible Sections */
-.xss-subsection {
-  margin-bottom: 1rem;
-  border: 1px solid #e9ecef;
-  border-radius: 6px;
-  overflow: hidden;
-}
-
-.xss-subsection:last-child {
-  margin-bottom: 0;
-}
-
-.subsection-title {
-  font-size: 1rem;
-  font-weight: 600;
-  margin: 0;
-  padding: 0.75rem 1rem;
-  background-color: #f8f9fa;
-  color: #495057;
-  cursor: pointer;
-  border-bottom: 1px solid #e9ecef;
-  transition: background-color 0.15s ease;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.subsection-title:hover {
-  background-color: #e9ecef;
-}
-
-.toggle-icon {
-  font-size: 0.75rem;
-  color: #6c757d;
-  transition: transform 0.15s ease;
-}
-
-.xss-subsection .button-grid {
-  padding: 1rem;
-  margin: 0;
-  background-color: white;
-}
-
-@media (max-width: 768px) {
-  .container {
-    padding: 0 15px;
+  // Elements
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
   }
-  
-  .title {
-    font-size: 1.75rem;
+
+  &__header {
+    background-color: white;
+    border-bottom: 1px solid #e9ecef;
+    padding: 2rem 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateZ(0);
+    will-change: transform, padding, box-shadow;
+
+    // Modifiers
+    &--sticky {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 1rem 0;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      background-color: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+
+      .console-sandbox__title {
+        font-size: 1.5rem;
+        margin: 0 0 0.25rem 0;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .console-sandbox__subtitle {
+        font-size: 0.875rem;
+        margin: 0 0 0.75rem 0;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .console-sandbox__method-selector {
+        gap: 0.5rem;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+        label {
+          font-size: 0.8rem;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+      }
+
+      .console-sandbox__method-select {
+        padding: 0.375rem 0.5rem;
+        font-size: 0.8rem;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+    }
   }
-  
-  .sections {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+
+  &__header-placeholder {
+    height: 8rem;
+    transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
-  
-  .section {
-    padding: 1.25rem;
+
+  &__title {
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+    color: #212529;
   }
-  
-  .button-grid {
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    gap: 0.375rem;
+
+  &__subtitle {
+    font-size: 1rem;
+    color: #6c757d;
+    margin: 0 0 1.5rem 0;
   }
-  
-  .btn {
-    padding: 0.625rem 0.75rem;
-    font-size: 0.8rem;
+
+  &__method-selector {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    label {
+      font-weight: 500;
+      color: #495057;
+      font-size: 0.9rem;
+    }
   }
-  
-  .method-selector {
-    flex-direction: column;
-    align-items: flex-start;
+
+  &__method-select {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    background-color: white;
+    font-size: 0.9rem;
+    color: #495057;
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+      border-color: #007bff;
+      box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+    }
+  }
+
+  &__main {
+    padding: 2rem 0;
+  }
+
+  &__sections {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+  }
+
+  &__section {
+    background-color: white;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+
+  &__section-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 1rem 0;
+    color: #212529;
+    border-bottom: 2px solid #f8f9fa;
+    padding-bottom: 0.5rem;
+  }
+
+  &__section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #f8f9fa;
+    padding-bottom: 0.5rem;
+
+    .console-sandbox__section-title {
+      margin: 0;
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+  }
+
+  &__button-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
     gap: 0.5rem;
   }
-}
 
-@media (max-width: 480px) {
-  .button-grid {
-    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  &__btn {
+    padding: 0.75rem 1rem;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    color: #495057;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    text-align: center;
+
+    &:hover {
+      background-color: #e9ecef;
+      border-color: #adb5bd;
+    }
+
+    &:active {
+      background-color: #dee2e6;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: #007bff;
+      box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+    }
+
+    // Button modifiers
+    &--error {
+      background-color: #f8d7da;
+      border-color: #f5c6cb;
+      color: #721c24;
+
+      &:hover {
+        background-color: #f1b0b7;
+        border-color: #ed969e;
+      }
+    }
+
+    &--toggle {
+      background-color: #e9ecef;
+      border-color: #ced4da;
+      color: #495057;
+      font-size: 0.8rem;
+      padding: 0.5rem 0.75rem;
+      min-width: 100px;
+
+      &:hover {
+        background-color: #dee2e6;
+        border-color: #adb5bd;
+      }
+    }
   }
-  
-  .btn {
-    padding: 0.5rem 0.625rem;
+
+  &__iframe-container {
+    margin-top: 1rem;
+    height: 100px;
+    border: 1px dashed #dee2e6;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6c757d;
+    font-size: 0.875rem;
+  }
+
+  // XSS Collapsible Sections
+  &__xss-subsection {
+    margin-bottom: 1rem;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    overflow: hidden;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .console-sandbox__button-grid {
+      padding: 1rem;
+      margin: 0;
+      background-color: white;
+    }
+  }
+
+  &__subsection-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0;
+    padding: 0.75rem 1rem;
+    background-color: #f8f9fa;
+    color: #495057;
+    cursor: pointer;
+    border-bottom: 1px solid #e9ecef;
+    transition: background-color 0.15s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    &:hover {
+      background-color: #e9ecef;
+    }
+  }
+
+  &__toggle-icon {
     font-size: 0.75rem;
+    color: #6c757d;
+    transition: transform 0.15s ease;
   }
-}
 
-/* Dark mode styles */
-.dark .console-sandbox {
-  background-color: #1a1a1a;
-  color: #e0e0e0;
-}
+  // Responsive
+  @media (max-width: 768px) {
+    &__container {
+      padding: 0 15px;
+    }
+    
+    &__title {
+      font-size: 1.75rem;
+    }
+    
+    &__sections {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    
+    &__section {
+      padding: 1.25rem;
+    }
+    
+    &__button-grid {
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 0.375rem;
+    }
+    
+    &__btn {
+      padding: 0.625rem 0.75rem;
+      font-size: 0.8rem;
+    }
+    
+    &__method-selector {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+  }
 
-.dark .header {
-  background-color: #2d2d2d;
-  border-bottom-color: #404040;
-}
+  @media (max-width: 480px) {
+    &__button-grid {
+      grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    }
+    
+    &__btn {
+      padding: 0.5rem 0.625rem;
+      font-size: 0.75rem;
+    }
+  }
 
-.dark .title {
-  color: #ffffff;
-}
+  // Dark mode styles
+  .dark & {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
 
-.dark .subtitle {
-  color: #b0b0b0;
-}
+    &__header {
+      background-color: #2d2d2d;
+      border-bottom-color: #404040;
+    }
 
-.dark .section {
-  background-color: #2d2d2d;
-  border-color: #404040;
-}
+    &__title {
+      color: #ffffff;
+    }
 
-.dark .section-title {
-  color: #ffffff;
-  border-bottom-color: #404040;
-}
+    &__subtitle {
+      color: #b0b0b0;
+    }
 
-.dark .section-header {
-  border-bottom-color: #404040;
-}
+    &__section {
+      background-color: #2d2d2d;
+      border-color: #404040;
+    }
 
-.dark .btn {
-  background-color: #404040;
-  border-color: #555;
-  color: #e0e0e0;
-}
+    &__section-title {
+      color: #ffffff;
+      border-bottom-color: #404040;
+    }
 
-.dark .btn:hover {
-  background-color: #505050;
-  border-color: #666;
-}
+    &__section-header {
+      border-bottom-color: #404040;
+    }
 
-.dark .btn:active {
-  background-color: #606060;
-}
+    &__btn {
+      background-color: #404040;
+      border-color: #555;
+      color: #e0e0e0;
 
-.dark .btn:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
-}
+      &:hover {
+        background-color: #505050;
+        border-color: #666;
+      }
 
-.dark .btn-error {
-  background-color: #4a2c2c;
-  border-color: #5a3a3a;
-  color: #ff6b6b;
-}
+      &:active {
+        background-color: #606060;
+      }
 
-.dark .btn-error:hover {
-  background-color: #5a3a3a;
-  border-color: #6a4a4a;
-}
+      &:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+      }
 
-.dark .btn-toggle {
-  background-color: #404040;
-  border-color: #555;
-  color: #e0e0e0;
-}
+      &--error {
+        background-color: #4a2c2c;
+        border-color: #5a3a3a;
+        color: #ff6b6b;
 
-.dark .btn-toggle:hover {
-  background-color: #505050;
-  border-color: #666;
-}
+        &:hover {
+          background-color: #5a3a3a;
+          border-color: #6a4a4a;
+        }
+      }
 
-.dark .iframe-container {
-  border-color: #404040;
-  background-color: #2d2d2d;
-  color: #b0b0b0;
-}
+      &--toggle {
+        background-color: #404040;
+        border-color: #555;
+        color: #e0e0e0;
 
-.dark .xss-subsection {
-  border-color: #404040;
-}
+        &:hover {
+          background-color: #505050;
+          border-color: #666;
+        }
+      }
+    }
 
-.dark .subsection-title {
-  background-color: #404040;
-  color: #e0e0e0;
-  border-bottom-color: #555;
-}
+    &__iframe-container {
+      border-color: #404040;
+      background-color: #2d2d2d;
+      color: #b0b0b0;
+    }
 
-.dark .subsection-title:hover {
-  background-color: #505050;
-}
+    &__xss-subsection {
+      border-color: #404040;
 
-.dark .toggle-icon {
-  color: #b0b0b0;
-}
+      .console-sandbox__button-grid {
+        background-color: #2d2d2d;
+      }
+    }
 
-.dark .xss-subsection .button-grid {
-  background-color: #2d2d2d;
-}
+    &__subsection-title {
+      background-color: #404040;
+      color: #e0e0e0;
+      border-bottom-color: #555;
 
-.dark .method-selector label {
-  color: #e0e0e0;
-}
+      &:hover {
+        background-color: #505050;
+      }
+    }
 
-.dark .method-select {
-  background-color: #404040;
-  border-color: #555;
-  color: #e0e0e0;
-}
+    &__toggle-icon {
+      color: #b0b0b0;
+    }
 
-.dark .method-select:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+    &__method-selector label {
+      color: #e0e0e0;
+    }
+
+    &__method-select {
+      background-color: #404040;
+      border-color: #555;
+      color: #e0e0e0;
+
+      &:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+      }
+    }
+  }
 }
 </style> 

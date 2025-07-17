@@ -1,15 +1,15 @@
 <template>
-  <div v-if="!routerReady" class="agent-indicator-loading">
-    <span class="loading-text">Loading...</span>
+  <div v-if="!routerReady" class="agent-indicator agent-indicator--loading">
+    <span class="agent-indicator__loading-text">Loading...</span>
   </div>
   <div v-else-if="hasLocalAgentParam !== null"
     class="agent-indicator" 
-    :class="agentType"
+    :class="`agent-indicator--${agentType}`"
     @dblclick="toggleAgentType"
     title="Double-click to toggle agent type"
   >
-    <span class="agent-label">{{ agentType.toUpperCase() }}</span>
-    <span v-if="agentReason" class="agent-reason">({{ agentReason }})</span>
+    <span class="agent-indicator__label">{{ agentType.toUpperCase() }}</span>
+    <span v-if="agentReason" class="agent-indicator__reason">({{ agentReason }})</span>
   </div>
 </template>
 
@@ -57,7 +57,7 @@ onMounted(async () => {
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .agent-indicator {
   display: flex;
   align-items: center;
@@ -70,59 +70,52 @@ onMounted(async () => {
   cursor: pointer;
   user-select: none;
   transition: opacity 0.2s;
-}
 
-.agent-indicator-loading {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 12px;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: bold;
-  background-color: #666;
-  color: white;
-  user-select: none;
-  transition: opacity 0.2s;
-}
+  &:hover {
+    opacity: 0.8;
+  }
 
-.loading-text {
-  font-size: 10px;
-  opacity: 0.8;
-}
+  // Modifiers
+  &--loading {
+    background-color: #666;
+    color: white;
+    cursor: default;
+  }
 
-.agent-indicator:hover {
-  opacity: 0.8;
-}
+  &--local {
+    background-color: #ff9800;
+    color: white;
+  }
 
-.agent-indicator.local {
-  background-color: #ff9800;
-  color: white;
-}
+  &--production {
+    background-color: #4CAF50;
+    color: white;
+  }
 
-.agent-indicator.production {
-  background-color: #4CAF50;
-  color: white;
-}
+  // Elements
+  &__label {
+    font-weight: bold;
+  }
 
-.agent-label {
-  font-weight: bold;
-}
+  &__reason {
+    font-size: 10px;
+    opacity: 0.9;
+    font-weight: normal;
+  }
 
-.agent-reason {
-  font-size: 10px;
-  opacity: 0.9;
-  font-weight: normal;
-}
+  &__loading-text {
+    font-size: 10px;
+    opacity: 0.8;
+  }
 
-@media (max-width: 768px) {
-  .agent-indicator {
+  // Responsive
+  @media (max-width: 768px) {
     font-size: 10px;
     padding: 4px 8px;
-  }
-  
-  .agent-reason {
-    display: none;
+
+    &__reason {
+      display: none;
+    }
   }
 }
 </style> 
