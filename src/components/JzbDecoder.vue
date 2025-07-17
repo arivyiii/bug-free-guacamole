@@ -289,9 +289,56 @@ import base64js from 'base64-js'
   .download-btn { background: #2196f3; color: #fff; }
   
   .decode-btn:hover { opacity: 0.9; }
-  .clear-btn:hover { opacity: 0.9; }
-  .remove-btn:hover { opacity: 0.9; }
-  .copy-btn:hover { opacity: 0.9; }
-  .download-btn:hover { opacity: 0.9; }
-  </style>
+.clear-btn:hover { opacity: 0.9; }
+.remove-btn:hover { opacity: 0.9; }
+.copy-btn:hover { opacity: 0.9; }
+.download-btn:hover { opacity: 0.9; }
+
+/* Dark mode styles */
+.dark .jzb-decoder {
+  background: #1a1a1a;
+}
+
+.dark .title {
+  color: #ffffff;
+}
+
+.dark .add-btn {
+  border-color: #007acc;
+  color: #007acc;
+}
+
+.dark .add-btn:hover {
+  background: rgba(0, 122, 204, 0.2);
+}
+
+.dark .payload-card {
+  background: #2d2d2d;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.dark .section-title {
+  color: #e0e0e0;
+}
+
+.dark .input-area {
+  border-color: #404040;
+  color: #e0e0e0;
+  background: #1a1a1a;
+}
+
+.dark .output-area {
+  background: #1a1a1a;
+  color: #e0e0e0;
+}
+
+.dark .clear-btn {
+  background: #404040;
+  color: #e0e0e0;
+}
+
+.dark .clear-btn:hover {
+  background: #505050;
+}
+</style>
   

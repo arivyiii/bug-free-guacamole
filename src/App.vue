@@ -1,6 +1,7 @@
 <script setup>
 import { RouterView } from 'vue-router'
 import AgentIndicator from './components/AgentIndicator.vue'
+import DarkModeToggle from './components/DarkModeToggle.vue'
 
 pendo.initialize({
         visitor: {
@@ -22,6 +23,7 @@ pendo.initialize({
           <router-link to="/jzb-decoder" class="nav-link">JZB Decoder</router-link>
           <router-link to="/jzb-encoder" class="nav-link">JZB Encoder</router-link>
           <AgentIndicator />
+          <DarkModeToggle />
         </div>
       </div>
     </nav>
@@ -43,6 +45,18 @@ body {
   font-family: Arial, sans-serif;
   background-color: #f5f5f5;
   color: #333;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Add transition to all elements for smooth dark mode switching */
+:global(*) {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Dark mode styles */
+.dark body {
+  background-color: #1a1a1a;
+  color: #e0e0e0;
 }
 
 #app {
@@ -56,6 +70,12 @@ body {
   color: white;
   padding: 1rem 0;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease;
+}
+
+.dark .navigation {
+  background-color: #2d2d2d;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
 .nav-container {
@@ -87,10 +107,20 @@ body {
 
 .nav-link:hover {
   background-color: #555;
+  transition: background-color 0.3s ease;
+}
+
+.dark .nav-link:hover {
+  background-color: #444;
 }
 
 .nav-link.router-link-active {
   background-color: #4CAF50;
+  transition: background-color 0.3s ease;
+}
+
+.dark .nav-link.router-link-active {
+  background-color: #45a049;
 }
 
 .main-content {
@@ -99,6 +129,11 @@ body {
   margin: 0 auto;
   width: 100%;
   padding: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.dark .main-content {
+  background-color: #1a1a1a;
 }
 
 @media (max-width: 768px) {
