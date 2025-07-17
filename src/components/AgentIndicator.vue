@@ -1,5 +1,8 @@
 <template>
-  <div 
+  <div v-if="!routerReady" class="agent-indicator-loading">
+    <span class="loading-text">Loading...</span>
+  </div>
+  <div v-else-if="hasLocalAgentParam !== null"
     class="agent-indicator" 
     :class="agentType"
     @dblclick="toggleAgentType"
@@ -11,13 +14,15 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, ref, onMounted, nextTick, watch } from 'vue'
 import { localAgentUrlParam } from '../constants'
 import { useRoute, useRouter } from 'vue-router'
 
 const route = useRoute()
 const router = useRouter()
 
+const hasLocalAgentParam = ref(null);
+const routerReady = ref(false);
 
 const toggleAgentType = () => {
   const query = { ...route.query }
@@ -35,10 +40,6 @@ const toggleAgentType = () => {
   })
 }
 
-const hasLocalAgentParam = computed(() => {
-  return route.query[localAgentUrlParam] === 'true'
-})
-
 const agentType = computed(() => {
   const useLocalAgent = hasLocalAgentParam.value || import.meta.env.VITE_USE_LOCAL_AGENT
 
@@ -47,6 +48,12 @@ const agentType = computed(() => {
 
 const agentReason = computed(() => {
   return hasLocalAgentParam.value ? 'query parameter' : 'environment variable'
+});
+
+onMounted(async () => {
+    await router.isReady();
+    routerReady.value = true;
+    hasLocalAgentParam.value = route.query[localAgentUrlParam] === 'true'
 });
 </script>
 
@@ -63,6 +70,25 @@ const agentReason = computed(() => {
   cursor: pointer;
   user-select: none;
   transition: opacity 0.2s;
+}
+
+.agent-indicator-loading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  background-color: #666;
+  color: white;
+  user-select: none;
+  transition: opacity 0.2s;
+}
+
+.loading-text {
+  font-size: 10px;
+  opacity: 0.8;
 }
 
 .agent-indicator:hover {
