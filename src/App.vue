@@ -20,6 +20,7 @@ pendo.initialize({
         <h1 class="app__nav-title">Bug Free Guacamole</h1>
         <div class="app__nav-links">
           <router-link to="/" class="app__nav-link">Console Sandbox</router-link>
+          <router-link to="/network-sandbox" class="app__nav-link">Network Sandbox</router-link>
           <router-link to="/jzb-decoder" class="app__nav-link">JZB Decoder</router-link>
           <router-link to="/jzb-encoder" class="app__nav-link">JZB Encoder</router-link>
           <AgentIndicator />
