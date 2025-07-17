@@ -191,7 +191,6 @@ export default {
   },
   data() {
     return {
-      allStylingSectionsExpanded: false,
       stylingSections: {
         text: false,
         colors: false,
@@ -205,6 +204,11 @@ export default {
         icons: false
       }
     };
+  },
+  computed: {
+    allStylingSectionsExpanded() {
+      return Object.values(this.stylingSections).every(section => section);
+    }
   },
   methods: {
     logWithAllMethods(message, style) {
@@ -417,7 +421,6 @@ export default {
       Object.keys(this.stylingSections).forEach(key => {
         this.stylingSections[key] = shouldExpand;
       });
-      this.allStylingSectionsExpanded = shouldExpand;
     }
   }
 };

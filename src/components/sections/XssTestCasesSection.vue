@@ -237,7 +237,6 @@ export default {
   },
   data() {
     return {
-      allXssSectionsExpanded: false,
       xssSections: {
         basic: false,
         css: false,
@@ -255,6 +254,11 @@ export default {
         patterns: false
       }
     };
+  },
+  computed: {
+    allXssSectionsExpanded() {
+      return Object.values(this.xssSections).every(section => section);
+    }
   },
   methods: {
     // HTML/Script Tags
@@ -498,7 +502,6 @@ export default {
       Object.keys(this.xssSections).forEach(key => {
         this.xssSections[key] = shouldExpand;
       });
-      this.allXssSectionsExpanded = shouldExpand;
     }
   }
 };

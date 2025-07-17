@@ -81,39 +81,25 @@
 // Import global styles
 import '../assets/consoleSandbox.scss';
 
-// Import section components
-import PrimitivesSection from './sections/PrimitivesSection.vue';
-import ObjectsArraysSection from './sections/ObjectsArraysSection.vue';
-import FakerDataSection from './sections/FakerDataSection.vue';
-import FunctionsErrorsSection from './sections/FunctionsErrorsSection.vue';
-import DomElementsSection from './sections/DomElementsSection.vue';
-import UtilitiesSection from './sections/UtilitiesSection.vue';
-import ConsoleStylingSection from './sections/ConsoleStylingSection.vue';
-import XssTestCasesSection from './sections/XssTestCasesSection.vue';
-import IpAddressTestCasesSection from './sections/IpAddressTestCasesSection.vue';
-import SsnTestCasesSection from './sections/SsnTestCasesSection.vue';
-import CreditCardTestCasesSection from './sections/CreditCardTestCasesSection.vue';
-import HttpsUrlTestCasesSection from './sections/HttpsUrlTestCasesSection.vue';
-import DedupeTestCasesSection from './sections/DedupeTestCasesSection.vue';
-import ContinuousLoggingSection from './sections/ContinuousLoggingSection.vue';
+import { defineAsyncComponent } from 'vue';
 
 export default {
   name: 'ConsoleSandbox',
   components: {
-    PrimitivesSection,
-    ObjectsArraysSection,
-    FakerDataSection,
-    FunctionsErrorsSection,
-    DomElementsSection,
-    UtilitiesSection,
-    ConsoleStylingSection,
-    XssTestCasesSection,
-    IpAddressTestCasesSection,
-    SsnTestCasesSection,
-    CreditCardTestCasesSection,
-    HttpsUrlTestCasesSection,
-    DedupeTestCasesSection,
-    ContinuousLoggingSection
+    PrimitivesSection: defineAsyncComponent(() => import('./sections/PrimitivesSection.vue')),
+    ObjectsArraysSection: defineAsyncComponent(() => import('./sections/ObjectsArraysSection.vue')),
+    FakerDataSection: defineAsyncComponent(() => import('./sections/FakerDataSection.vue')),
+    FunctionsErrorsSection: defineAsyncComponent(() => import('./sections/FunctionsErrorsSection.vue')),
+    DomElementsSection: defineAsyncComponent(() => import('./sections/DomElementsSection.vue')),
+    UtilitiesSection: defineAsyncComponent(() => import('./sections/UtilitiesSection.vue')),
+    ConsoleStylingSection: defineAsyncComponent(() => import('./sections/ConsoleStylingSection.vue')),
+    XssTestCasesSection: defineAsyncComponent(() => import('./sections/XssTestCasesSection.vue')),
+    IpAddressTestCasesSection: defineAsyncComponent(() => import('./sections/IpAddressTestCasesSection.vue')),
+    SsnTestCasesSection: defineAsyncComponent(() => import('./sections/SsnTestCasesSection.vue')),
+    CreditCardTestCasesSection: defineAsyncComponent(() => import('./sections/CreditCardTestCasesSection.vue')),
+    HttpsUrlTestCasesSection: defineAsyncComponent(() => import('./sections/HttpsUrlTestCasesSection.vue')),
+    DedupeTestCasesSection: defineAsyncComponent(() => import('./sections/DedupeTestCasesSection.vue')),
+    ContinuousLoggingSection: defineAsyncComponent(() => import('./sections/ContinuousLoggingSection.vue'))
   },
   data() {
     return {
